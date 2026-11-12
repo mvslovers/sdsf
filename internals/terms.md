@@ -72,6 +72,8 @@ each:
 - **TSO command**: a TSO command, CLIST or program given with `TSO`.
 - **JES2 command**: the command an action character or an overtype makes
   SDSF give to JES2 (`$CJ1234`). The help names it in parentheses.
+- **MVS command**: the command an overtype makes SDSF give to MVS itself and
+  not to JES2 (PGN on DA: `E name,PERFORM=n`).
 
 ## Who may see and do what
 
