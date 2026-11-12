@@ -15,7 +15,7 @@
 }  |@   JES2     STC    12   15 EXECUTION             LOCAL
 }  |@   HERC01   TSU   104   15 EXECUTION             LOCAL
 }  |    PAYROLL  JOB  1201    9 INPUT      A    1     LOCAL
-}  |    MYJOB    JOB  1240    1 PRINT                 LOCAL
+}  |    MYJOB    JOB  1240    1 PRINT      A          LOCAL
 }  +---------------------------------------------------------------------------
 }  The first line says what the list holds; on its right the rows shown,
 }  or a message. You type commands after COMMAND INPUT. The SCROLL field

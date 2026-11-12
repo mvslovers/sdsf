@@ -12,8 +12,8 @@
 }
 {  classes  }Up to 6 job classes, written right after ST without a blank:
 }            STA shows the jobs of class A, STAB those of A and B. TSO
-}            users, started tasks and the print queue have no class to go
-}            by and are left out. ST alone shows every class.
+}            users and started tasks have no class, and jobs on the print
+}            queue are left out. ST alone shows every class.
 {  name     }A job name. * stands for any number of characters, % for one:
 }            ST IEB* shows the jobs whose names start with IEB, ST IEB
 }            only those named IEB. ST alone shows every name.

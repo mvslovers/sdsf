@@ -11,7 +11,7 @@
 {  string     }a word; 'two words' or "two words" with blanks; X'C1C2'
 }             in hexadecimal; * the last string; none: FIND again
 {  direction  }NEXT (the default), PREV, FIRST, LAST, or ALL to count
-}             the lines that hold it and go to the first
+}             the hits (on the lists, the rows) and go to the first
 {  kind       }CHARS (the default), anywhere; WORD, a word of its own;
 }             PREFIX or PRE, the start of a word; SUFFIX or SUF, its end
 {  col1 col2  }the string must begin in col1, or lie within col1 to col2

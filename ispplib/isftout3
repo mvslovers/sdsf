@@ -13,7 +13,7 @@
 {    F 'COND CODE'    }a string with a blank in it, in quotes
 {    PF5              }the next one (RFIND)
 {    F ABEND PREV     }backwards
-{    F ABEND ALL      }how many lines hold it
+{    F ABEND ALL      }how often it occurs
 }
 }  To print the output, or a part of it:
 {    PRINT OPEN       }a print file, SYSOUT of your session
