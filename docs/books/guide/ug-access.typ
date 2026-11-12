@@ -228,11 +228,13 @@ When SDSF cannot enter the authorized state, it says so in the title line:
 The RAKF profiles are lines in a table. The class stands in columns 1 to 8,
 the profile from column~9, the group from column~53 and the access from
 column~61. For each profile the line without a group is the universal
-access, the access of every user, and it must be there: the load of the table stops with
-the abend U0400 if a profile has a line for a group but no line without a
-group, and RAKF then keeps the table it had. Keep the table in sort order, the
-lines of one profile together and the line without a group first, as in the
-examples.
+access, the access of every user, and it must be there: the load of the table
+stops with the abend U0400 if a profile has a line for a group but no line
+without a group, and RAKF then keeps the table it had. The order of the lines
+does not matter, because RAKF sorts the table itself when it loads it; the
+examples keep the lines of one profile together and the line without a group
+first only to be easy to read. A line that appears twice for the same profile
+and group stops the load with the abend U0300.
 #idx("profile table")
 
 After you change the table, RAKF must load it before the profiles take
@@ -307,8 +309,8 @@ of the other users nothing changes. The profile #cmd("HERC02.*") sorts after
 #cmd("*"), so it is the one that counts for the jobs of #cmd("HERC02")
 (@ug-access-cover). It replaces the lines of #cmd("*") for these jobs, which is
 why it repeats the line of ADMIN: without it, ADMIN would get the universal
-access NONE for the jobs of #cmd("HERC02"). Write #cmd("HERC02.P*") instead to limit it to the jobs of
-#cmd("HERC02") whose names begin with P.
+access NONE for the jobs of #cmd("HERC02"). Write #cmd("HERC02.P*") instead to
+limit it to the jobs of #cmd("HERC02") whose names begin with P.
 
 === Checking a Profile <ug-access-check>
 
