@@ -56,8 +56,8 @@ ids (#cmd("ASID")). A row is white, or blue while the address space is swapped
 out. If the list is longer than the screen, the Up key (PF7) and the Down key
 (PF8) scroll it (@ug-start).
 
-The first columns, those you see when the panel is shown for the first time,
-are these:
+The first columns, those you see in the first order of the columns, are
+these:
 
 #deflist(width: 1.2in,
   [#cmd("JOBNAME")], [the name of the job, started task, TSO user or
@@ -92,7 +92,8 @@ number of the executing #cmd("SYSLOG") task, and the action characters on its
 row act on that task.
 
 *An initiator that runs a job.* It shows as that job, not as an initiator. A
-row of type #cmd("INIT") is an idle initiator.
+row with a blank #cmd("TYPE") and no #cmd("JNUM") is an idle initiator\;
+#cmd("DA INIT") asks for these rows.
 
 === Doing Something with a Row <ug-running-act>
 
@@ -158,9 +159,9 @@ no address space.
 
 === Showing More, Showing Fewer <ug-running-limit>
 
-A word alone adds to what #cmd("DA") shows. A word with #cmd("O") in front shows
-that and nothing else, and a word with #cmd("NO") in front shows everything but
-that:
+A type alone adds to what #cmd("DA") shows. A word with #cmd("O") in front shows
+that and nothing else, and a word with #cmd("NO") in front leaves that out of
+what #cmd("DA") shows:
 
 #deflist(width: 1.8in,
   [#var("type")], [adds the type: #cmd("DA INIT") shows the idle initiators as
@@ -170,8 +171,8 @@ that:
     out.],
   [#cmd("O")#var("type"), #cmd("O")#var("position")], [only that type or
     position, for example #cmd("OJOB") or #cmd("OOUT"). Only one such word.],
-  [#cmd("NO")#var("type"), #cmd("NO")#var("position")], [everything but that
-    type or position, for example #cmd("NOTSU").],
+  [#cmd("NO")#var("type"), #cmd("NO")#var("position")], [what #cmd("DA") shows,
+    but not that type or position, for example #cmd("NOTSU").],
   [#cmd("ALL"), #cmd("ALLT"), #cmd("ALLP")], [all types and positions, all
     types, all positions. Each stands alone.],
 )
@@ -194,8 +195,9 @@ type #cmd("DA") with nothing after it.
 #idx("PARM INVALID")
 #idx("TOO MANY PARMS")
 A word that is none of these gives #cmd("PARM INVALID"), and the cursor stands
-on it. So does #cmd("ALL"), #cmd("ALLT") or #cmd("ALLP") together with another
-word. More than four words give #cmd("TOO MANY PARMS"). Correct the command and
+on it. #cmd("ALL"), #cmd("ALLT") or #cmd("ALLP") together with another word, and
+a second word with #cmd("O") in front, give #cmd("PARM INVALID") as well, without
+the cursor moving. More than four words give #cmd("TOO MANY PARMS"). Correct the command and
 press Enter again. A word that begins with #cmd("O") is read as one with
 #cmd("O") in front, unless it begins with #cmd("OU"), so #cmd("OUT") is a
 position.
@@ -217,8 +219,8 @@ task and follows the rule for jobs.
 #idx("PF11")
 #idx("further fields")
 #idx("Right key")
-A row of the DA panel is 113 or 114 columns wide, more than the 80 of a
-screen. The Right key (PF11) shows the part of the row that did not fit, and
+A row of the DA panel is 113 columns wide in the first order of the columns
+and 114 after #cmd("?") (@ug-running-qm), more than the 80 of a screen. The Right key (PF11) shows the part of the row that did not fit, and
 the Left key (PF10) goes back to the start. #cmd("NP") and #cmd("JOBNAME") stay
 in place. The Right key moves the columns after #cmd("JOBNAME") once, as far as
 the end of the row, so a second press moves nothing more. If your screen is as
@@ -246,14 +248,15 @@ The columns that come after those of @ug-running-rows are these:
 the current step. #cmd("SIO") and #cmd("CPU%") are rates over the time between
 two displays.
 
-#note[On a screen of 80 columns, the first column of the moved part can show
-without its first characters, so that the heading reads #cmd("OS") for
-#cmd("POS").]
+#note[On a screen of 80 columns, the first column of the moved part shows
+without its first characters, in the heading and in the rows: the heading reads
+#cmd("OS") for #cmd("POS"), and the values of the column are cut the same way. After
+#cmd("?") the heading reads #cmd("ID") for #cmd("ASID").]
+
+=== Another Order of the Columns <ug-running-qm>
 
 #idx("? command")
 #idx("order of the columns")
-=== Another Order of the Columns <ug-running-qm>
-
 #cmd("?") typed alone on the command line, with nothing else, changes the order
 of the columns after #cmd("JOBNAME"). It is not the #cmd("?") action character.
 The order is then #cmd("STEPNAME"), #cmd("PROCSTEP"), #cmd("TYPE"),
