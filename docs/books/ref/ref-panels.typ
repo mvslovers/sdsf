@@ -398,7 +398,7 @@ not show, so it can be larger than the sum of the rows on the screen. #cmd("PAGI
   [#cmd("DP")], [the dispatching priority, in hexadecimal.],
   [#cmd("PGN")], [the performance group. May be overtyped.],
   [#cmd("REAL")], [the frames of real storage the address space holds.],
-  [#cmd("PAGING")], [not measured yet: always 0.00.],
+  [#cmd("PAGING")], [always 0.00.],
   [#cmd("SIO")], [the I/O (EXCPs) per second since the panel was last shown.],
   [#cmd("CPU%")], [the share of the processor since the panel was last
     shown.],
@@ -510,7 +510,7 @@ Right keys do nothing on this panel.
 jobs on the print queue are not listed. Executing jobs are white, the others
 blue.
 
-*Limiting the list.* #cmd("I") with up to eight classes written directly after
+*Limiting the list.* #cmd("I") with up to seven classes written directly after
 it, and
 #cmd("H") or #cmd("NH") after them, as in #cmd("IA H"). Without classes only
 batch jobs are shown\; in the classes, #cmd("$") adds the TSO users and
@@ -580,7 +580,7 @@ keys move the others. In their order:
 
 *Order of the rows.* The oldest comes first, by the time the job ended.
 
-*Limiting the list.* #cmd("H") with up to eight classes written directly after
+*Limiting the list.* #cmd("H") with up to seven classes written directly after
 it, and
 #cmd("ALL") or a job name after them, as in #cmd("HX TBR*"). #cmd("H") alone
 shows the jobs whose names begin with the user id; #cmd("H ALL") shows all the
@@ -646,7 +646,7 @@ The panel also has the headings #cmd("PRT-REC"), #cmd("DEVICE"),
 class and the forms of a row are those of the first data set waiting to be
 printed.
 
-*Limiting the list.* #cmd("O") with up to eight classes written directly after
+*Limiting the list.* #cmd("O") with up to seven classes written directly after
 it, and
 forms after them, as in #cmd("OA STD"); the forms may hold #cmd("*") and
 #cmd("%"). #cmd("PREFIX") and #cmd("DEST") limit the list too, #cmd("DEST") by
