@@ -374,8 +374,8 @@ members #cmd("IGX00011") of #cmd("SYS1.LPALIB") and #cmd("SYS1.AOST4"). Each
 line reports #cmd("IDC0550I ENTRY ... DELETED") for a data set and
 #cmd("IDC0549I MEMBER IGX00011 DELETED") for a member.
 
-Take the lines for SDSF out of the logon CLIST first (next section), or every
-logon names data sets that no longer exist.
+Take the lines for SDSF out of the logon CLIST or procedure first (next
+section), or every logon names data sets that no longer exist.
 
 === Take Back the System Changes <ug-install-undo>
 
@@ -524,8 +524,7 @@ either is missing, the same few messages appear. Look at RAKF first.
   #table(columns: (1.9in, 1.8in, 1fr),
     [What you see], [Why], [What to do],
     [A user sees their own jobs only.],
-      [There is no profile in the class JESSPOOL for the jobs of others. RAKF
-       before 2.0.0 has no class JESSPOOL at all.],
+      [Without a JESSPOOL profile a user sees only their own jobs.],
       [Add the profiles (@ug-install-auth).],
     [#cmd("COMMAND NOT AUTHORIZED") on #cmd("LOG"), #cmd("PR") or #cmd("INIT"),
       or #cmd("NOT AUTHORIZED FOR CMD") on a #cmd("/") command.],
