@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Printer Panel -- the PR Command          !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}
+@  PR}[word ...]     up to four words of these:
+}
+{  n        }printer n, PRINTERn
+{  n-m      }the printers n to m
+{  LCL      }all the local printers
+{  Rn, RMT  }remote printers: taken, but JES2 does not tell SDSF about
+}            them, so they show nothing yet
+}
+}  PR alone shows all the printers.
+}
+}  Examples:
+{    PR 1       }PRINTER1
+{    PR 1-3 5   }PRINTER1 to PRINTER3, and PRINTER5
+}
+}
+}
+}
+}
+}
+}
+}  Enter: next topic   PF7: Printer panel help   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFHPRA
+  &ZUP = ISFHPR
+)END

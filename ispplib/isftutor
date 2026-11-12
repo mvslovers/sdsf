@@ -1,0 +1,43 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@TUTORIAL: SDSF                                 !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                  }
+}
+}  This short course shows what SDSF does and how you use it, panel by
+}  panel. It takes about a quarter of an hour. For the details of a
+}  command or a field, use the help: the Help key on any SDSF panel.
+}
+}  Press Enter to go through the course from the start, or type the number
+}  of a part:
+}
+@     1 }Using the tutorial
+@     2 }The SDSF panels
+@     3 }Following a job
+@     4 }Looking at output
+@     5 }Acting on jobs: hold, release, cancel, purge
+@     6 }Showing fewer jobs: ST, PREFIX and DEST
+@     7 }A summary
+}
+}
+}
+}
+}
+}  Enter: part 1   T: help contents   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZSEL = TRANS(&ISFHCMD
+                1,ISFTNAV
+                2,ISFTPAN
+                3,ISFTJOB
+                4,ISFTOUT
+                5,ISFTACT
+                6,ISFTLIM
+                7,ISFTSUM
+                *,'?')
+  &ZCONT = ISFTNAV
+)END

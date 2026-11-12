@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@TUTORIAL: The SDSF Panels                      !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}
+}  SDSF starts with its menu. Each line of it names a panel; type the name
+}  on the command line of the menu, or of any SDSF panel, to go there.
+}
+{  ST    }All the jobs on the JES2 queues: waiting, executing, ended.
+{  I     }The jobs read in, waiting to execute or executing.
+{  O     }The jobs that have ended, with output waiting to be printed.
+{  H     }The jobs with held output: output kept for you to look at.
+{  DA    }What is running now: the active address spaces.
+{  LOG   }The system log, with the replies the system waits for.
+{  PR    }The JES2 printers.     {  INIT  }The JES2 initiators.
+}
+}  From a job on ST, DA, I, O or H you get to two more panels:
+{  ?     }the Job Data Set panel, the list of the job's output data sets
+{  S     }the Output Data Set panel, the output itself
+}
+}  The End key takes you back: from a list to the menu, from the menu out
+}  of SDSF.
+}
+}
+}
+}  Enter: next   PF10: back   PF7: list of parts   PF3: leave
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFTPAN2
+  &ZUP = ISFTUTOR
+)END

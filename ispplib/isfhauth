@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Who May See and Do What                  !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}  SDSF asks RAKF what you may see and do.
+}
+@  Your own jobs}, those that run under your user id, you always see, and
+}  every action on them is allowed.
+}
+@  The jobs of others}are guarded by profiles of the RAKF class JESSPOOL.
+}  The entity is owner.jobname.jobid, as in HERC02.PAYROLL.JOB01234.
+{    READ    }The job is on the lists (ST, DA, I, O, H); D, L, ? and S.
+{    UPDATE  }Also the other action characters and overtyping.
+}  A job you may not read is not on the lists at all. An action you may
+}  not take: NOT AUTHORIZED FOR JOB.
+}
+@  The system}is guarded by the FACILITY profile SDSF.OPER.
+{    READ    }LOG, PR and INIT; on DA, the address spaces without a job;
+}             D on a printer or an initiator.
+{    UPDATE  }/ commands; the other actions on printers and initiators.
+}  Without it: COMMAND NOT AUTHORIZED, NOT AUTHORIZED FOR CMD, PRT or INIT.
+}
+}  RAKF before 2.0.0 has no class JESSPOOL: then you see your own jobs only.
+}
+}
+}  Enter: next page   PF7: contents   PF10: back   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFHAUT2
+  &ZUP = ISFHTOC
+)END

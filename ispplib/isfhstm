@@ -1,0 +1,33 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Status Panel -- Commands                 !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                  }
+}
+}  Besides the commands you can give on every panel (topic 12 of the
+}  contents), the Status panel takes:
+}
+{  ?                }The further fields of the jobs, and back (topic 4).
+{  ST [name]        }The list again, with other classes or another name.
+{  Enter            }With an empty command line: the list read again, to
+}                   show what has changed.
+{  UP, DOWN         }Scroll by the amount in the SCROLL field (PAGE, HALF,
+}                   CSR, DATA, a number of lines, or MAX on the key).
+{  TOP, BOTTOM      }To the first or last job.
+{  FIND string      }The next job whose line holds the string goes to the
+}                   top; PF5 (RFIND) finds the next one.
+{  LOCATE n         }The job in row n goes to the top.
+{  RIGHT, LEFT      }With ?: move the further fields (PF11, PF10).
+{  END              }Back to the menu.
+}
+}  The other panel commands (DA, I, O, H, PR, INIT, LOG) go to that panel.
+}
+}  PF7: Status panel help   PF10: back   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZUP = ISFHST
+)END

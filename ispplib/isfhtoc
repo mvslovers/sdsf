@@ -1,0 +1,51 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: SDSF Table of Contents                   !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                  }
+}
+}  Type the number of a topic and press Enter.
+}
+@     1 }The primary option menu
+@     2 }ST     }- the Status panel: the jobs on the JES2 queues
+@     3 }DA     }- the active address spaces
+@     4 }I      }- the jobs waiting on the input queue
+@     5 }O      }- the output waiting to be printed
+@     6 }H      }- the held output
+@     7 }PR     }- the JES2 printers
+@     8 }INIT   }- the JES2 initiators
+@     9 }LOG    }- the system log
+@    10 }The Job Data Set panel: the data sets of a job
+@    11 }The Output Data Set panel: browsing output
+@    12 }Commands you can give on every panel
+@    13 }Who may see and do what
+@    14 }Using the help
+@    15 }Messages: what they mean
+}
+}  The index (I) lists the subjects in alphabetical order.
+}  Enter: topic 1   I: index   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZSEL = TRANS(&ISFHCMD
+                1,ISFHMN
+                2,ISFHST
+                3,ISFHDA
+                4,ISFHIQ
+                5,ISFHOQ
+                6,ISFHHQ
+                7,ISFHPR
+                8,ISFHIT
+                9,ISFHLG
+               10,ISFHJD
+               11,ISFHOD
+               12,ISFKALL
+               13,ISFHAUTH
+               14,ISFHHELP
+               15,ISFHMS1
+                *,'?')
+  &ZCONT = ISFHMN
+)END

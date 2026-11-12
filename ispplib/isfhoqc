@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Output Queue Panel -- the O Command      !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}
+@  O}[classes] [forms]
+}
+{  classes  }Output classes, written right after O without a blank: OA
+}            shows class A, OAX classes A and X. Up to 7.
+{  forms    }The forms the output is on. * stands for any number of
+}            characters, % for one.
+}
+}  The class and the forms are those of the job's first data set that is
+}  waiting to be printed.
+}
+}  Examples:
+{    O          }all the output waiting to be printed
+{    OA         }the output of class A
+{    O STD*     }the output on forms beginning with STD
+}
+}
+}
+}
+}
+}
+}  Enter: next topic   PF7: Output Queue help   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFHOQF
+  &ZUP = ISFHOQ
+)END

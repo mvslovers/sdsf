@@ -1,0 +1,43 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Input Queue Panel                        !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}
+}  The Input Queue panel (I) lists the jobs that have been read in and
+}  are waiting to execute or executing, in the order of the Status panel.
+}  Without classes it shows batch jobs only; with classes, $ adds the
+}  TSO users and # the started tasks.
+}
+}  You see your own jobs, and the jobs of others as far as RAKF lets you
+}  read them (topic 13 of the contents). PREFIX and DEST limit the list.
+}  Executing jobs are white, the others blue.
+}
+}  Type the number of a topic, or press Enter to see them in order.
+}
+@     1 }The I command: classes, held jobs
+@     2 }Action characters
+@     3 }The fields of the panel, and the ? command
+@     4 }Overtyping PRTY, C and DEST
+@     5 }Commands on the list panels
+}
+}
+}
+}
+}  Enter: topic 1   PF7: contents   PF10: back   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZSEL = TRANS(&ISFHCMD
+                 1,ISFHIQC
+                 2,ISFHIQA
+                 3,ISFHIQF
+                 4,ISFHIQO
+                 5,ISFHLSM
+                *,'?')
+  &ZCONT = ISFHIQC
+  &ZUP = ISFHTOC
+)END

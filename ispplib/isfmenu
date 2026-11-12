@@ -1,0 +1,33 @@
+)ATTR
+ + TYPE(TEXT)   INTENS(LOW)  SKIP(ON)  COLOR(GREEN)
+ % TYPE(TEXT)   INTENS(HIGH) SKIP(ON)  COLOR(WHITE)
+ $ TYPE(TEXT)   INTENS(LOW)  SKIP(ON)  COLOR(BLUE)
+ _ TYPE(INPUT)  INTENS(HIGH) JUST(LEFT) CAPS(ON) COLOR(RED)
+ ~ TYPE(INPUT)  INTENS(HIGH) JUST(LEFT) CAPS(ON) COLOR(RED)
+ ! TYPE(OUTPUT) INTENS(HIGH) JUST(LEFT) CAPS(OFF) COLOR(WHITE)
+)BODY WIDTH(&ZSCREENW) EXPAND(//)
+!ISFLN1 / /
+%COMMAND INPUT ===>_ISFCMD                       / /%SCROLL ===>~ISFS+
++
+% Type an option or command and press Enter.
++
+%    LOG      $- Display the system log
+%    DA       $- Display active users of the system
+%    I        $- Display jobs in the JES2 input queue
+%    O        $- Display jobs in the JES2 output queue
+%    H        $- Display jobs in the JES2 held output queue
+%    ST       $- Display status of jobs in the JES2 queues
+%    PR       $- Display JES2 printers on this system
+%    INIT     $- Display JES2 initiators on this system
++
+%    TUTOR    $- Short course on SDSF (ISPF only)
+%    END      $- Exit SDSF
++
+$    Use%Help$key for more information.
++
+$    SDSF for MVS 3.8j - brought to you with love by the MVSLOVERS
+)INIT
+  .CURSOR = &ISFCSR
+)PROC
+  &ISFPFK = .PFKEY
+)END

@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Messages -- L to N                       !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+@n LINES PRINTED}, @n PAGES PRINTED
+}    PRINT wrote that many lines of output, or pages of the log.
+@LOG NOT READABLE
+}    SDSF could not get the authorized state to read the log.
+@NO ANSWER FROM JES2
+}    PR or INIT: JES2 did not answer within a few seconds. Press Enter.
+@NO CHARS 'x' FOUND}  (or WORD, PREFIX, SUFFIX)
+}    FIND looked through all of the data: the string is not there.
+@NO COMMAND PROVIDED
+}    / with no command after it.
+@NO HELP FOR THIS PANEL YET
+}    Help: the panel's help is not there; the contents are shown instead.
+@NO SYSLOG FOUND
+}    SYSID names another system: SDSF shows only this system's log.
+@NOT AUTHORIZED
+}    P on the Status panel: SDSF could not get the authorized state.
+@NOT AUTHORIZED FOR JOB
+}    You may not act on this job: it needs UPDATE access in RAKF (topic 13
+}    of the contents).
+}
+}
+}  Enter: next page   PF7: contents   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFHMS5
+  &ZUP = ISFHTOC
+)END

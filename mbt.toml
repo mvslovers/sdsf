@@ -1,0 +1,108 @@
+schema = 3
+
+[project]
+name = "sdsf"
+version = "1.2.0-dev"
+kind = "application"
+
+[toolchain]
+cc370 = "1.6.3"
+libc370 = "2.29.0"
+mbt = "3.2"
+
+[deploy]
+target = "ISF.DEV.LINKLIB"
+
+# The entry of SDSF: a program under ISPF, from the ISPLLIB concatenation
+# (it loads ISPLINK from there), its panels in ispplib/.
+[module.ISFISP]
+sources = ["src/isfisp.c", "src/isfst.c", "src/isfpan.c", "src/isfauth.c", "src/isfhelp.c"]
+rent = false
+reus = false
+
+# A test tool: stays in execution for PARM seconds.
+[module.ISFWAIT]
+sources = ["tools/isfwait.c"]
+rent = false
+reus = false
+ship = false            # a test tool: not in the SMP package (mbt#373)
+
+# A test tool: asks the operator (WTOR) and ends on the reply.
+[module.ISFWTOR]
+sources = ["tools/isfwtor.c"]
+rent = false
+reus = false
+ship = false            # a test tool: not in the SMP package (mbt#373)
+
+# A test tool for the SVC: turns the authorization on and off and reports
+# (tools/isfsvct.c). Linked as ISFSVCT; as another name it must be refused.
+[module.ISFSVCT]
+sources = ["tools/isfsvct.c"]
+rent = false
+reus = false
+ship = false            # a test tool: not in the SMP package (mbt#373)
+
+# The SVC of SDSF: an extended SVC routine, SVC 109 code 11, that turns
+# the APF authorization on and off for SDSF's own modules only.
+# Installed in SYS1.LPALIB, active after an IPL with CLPA. Pure assembler: MVS enters it as an SVC, no C runtime.
+[module.IGX00011]
+entry = "IGX00011"
+startup = false
+sources = ["asm/igx00011.asm"]
+rent = true
+reus = true
+refr = true
+
+# SMP links it into SYS1.LPALIB through the JCLIN and keeps it in
+# SYS1.AOST4, as IBM's SVCs are; it travels as source and the install job
+# assembles it with IFOX00 (mbt#380, asked for by the TK5 maintainer).
+[module.IGX00011.smp]
+syslib = "LPALIB"
+distlib = "AOST4"
+source = true
+
+
+# A diagnostic tool for the job authorization: every job with its owner
+# (JCTUSEID), the JESSPOOL entity and RAKF's answers (tools/isfjown.c).
+[module.ISFJOWN]
+sources = ["tools/isfjown.c", "src/isfst.c", "src/isfauth.c"]
+rent = false
+reus = false
+ship = false            # a test tool: not in the SMP package (mbt#373)
+
+
+# ---- The SMP package ----
+[distribution]
+readme = "docs/installation.md"
+extra = ["docs/uninstall.md"]
+
+# The panels and the CLIST SDSF are SMP elements (++MAC), each in a
+# library of its own (the TK5 maintainer's layout): ISF.ISFPLIB for the
+# ISPPLIB concatenation, ISF.ISFCLST for SYSPROC, with the distribution
+# libraries ISF.AISFPLIB and ISF.AISFCLST (docs/installation.md).
+[distribution.library.ispplib]
+target = "ISF.ISFPLIB"
+element = "MAC"
+
+[distribution.library.clist]
+target = "ISF.ISFCLST"
+element = "MAC"
+
+[smp]
+# T + ISF + version. 0.9.0 was a beta under TISF090; the first release
+# after it is 1.2.0 (1.0 and 1.1 are skipped). It does not delete TISF090:
+# there is no upgrade from the beta, it is removed and 1.2.0 installed
+# fresh. Set explicitly because the version is a prerelease while it is
+# built.
+fmid = "TISF120"
+delete = []
+prereq = []
+accept_fmid = true
+# ISF.LINKLIB goes into IEAAPF00 and LNKLST00: ISFISP must be loaded from
+# an APF library for the SVC. Own ddnames: LINKLIB is
+# the ddname of SYS1.LINKLIB in the SMP procedures.
+lklib = "ISF.ISFLOAD"
+target = "ISF.LINKLIB"
+target_dd = "ISFLINK"
+distlib = "ISF.AISFLOAD"
+distlib_dd = "AISFLOAD"

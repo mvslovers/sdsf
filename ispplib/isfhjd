@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Job Data Set Panel                       !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}  The Job Data Set panel lists the output data sets of one job: ? in the
+}  NP column of a job on ST, DA, I, O or H shows it. INPUT ON adds the
+}  job's input: its JCL as JES2 converted it and its instream data.
+}
+{  DDNAME   }The data set's DD name; JESMSGLG, JESJCL and JESYSMSG are
+}            JES2's.
+{  STEP-NAME, PROC-STEP }The step that wrote it; JES2 for JES2's.
+{  DSID     }The data set's number within the job.
+{  C        }Its output class.
+{  REC-CNT  }Its records.
+{  CC       }The copies to print.
+{  CREATE-DATE-TIME  }The date of the job, yy.ddd.
+{  FORMS, FCB, UCS, FLASH, BURST, PRMODE }How it is printed.
+}  PF11 and PF10 move the fields right of DDNAME.
+}
+}  Action character:
+{   S  }Browse the data set (Output Data Set panel).
+}
+}  END goes back to the list. The commands of the list panels work here.
+}
+}
+}  Enter: next topic   PF7: contents   PF10: back   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFHLSM
+  &ZUP = ISFHTOC
+)END

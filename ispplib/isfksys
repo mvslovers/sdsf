@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Commands -- SYSID                        !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}
+@  SYSID}name     or SYSID ?
+}
+}  The system whose log the LOG panel shows, up to 4 characters. SDSF
+}  reads the log of this system only, from its master trace table: with
+}  the id of any other system the log is empty and the panel says
+}  NO SYSLOG FOUND. SYSID with this system's id shows its log again.
+}
+}  SYSID ? puts the current setting on the command line. The id of this
+}  system is on the title line of the log.
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}  Enter: next topic   PF7: commands   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFKSET
+  &ZUP = ISFKALL
+)END

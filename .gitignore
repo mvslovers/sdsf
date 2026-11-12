@@ -1,0 +1,13 @@
+# Build output
+/build/
+/dist/
+/.mbt/
+/compile_commands.json
+*.o
+*.s
+*.d
+.DS_Store
+
+# Logs of the TN3270 test sessions
+/tnz.log
+/zti.log

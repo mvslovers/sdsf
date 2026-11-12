@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Commands -- / and TSO                    !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}
+@  /}command     }gives an MVS or JES2 command as from the master console.
+}
+}  Examples: /D A,L or /$DI. The answer goes to the system log: give the
+}  command on the LOG panel to see it there. The panel says COMMAND
+}  ISSUED. / alone: NO COMMAND PROVIDED.
+}
+}  Operator commands need UPDATE access to SDSF.OPER (topic 13 of the
+}  contents); without it: NOT AUTHORIZED FOR CMD.
+}
+@  TSO}command   }runs a TSO command, CLIST or program.
+}
+}  Example: TSO LISTCAT. The screen shows what the command writes; after
+}  Enter the SDSF panel comes back. TSO alone: COMMAND PARM IS MISSING.
+}
+}  The command line is as long as the screen leaves room for: 42
+}  characters on a screen 80 columns wide.
+}
+}
+}
+}
+}  Enter: next topic   PF7: commands   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFKPRE
+  &ZUP = ISFKALL
+)END

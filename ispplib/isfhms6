@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Messages -- P to Z                       !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+@PRINT CLOSED n LINE
+}    PRINT CLOSE: the file is closed, with n lines; SYSOUT goes to print.
+@PRINT NOT OPENED
+}    PRINT CLOSE with no file open.
+@PURGE FAILED RC n
+}    P on the Status panel: JES2 did not purge the job, with that return
+}    code.
+@REPLIES NOT READABLE
+}    SDSF could not get the authorized state to read the replies.
+@TOO FEW PARMS}, @TOO MANY PARMS
+}    The command needs more parameters, or has more than it takes.
+@TOP OF DATA REACHED
+}    FIND PREV went to the start without finding the string again. The
+}    next FIND PREV starts over at the end.
+@ISF001E ISFISP RUNS UNDER ISPF: SELECT PGM(ISFISP)
+}    ISFISP was called outside ISPF. Start SDSF under ISPF: TSO SDSF from
+}    an ISPF command line.
+}
+}
+}
+}
+}  Enter: contents   PF7: contents   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFHTOC
+  &ZUP = ISFHTOC
+)END

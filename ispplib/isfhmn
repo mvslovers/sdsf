@@ -1,0 +1,44 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: SDSF Primary Option Menu                 !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                  }
+}
+}  The menu lists the panels of SDSF. Type the name of one on the command
+}  line and press Enter; a command can carry parameters, as in ST A or
+}  H ALL. Every SDSF panel takes these names too, so you can go from one
+}  panel to another without coming back here.
+}
+}  For the help of a panel, type its number:
+}
+@     1 }LOG    }- the system log            @     5 }H      }- held output
+@     2 }DA     }- active address spaces     @     6 }ST     }- Status panel
+@     3 }I      }- the input queue           @     7 }PR     }- printers
+@     4 }O      }- the output queue          @     8 }INIT   }- initiators
+}
+}  TUTOR starts the tutorial, a short course through SDSF. END, or the
+}  End key, leaves SDSF. The commands you can give on every panel (/ for
+}  an operator command, TSO for a TSO command, PREFIX, DEST and others)
+}  work on the menu as well.
+}
+}
+}  Enter: contents   I: index   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZSEL = TRANS(&ISFHCMD
+                1,ISFHLG
+                2,ISFHDA
+                3,ISFHIQ
+                4,ISFHOQ
+                5,ISFHHQ
+                6,ISFHST
+                7,ISFHPR
+                8,ISFHIT
+                *,'?')
+  &ZCONT = ISFHTOC
+  &ZUP = ISFHTOC
+)END

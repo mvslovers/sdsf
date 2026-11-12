@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@TUTORIAL: Looking at Output, the Data Set      !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}  The Output Data Set panel shows the output as it would be printed:
+}  +---------------------------------------------------------------------------
+}  |@SDSF OUTPUT DISPLAY MYJOB    JOB  1240 DSID   102 LINE       1
+}  |@COMMAND INPUT ===>                                        SCROLL ===> PAGE
+}  |@***************************** TOP OF DATA *****************************
+}  | IDCAMS  SYSTEM SERVICES
+}  |   LISTCAT LEVEL(HERC01)
+}  | NONVSAM ------- HERC01.MYJOB.DATA
+}  | IDC0001I FUNCTION COMPLETED, HIGHEST CONDITION CODE WAS 0
+}  | IDC0002I IDCAMS PROCESSING COMPLETE. MAXIMUM CONDITION CODE WAS 0
+}  |@**************************** BOTTOM OF DATA ***************************
+}  +---------------------------------------------------------------------------
+}  The title line names the job and the data set at the top (DSID 102);
+}  LINE is the line at the top, COLUMNS on the right the columns shown.
+{  PF8, PF7    }down and up       {  PF11, PF10  }right and left
+{  BOTTOM, TOP }to the end or the start
+{  NEXT, PREV  }to the next or the previous data set
+}  The End key goes back to the Job Data Set panel.
+}
+}
+}
+}  Enter: next   PF10: back   PF7: list of parts   PF3: leave
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFTOUT3
+  &ZUP = ISFTUTOR
+)END

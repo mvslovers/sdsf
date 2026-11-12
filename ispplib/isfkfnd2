@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Commands -- FIND, more                   !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}
+}  Examples:
+{    F IEF404I              }the next line with IEF404I
+{    F JOB PREV             }the line before with JOB
+{    F 'NOT CATLGD' ALL     }how many lines hold it, and the first
+{    F X'5B' 1              }a dollar sign in column 1
+{    F ABEND 20 60          }ABEND within columns 20 to 60
+}
+}  On the log and on output, one FIND looks through FINDLIM lines at most
+}  (5000 unless set otherwise, topic 10 of the commands) and then says
+}  FINDLIM REACHED; the next FIND goes on from there.
+}
+}  The last string is kept: in the next SDSF session, FIND alone or PF5
+}  looks for it again.
+}
+}  Mistakes: INVALID HEX STRING, INCONSISTENT PARAMETERS (two directions,
+}  two kinds, or a string longer than the columns), INVALID LEFT BOUNDARY
+}  and INVALID RIGHT BOUNDARY.
+}
+}
+}
+}  Enter: next topic   PF7: commands   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFKSCR
+  &ZUP = ISFKALL
+)END

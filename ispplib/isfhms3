@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Messages -- I to J                       !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+@INVALID DESTINATION NAME
+}    DEST, or a destination typed over DEST, is not LOCAL, ANYLOCAL, Rn,
+}    RMn, RMTn or Un.
+@INVALID HEX STRING
+}    X'..' in FIND holds something other than 0 to 9 and A to F, or an odd
+}    number of digits.
+@INVALID LEFT BOUNDARY, INVALID RIGHT BOUNDARY
+}    A column of FIND is not a number of the data's columns.
+@INVALID OPTION
+}    Help: what was typed is not a topic of this panel, nor T, I or HELP.
+@INVALID SCROLL AMOUNT
+}    The SCROLL field, or the word before a scroll key, is not PAGE, HALF,
+}    DATA, CSR, MAX or a number.
+@INVALID SYNTAX
+}    FIND or a setting that cannot be read (PREFIX x or y longer than one
+}    character, ACTION ? with more), or a printer's SFORM, SFCB or SEP.
+@JES2 NOT READABLE
+}    SDSF could not read the JES2 queues.
+@JOB NOT FOUND
+}    The job has left the queues since the list was read, or the row has
+}    no JES2 job, as an idle initiator. Enter reads the list again.
+}  Enter: next page   PF7: contents   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFHMS4
+  &ZUP = ISFHTOC
+)END

@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: DA Panel -- Fields                       !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}
+{  JOBNAME  }The name of the job, started task, TSO user or initiator.
+{  STEPNAME }The step running, for a batch job; the procedure of a
+}            started task; the logon procedure of a TSO user.
+{  PROCSTEP }The step of the procedure; for a TSO user, the terminal.
+{  TYPE     }JOB, STC or TSU; blank for an idle initiator.
+{  JNUM     }The JES2 job number, if the address space has one.
+{  C        }The job class.
+{  POS      }IN in storage, OUT swapped out, N/S not swappable.
+{  DP       }The dispatching priority, in hexadecimal.
+{  PGN      }The performance group. Overtype it to move the address space
+}            to another one: a RESET (E name,PERFORM=n). It needs update
+}            access to the job, or to SDSF.OPER for one without a job.
+{  REAL     }The frames of real storage it holds.
+{  PAGING   }Not measured yet: always 0.00.
+{  SIO      }The I/O (EXCPs) per second since the panel was last shown.
+{  CPU%     }The share of the processor since the panel was last shown.
+}
+}  SIO and CPU% are taken over the time between two displays: the first
+}  display shows 0.00, Enter shows the next interval. PF11 shows further
+}  fields (next topic).
+}  Enter: next topic   PF7: DA panel help   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFHDAF2
+  &ZUP = ISFHDA
+)END

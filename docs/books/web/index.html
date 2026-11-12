@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SDSF manuals</title>
+<link rel="stylesheet" href="bookmaster.css">
+<style>
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+.card { border-top: 6px solid var(--ink); padding: 1rem 0 0; }
+.card h3 { border: 0; margin: 0 0 .5rem; padding: 0; font-size: 1.35rem; }
+.card .num { color: var(--muted); font-family: 'IBM Plex Sans', sans-serif; font-size: .85rem; }
+.card ul { list-style: none; padding: 0; font-family: 'IBM Plex Sans', sans-serif; }
+main.landing { max-width: 60rem; margin: 0 auto; }
+</style>
+</head>
+<body class="bm-landing">
+<header class="bm-top"><nav class="bm-crumbs" aria-label="Breadcrumb"><a href="https://mvslovers.readthedocs.io/">mvslovers</a><span class="sep">›</span><a href="index.html">SDSF</a></nav><span class="num">mvslovers manuals</span></header>
+<main class="landing">
+<h2>SDSF (sdsf) for MVS 3.8j</h2>
+<p>The spool and system display facility for MVS 3.8j under ISPF: jobs and their output, the running system, the system log, printers and initiators. Two books describe SDSF 1.2.</p>
+<div class="cards">
+  <section class="card">
+    <h3>User's Guide</h3>
+    <p class="num">ML11-0001</p>
+    <p>Starting SDSF, looking at jobs, the queues, the running system and the log, printers and initiators, searching output, who may do what, installing and removing SDSF.</p>
+    <ul><li><a href="guide/index.html">Read online</a></li><li><a href="ml11-0001-0.pdf">Download PDF</a></li></ul>
+  </section>
+  <section class="card">
+    <h3>Reference</h3>
+    <p class="num">ML11-0002</p>
+    <p>The commands, the panels, the action characters, the authorization rules, the differences from IBM's SDSF V1R2, the messages, the PF keys, the package and the SVC routine.</p>
+    <ul><li><a href="reference/index.html">Read online</a></li><li><a href="ml11-0002-0.pdf">Download PDF</a></li></ul>
+  </section>
+</div>
+</main>
+</body>
+</html>

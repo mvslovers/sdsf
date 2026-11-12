@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@TUTORIAL: Acting on Jobs                       !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}
+}  An action character in the NP column of a job acts on it. On the
+}  Status panel:
+}
+{   H  }hold the job: a job waiting to execute does not start
+{   A  }release it
+{   C  }cancel it: it ends, its output stays
+{   P  }purge it: it ends and its output is gone. SDSF does not ask
+}        again, so be sure it is the right job.
+{   O  }release its held output for printing
+{   D  }JES2 displays the job's status in the log
+}
+}  SDSF gives the command to JES2 and says COMMAND ISSUED. JES2's answer
+}  is in the log. Press Enter to see the job's new state.
+}
+}  You may act on your own jobs. The jobs of others need update access
+}  in RAKF; without it: NOT AUTHORIZED FOR JOB.
+}
+}
+}
+}
+}  Enter: next   PF10: back   PF7: list of parts   PF3: leave
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFTACT2
+  &ZUP = ISFTUTOR
+)END

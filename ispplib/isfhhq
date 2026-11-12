@@ -1,0 +1,41 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Held Output Panel                        !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}
+}  The Held Output panel (H) lists the jobs that have held output, the
+}  output that is not printed until it is released. Here you look at
+}  the output of jobs whose MSGCLASS is a held class, for example.
+}  The oldest comes first, by the time the job ended.
+}
+}  H alone shows the jobs whose names begin with your user id. H ALL
+}  shows all you may see (topic 13 of the contents); PREFIX takes the
+}  place of your user id. DEST limits the list as well.
+}
+}  Action characters:
+{   ?  }Show the job's data sets (Job Data Set panel).
+{   S  }Browse the job's output (Output Data Set panel).
+{   O  }Release the held output for printing ($O). With a new DEST typed
+}       over the field, it goes there ($R first).
+}  A new DEST without O: "O" ACTION REQUIRED. To purge, use P on ST.
+}
+}  Type the number of a topic, or press Enter to see them in order.
+@     1 }The H command: classes, ALL and a job name
+@     2 }The fields of the panel
+@     3 }Commands on the list panels
+}  Enter: topic 1   PF7: contents   PF10: back   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZSEL = TRANS(&ISFHCMD
+                 1,ISFHHQC
+                 2,ISFHHQF
+                 3,ISFHLSM
+                *,'?')
+  &ZCONT = ISFHHQC
+  &ZUP = ISFHTOC
+)END

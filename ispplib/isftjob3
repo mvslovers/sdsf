@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@TUTORIAL: Following a Job, its Data Sets       !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}  This is the Job Data Set panel of MYJOB:
+}  +---------------------------------------------------------------------------
+}  |@SDSF JOB DATA SET DISPLAY - JOB MYJOB    (J1240   )    LINE 1-4 (4)
+}  |@COMMAND INPUT ===>                                        SCROLL ===> PAGE
+}  |@NP DDNAME   STEP-NAME PROC-STEP DSID C REC-CNT PAGE-CNT BYTE-CNT CC RMT
+}  |    JESMSGLG JES2                   2 A      14                    1
+}  |    JESJCL   JES2                   3 A       9                    1
+}  |    JESYSMSG JES2                   4 A      17                    1
+}  |    SYSPRINT STEP1                102 A       6                    1
+}  +---------------------------------------------------------------------------
+}  Every job has the three data sets of JES2:
+{  JESMSGLG }the job log: when the job started and ended, and messages
+{  JESJCL   }the JCL as JES2 read it
+{  JESYSMSG }the messages of the system: the steps, their data sets and
+}            their return codes
+}  The others are written by the job's programs, here SYSPRINT of STEP1.
+}  REC-CNT is the number of lines.
+}
+}  * END OF PART 3 *
+}
+}
+}  Enter: part 4   PF10: back   PF7: list of parts   PF3: leave
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFTOUT
+  &ZUP = ISFTUTOR
+)END

@@ -1,0 +1,54 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Index -- A to D                          !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}  Type the number of a subject and press Enter.
+}
+@     1 }ACTION command, the replies shown
+@     2 }action characters on the DA panel
+@     3 }action characters on the Input Queue panel
+@     4 }action characters on the Initiator panel
+@     5 }action characters on the Printer panel
+@     6 }action characters on the Status panel
+@     7 }authorization: who may see and do what
+@     8 }BOTTOM command
+@     9 }cancelling a job
+@    10 }classes, limiting the Status panel to
+@    11 }COLS command
+@    12 }commands on every panel
+@    13 }commands on the list panels
+@    14 }DA command
+@    15 }DA panel
+@    16 }DA panel, fields of
+}
+}
+}
+}  Enter: next page   T: contents   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZSEL = TRANS(&ISFHCMD
+                 1,ISFKACT
+                 2,ISFHDAA
+                 3,ISFHIQA
+                 4,ISFHIT
+                 5,ISFHPRA
+                 6,ISFHSTA
+                 7,ISFHAUTH
+                 8,ISFKSCR
+                 9,ISFHSTA
+                10,ISFHSTC
+                11,ISFHLGM
+                12,ISFKALL
+                13,ISFHLSM
+                14,ISFHDAC
+                15,ISFHDA
+                16,ISFHDAF
+                *,'?')
+  &ZCONT = ISFXD
+  &ZUP = ISFHTOC
+)END

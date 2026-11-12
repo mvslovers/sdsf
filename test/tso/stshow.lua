@@ -1,0 +1,16 @@
+-- Prints the top of the Status panel; a look, not a test.
+return function(t)
+  t:logon(); t:clear()
+  t:type("ISPF"):enter()
+  t:expect("Primary Option Menu")
+  t:type("S"):enter()
+  t:expect("COMMAND INPUT")
+  t:type("ST"):enter()
+  t:expect("SDSF STATUS DISPLAY ALL CLASSES")
+  print(t:text())
+  t:pf(3)
+  t:pf(3)
+  t:expect("Primary Option Menu")
+  t:type("X"):enter()
+  t:logoff()
+end

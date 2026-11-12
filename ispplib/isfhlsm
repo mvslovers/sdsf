@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Commands on the List Panels              !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}
+}  On ST, DA, I, O, H, PR, INIT and the Job Data Set panel:
+}
+{  Enter            }With an empty command line: the list read again.
+{  UP, DOWN         }Scroll by the SCROLL amount (PF7, PF8).
+{  TOP, BOTTOM      }To the first or the last row.
+{  FIND string      }The next row whose line holds the string goes to the
+}                   top; PF5 (RFIND) finds the next one. NEXT, PREV,
+}                   FIRST, LAST and ALL as on the log (topic 12 of the
+}                   contents).
+{  LOCATE n, L n    }Row n goes to the top.
+{  RIGHT, LEFT      }Where a row is wider than the screen: PF11, PF10.
+{  ?                }ST, I: the further fields; DA: the other order.
+{  END              }Back to the menu; from the Job Data Set panel, back
+}                   to the list.
+}
+}  On a list, FIND looks at the rows as the screen shows them; WORD,
+}  PREFIX, SUFFIX and columns are taken but make no difference there.
+}
+}  The panel commands ST, DA, I, O, H, PR, INIT and LOG go to that panel.
+}
+}  Enter: commands on every panel   PF10: back   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFKALL
+  &ZUP = ISFHTOC
+)END

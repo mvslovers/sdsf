@@ -1,0 +1,43 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: DA Panel                                 !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}
+}  The DA panel (Display Active users) lists the address spaces active on
+}  this system: batch jobs, started tasks, TSO users and, if you ask for
+}  them, idle initiators. It shows what each one uses: the processor, I/O
+}  and real storage. The rows are in the order of their address space ids.
+}
+}  A row is white, or blue while the address space is swapped out.
+}  You see the address spaces of the jobs you may read (topic 13 of the
+}  contents); those without a job, such as the master scheduler or JES2,
+}  need READ access to SDSF.OPER.
+}
+}  The title line adds up SIO and CPU% over all rows.
+}
+}  Type the number of a topic, or press Enter to see them in order.
+}
+@     1 }The DA command: which address spaces
+@     2 }Action characters
+@     3 }The fields of the panel
+@     4 }Further fields: PF11 and the ? command
+@     5 }Commands on the list panels
+}
+}  Enter: topic 1   PF7: contents   PF10: back   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZSEL = TRANS(&ISFHCMD
+                 1,ISFHDAC
+                 2,ISFHDAA
+                 3,ISFHDAF
+                 4,ISFHDAF2
+                 5,ISFHLSM
+                *,'?')
+  &ZCONT = ISFHDAC
+  &ZUP = ISFHTOC
+)END

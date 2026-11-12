@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Initiator Panel                          !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}  The Initiator panel (INIT) lists the JES2 initiators. SDSF asks JES2
+}  each time ($DI) and reads the answer from the system log. INIT takes
+}  no parameters; it needs READ access to SDSF.OPER.
+}
+{  ID       }The initiator's number.
+{  STATUS   }INACTIVE, ACTIVE, DRAINED, HALTED, ... as JES2 gives it.
+{  CLASSES  }The job classes it selects, in that order. Overtype them to
+}            change them ($TI); JES2 keeps five at most.
+{  JOB-NAME, STEP-NAME, PROC-STEP, TYPE, JNUM, C, ASID }
+}            The job an active initiator runs.
+}  Active initiators are white, the others blue.
+}
+}  Action characters:
+{   D  }Display the initiator ($DI).
+{   S  }Start it ($SI).
+{   P  }Stop it once its job has ended ($PI).
+{   Z  }Halt it: it takes no new job until S ($ZI).
+}  D needs READ access to SDSF.OPER, the others UPDATE access; without
+}  it: NOT AUTHORIZED FOR INIT. JES2's answers go to the system log.
+}
+}
+}  Enter: next topic   PF7: contents   PF10: back   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFHLSM
+  &ZUP = ISFHTOC
+)END

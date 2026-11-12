@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Output Data Set Panel -- Moving Around   !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+{  NEXT n, N n      }The start of the data set n after the one at the
+}                   top; NEXT alone the next one.
+{  PREV n, P n      }The start of the data set n before; NEXT 0 or PREV 0
+}                   the start of the one at the top.
+{  LOCATE n, L n    }Line n of the data set at the top.
+{  UP, DOWN         }By the SCROLL amount (PF7, PF8).
+{  TOP, BOTTOM      }To the first or the last line.
+{  RIGHT, LEFT      }Sideways, by the width of the screen or the amount
+}                   given (PF11, PF10); up to column 255.
+{  COLS             }A scale line over the data; RESET takes it away.
+{  SET HEX ON, OFF  }Each line also in hexadecimal: under the text, the
+}                   first and the second digit of each byte.
+}
+}  A word typed before PF7, PF8, PF10 or PF11 is the amount for that
+}  key: M (MAX), P (PAGE), H (HALF), D (DATA), C (CSR), or a number.
+}
+}  The output cannot be changed: what you type over it is not kept.
+}
+}
+}
+}
+}  Enter: next topic   PF7: Output Data Set help   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFKPRT
+  &ZUP = ISFHOD
+)END

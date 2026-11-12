@@ -1,0 +1,39 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@TUTORIAL: Looking at Output                    !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}
+}  To look at a data set, type S in its NP column.
+}
+}  +---------------------------------------------------------------------------
+}  |@SDSF JOB DATA SET DISPLAY - JOB MYJOB    (J1240   )    LINE 1-4 (4)
+}  |@COMMAND INPUT ===>                                        SCROLL ===> PAGE
+}  |@NP DDNAME   STEP-NAME PROC-STEP DSID C REC-CNT PAGE-CNT BYTE-CNT CC RMT
+}  |    JESMSGLG JES2                   2 A      14                    1
+}  |    JESJCL   JES2                   3 A       9                    1
+}  |    JESYSMSG JES2                   4 A      17                    1
+}  |_HN}SYSPRINT STEP1                102 A       6                    1
+}  +---------------------------------------------------------------------------
+}
+@  Type S in the NP column of SYSPRINT and press Enter.
+}
+}  S on a job on the Status panel, instead of ?, shows all its data sets
+}  one after the other.
+}
+}
+}
+}
+}  Enter: next   PF10: back   PF7: list of parts   PF3: leave
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZSEL = TRANS(&HN
+                 S,ISFTOUT2
+                *,'?')
+  &ZCONT = ISFTOUT2
+  &ZUP = ISFTUTOR
+)END

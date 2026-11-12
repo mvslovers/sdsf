@@ -1,0 +1,5 @@
+//ISFJOWN  JOB (SDSF),'JOB OWNERS',CLASS=A,MSGCLASS=H
+//* the owners of the jobs and RAKF's answers (tools/isfjown.c)
+//RUN      EXEC PGM=ISFJOWN,REGION=4M
+//STEPLIB  DD DISP=SHR,DSN=ISF.DEV.LINKLIB
+//SYSPRINT DD SYSOUT=*

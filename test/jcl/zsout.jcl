@@ -1,0 +1,78 @@
+//ZSOUT JOB (1),'OUTPUT',CLASS=A,MSGCLASS=H,MSGLEVEL=(1,1)
+//GEN PROC
+//G EXEC PGM=IEBGENER
+//SYSPRINT DD SYSOUT=*
+//SYSIN DD DUMMY
+//LISTE DD SYSOUT=*,DCB=(RECFM=FB,LRECL=80,BLKSIZE=800)
+//SYSUT2 DD SYSOUT=*,DCB=(RECFM=FB,LRECL=80,BLKSIZE=800)
+// PEND
+//S1 EXEC GEN
+//G.SYSUT1 DD *
+LINE 001 OF THE TEST OUTPUT FROM STEP S1 ...............................00000001
+LINE 002 OF THE TEST OUTPUT FROM STEP S1 ...............................00000002
+LINE 003 OF THE TEST OUTPUT FROM STEP S1 ...............................00000003
+LINE 004 OF THE TEST OUTPUT FROM STEP S1 ...............................00000004
+LINE 005 OF THE TEST OUTPUT FROM STEP S1 ...............................00000005
+LINE 006 OF THE TEST OUTPUT FROM STEP S1 ...............................00000006
+LINE 007 OF THE TEST OUTPUT FROM STEP S1 ...............................00000007
+LINE 008 OF THE TEST OUTPUT FROM STEP S1 ...............................00000008
+LINE 009 OF THE TEST OUTPUT FROM STEP S1 ...............................00000009
+LINE 010 OF THE TEST OUTPUT FROM STEP S1 ...............................00000010
+LINE 011 OF THE TEST OUTPUT FROM STEP S1 ...............................00000011
+LINE 012 OF THE TEST OUTPUT FROM STEP S1 ...............................00000012
+LINE 013 OF THE TEST OUTPUT FROM STEP S1 ...............................00000013
+LINE 014 OF THE TEST OUTPUT FROM STEP S1 ...............................00000014
+LINE 015 OF THE TEST OUTPUT FROM STEP S1 ...............................00000015
+LINE 016 OF THE TEST OUTPUT FROM STEP S1 ...............................00000016
+LINE 017 OF THE TEST OUTPUT FROM STEP S1 ...............................00000017
+LINE 018 OF THE TEST OUTPUT FROM STEP S1 ...............................00000018
+LINE 019 OF THE TEST OUTPUT FROM STEP S1 ...............................00000019
+LINE 020 OF THE TEST OUTPUT FROM STEP S1 ...............................00000020
+LINE 021 OF THE TEST OUTPUT FROM STEP S1 ...............................00000021
+LINE 022 OF THE TEST OUTPUT FROM STEP S1 ...............................00000022
+LINE 023 OF THE TEST OUTPUT FROM STEP S1 ...............................00000023
+LINE 024 OF THE TEST OUTPUT FROM STEP S1 ...............................00000024
+LINE 025 OF THE TEST OUTPUT FROM STEP S1 ...............................00000025
+LINE 026 OF THE TEST OUTPUT FROM STEP S1 ...............................00000026
+LINE 027 OF THE TEST OUTPUT FROM STEP S1 ...............................00000027
+LINE 028 OF THE TEST OUTPUT FROM STEP S1 ...............................00000028
+LINE 029 OF THE TEST OUTPUT FROM STEP S1 ...............................00000029
+LINE 030 OF THE TEST OUTPUT FROM STEP S1 ...............................00000030
+LINE 031 OF THE TEST OUTPUT FROM STEP S1 ...............................00000031
+LINE 032 OF THE TEST OUTPUT FROM STEP S1 ...............................00000032
+LINE 033 OF THE TEST OUTPUT FROM STEP S1 ...............................00000033
+LINE 034 OF THE TEST OUTPUT FROM STEP S1 ...............................00000034
+LINE 035 OF THE TEST OUTPUT FROM STEP S1 ...............................00000035
+LINE 036 OF THE TEST OUTPUT FROM STEP S1 ...............................00000036
+LINE 037 OF THE TEST OUTPUT FROM STEP S1 ...............................00000037
+LINE 038 OF THE TEST OUTPUT FROM STEP S1 ...............................00000038
+LINE 039 OF THE TEST OUTPUT FROM STEP S1 ...............................00000039
+LINE 040 OF THE TEST OUTPUT FROM STEP S1 ...............................00000040
+LINE 041 OF THE TEST OUTPUT FROM STEP S1 ...............................00000041
+LINE 042 OF THE TEST OUTPUT FROM STEP S1 ...............................00000042
+LINE 043 OF THE TEST OUTPUT FROM STEP S1 ...............................00000043
+LINE 044 OF THE TEST OUTPUT FROM STEP S1 ...............................00000044
+LINE 045 OF THE TEST OUTPUT FROM STEP S1 ...............................00000045
+LINE 046 OF THE TEST OUTPUT FROM STEP S1 ...............................00000046
+LINE 047 OF THE TEST OUTPUT FROM STEP S1 ...............................00000047
+LINE 048 OF THE TEST OUTPUT FROM STEP S1 ...............................00000048
+LINE 049 OF THE TEST OUTPUT FROM STEP S1 ...............................00000049
+LINE 050 OF THE TEST OUTPUT FROM STEP S1 ...............................00000050
+LINE 051 OF THE TEST OUTPUT FROM STEP S1 ...............................00000051
+LINE 052 OF THE TEST OUTPUT FROM STEP S1 ...............................00000052
+LINE 053 OF THE TEST OUTPUT FROM STEP S1 ...............................00000053
+LINE 054 OF THE TEST OUTPUT FROM STEP S1 ...............................00000054
+LINE 055 OF THE TEST OUTPUT FROM STEP S1 ...............................00000055
+LINE 056 OF THE TEST OUTPUT FROM STEP S1 ...............................00000056
+LINE 057 OF THE TEST OUTPUT FROM STEP S1 ...............................00000057
+LINE 058 OF THE TEST OUTPUT FROM STEP S1 ...............................00000058
+LINE 059 OF THE TEST OUTPUT FROM STEP S1 ...............................00000059
+LINE 060 OF THE TEST OUTPUT FROM STEP S1 ...............................00000060
+/*
+//S2 EXEC PGM=IDCAMS
+//SYSPRINT DD SYSOUT=*
+//SYSIN DD *
+ LISTCAT LEVEL(SYS1) ALL
+/*
+//S3 EXEC PGM=IEFBR14
+//

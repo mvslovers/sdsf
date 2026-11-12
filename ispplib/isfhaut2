@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Who May See and Do What, more            !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}
+}  To read the log and the replies, to give JES2 and operator commands
+}  and to purge, SDSF needs the authorized state for a moment. It gets it
+}  from an SVC routine of its own, installed with SDSF. Where that is not
+}  installed, SDSF uses SVC 244, and only users allowed SVC 244 can do
+}  these things. RAKF still decides as above.
+}
+}  Without the authorized state:
+{    COMMAND NOT AUTHORIZED   }for action characters, / commands, PR and
+}                             INIT
+{    LOG NOT READABLE         }for the log
+{    REPLIES NOT READABLE     }for the replies at its end
+{    NOT AUTHORIZED           }for P on the Status panel
+}
+}  The system programmer sets up the profiles, for example:
+{    RDEFINE SDSF.OPER CLASS(FACILITY) UACC(NONE)
+{    PERMIT SDSF.OPER CLASS(FACILITY) ID(OPER) ACCESS(UPDATE)
+}  The installation guide of SDSF describes it.
+}
+}
+}
+}  Enter: contents   PF7: contents   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFHTOC
+  &ZUP = ISFHTOC
+)END

@@ -1,0 +1,43 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: System Log Panel                         !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}  The system log (LOG) shows the messages of the system and the commands
+}  given to it, oldest first. SDSF reads them from the master trace
+}  table, the part of the log the system keeps in storage, so the oldest
+}  lines drop out as new ones come. The panel opens at the end.
+}
+}  After the last line come the replies the system is waiting for, in
+}  white, newest first. The ACTION command chooses which (topic 3).
+}
+}  Enter reads the log again. A / command is answered in the log: SDSF
+}  waits a second and shows the log again with the answer.
+}
+}  LOG needs READ access to SDSF.OPER (topic 13 of the contents).
+}
+}  Type the number of a topic, or press Enter to see them in order.
+@     1 }FIND: looking for a string
+@     2 }LOCATE, scrolling, COLS and SET HEX
+@     3 }ACTION: the replies shown
+@     4 }PRINT: the log to SYSOUT or a data set
+@     5 }SYSID: the log of another system
+}
+}
+}  Enter: topic 1   PF7: contents   PF10: back   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZSEL = TRANS(&ISFHCMD
+                 1,ISFKFIND
+                 2,ISFHLGM
+                 3,ISFKACT
+                 4,ISFKPRT
+                 5,ISFKSYS
+                *,'?')
+  &ZCONT = ISFKFIND
+  &ZUP = ISFHTOC
+)END

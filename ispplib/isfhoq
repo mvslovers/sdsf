@@ -1,0 +1,41 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Output Queue Panel                       !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}
+}  The Output Queue panel (O) lists the jobs that have ended and have
+}  output waiting to be printed, that is output not held. The oldest
+}  comes first, by the time the job ended. The title line shows the
+}  classes and forms you asked for and the lines of all the rows.
+}
+}  You see your own jobs, and the jobs of others as far as RAKF lets you
+}  read them (topic 13 of the contents). PREFIX and DEST limit the list.
+}
+}  Action characters:
+{   ?  }Show the job's data sets (Job Data Set panel).
+{   S  }Browse the job's output (Output Data Set panel).
+}  Others are not on this panel yet: ACTION NOT AVAILABLE YET. DEST can
+}  be overtyped: the job's output goes there ($R). The other fields only
+}  show, as JES2 here has no command to change them.
+}
+}  Type the number of a topic, or press Enter to see them in order.
+@     1 }The O command: classes and forms
+@     2 }The fields of the panel
+@     3 }Commands on the list panels
+}
+}  Enter: topic 1   PF7: contents   PF10: back   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZSEL = TRANS(&ISFHCMD
+                 1,ISFHOQC
+                 2,ISFHOQF
+                 3,ISFHLSM
+                *,'?')
+  &ZCONT = ISFHOQC
+  &ZUP = ISFHTOC
+)END

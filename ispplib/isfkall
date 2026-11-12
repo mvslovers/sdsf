@@ -1,0 +1,51 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Commands on Every Panel                  !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}  These commands are taken on every SDSF panel, and most of them on the
+}  menu as well. Type the number of a topic:
+}
+@     1 }/          }an operator command
+@     2 }TSO        }a TSO command, CLIST or program
+@     3 }PREFIX     }limit the lists to job names
+@     4 }DEST       }limit the lists to destinations
+@     5 }FIND, RFIND}look for a string
+@     6 }UP, DOWN, TOP, BOTTOM, the SCROLL field
+@     7 }PRINT      }print the log or output
+@     8 }ACTION     }the replies shown on the log
+@     9 }SYSID      }the system whose log is shown
+@    10 }INPUT, SET HEX, FINDLIM
+@    11 }WHO        }your user id, logon procedure and terminal
+@    12 }RETRIEVE   }the commands typed before
+@    13 }Commands of the list panels
+}
+}  The panel commands ST, DA, I, O, H, PR, INIT and LOG go to that panel
+}  from any other. HELP shows the help of the panel, TUTOR the tutorial.
+}  END goes back. Your settings (PREFIX, DEST, ACTION, the scroll amount
+}  and the last FIND) are kept for the next time you use SDSF.
+}  Enter: topic 1   PF7: contents   PF10: back   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZSEL = TRANS(&ISFHCMD
+                 1,ISFKSL
+                 2,ISFKSL
+                 3,ISFKPRE
+                 4,ISFKDEST
+                 5,ISFKFIND
+                 6,ISFKSCR
+                 7,ISFKPRT
+                 8,ISFKACT
+                 9,ISFKSYS
+                10,ISFKSET
+                11,ISFKWHO
+                12,ISFKWHO
+                13,ISFHLSM
+                *,'?')
+  &ZCONT = ISFKSL
+  &ZUP = ISFHTOC
+)END

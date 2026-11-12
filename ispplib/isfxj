@@ -1,0 +1,55 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Index -- J to O                          !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}  Type the number of a subject and press Enter.
+}
+@     1 }Job Data Set panel
+@     2 }LOCATE command
+@     3 }LOG command, the system log
+@     4 }menu, the primary option
+@     5 }messages, what they mean
+@     6 }NEXT and PREV on the Output Data Set panel
+@     7 }O command
+@     8 }operator commands: /
+@     9 }Output Data Set panel
+@    10 }Output Queue panel
+@    11 }overtyping on DA: PGN
+@    12 }overtyping on H: DEST, with O
+@    13 }overtyping on INIT: CLASSES
+@    14 }overtyping on the Input Queue panel
+@    15 }overtyping on O: DEST
+@    16 }overtyping on PR: forms, classes, ...
+@    17 }overtyping on the Status panel
+}
+}
+}  Enter: next page   T: contents   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZSEL = TRANS(&ISFHCMD
+                 1,ISFHJD
+                 2,ISFHLGM
+                 3,ISFHLG
+                 4,ISFHMN
+                 5,ISFHMS1
+                 6,ISFHODM
+                 7,ISFHOQC
+                 8,ISFKSL
+                 9,ISFHOD
+                10,ISFHOQ
+                11,ISFHDAF
+                12,ISFHHQ
+                13,ISFHIT
+                14,ISFHIQO
+                15,ISFHOQ
+                16,ISFHPRF
+                17,ISFHSTO
+                *,'?')
+  &ZCONT = ISFXP
+  &ZUP = ISFXA
+)END

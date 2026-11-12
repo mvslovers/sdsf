@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Printer Panel -- Fields                  !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}
+{  PRINTER  }The printer's name.
+{  STATUS   }Its state as JES2 gives it: INACTIVE, ACTIVE, DRAINED, ...
+{  SFORM    }The forms it prints. Can be overtyped: $T with F=.
+{  SCLASS   }The output classes it prints. Can be overtyped: $T with Q=.
+{  JOBNAME, TYPE, JNUM }The job an active printer is printing.
+}
+}  PF11 shows the fields further right, PF10 goes back. Of those, SDSF
+}  fills SFCB (the FCB image; overtype it: $T with C=), SUCS (the print
+}  train), SEP (separator pages; YES or NO: $T with S=) and SDEST1 (the
+}  route; LOCAL or Un: $T with R=), and shows the JES2 defaults for
+}  WORK-SELECTION, SBURST, SPRMODE1, CKPTLINE and CKPTPAGE. The other
+}  fields are not filled yet.
+}
+}  Overtyping needs UPDATE access to SDSF.OPER; the panel says COMMAND
+}  ISSUED, Enter shows the new value. SFORM and SCLASS share one field.
+}
+}
+}
+}
+}
+}  Enter: next topic   PF7: Printer panel help   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFHLSM
+  &ZUP = ISFHPR
+)END

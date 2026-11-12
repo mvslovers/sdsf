@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@TUTORIAL: Showing Fewer Jobs, Class A          !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}
+}  Only the batch jobs of class A are left. MYJOB has ended and has no
+}  class any more; JES2 and your TSO session have none either.
+}
+}  +---------------------------------------------------------------------------
+}  |@SDSF STATUS DISPLAY CLASS A                            LINE 1-1 (1)
+}  |@COMMAND INPUT ===>                                        SCROLL ===> PAGE
+}  |@NP JOBNAME TYPE JNUM  PRTY QUEUE      C  POS HDN DEST     SAFF ASYS STAT
+}  |    PAYROLL  JOB  1201    9 INPUT      A    1     LOCAL
+}  +---------------------------------------------------------------------------
+}
+}  ST alone shows all the jobs again.
+}
+}  * END OF PART 6 *
+}
+}
+}
+}
+}
+}
+}
+}  Enter: part 7   PF10: back   PF7: list of parts   PF3: leave
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFTSUM
+  &ZUP = ISFTUTOR
+)END

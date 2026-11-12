@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Output Queue Panel -- Fields             !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+{  JOBNAME  }The name of the job.     {  TYPE }JOB, STC or TSU.
+{  JNUM     }The JES2 job number.     {  PRTY }The job's priority.
+{  C        }The output class.
+{  FORM     }The forms, of the first data set; **** if none were named.
+{  FCB      }The FCB image, the same way.
+{  DEST     }Where the output goes.
+{  TOT-REC  }The records of all the job's output data sets.
+}
+}  PF11 shows the fields further right, PF10 goes back:
+{  SYSID    }The system the job executed on.
+{  NODE     }The JES2 node, 1.
+{  UCS      }The print train (UCS image).
+{  FLASH    }The forms overlay.
+{  BURST    }YES if the output is burst.
+{  PRMODE   }The process mode, LINE.
+}
+}  PRT-REC, DEVICE, STATUS, RMT, O-GRP-N, OGI1, OGI2, JP and WTR are not
+}  filled yet.
+}
+}
+}
+}  Enter: next topic   PF7: Output Queue help   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFHLSM
+  &ZUP = ISFHOQ
+)END

@@ -1,0 +1,34 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Status Panel -- Further Fields (?)       !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                  }
+}
+}  The ? command, typed alone on the command line, shows further fields
+}  of the jobs after JOBNAME; ? again shows the usual ones. Where they do
+}  not fit on the screen, the Right key (PF11) moves them, the Left key
+}  (PF10) moves them back. NP and JOBNAME stay in place.
+}
+{  RNUM            }The remote the job came from; blank for local jobs.
+{  PROGRAMMER-NAME }The programmer name of the JOB statement.
+{  ACCT            }The account number.
+{  NOTIFY          }The user told when the job ends.
+{  ISYS            }The system that read the job in.
+{  RD-TIME RD-DATE }When the job was read in.
+{  ESYS            }The system that executes, or executed, the job.
+{  ST-TIME ST-DATE }When the job started to execute.
+{  CARDS           }The number of input cards.
+{  MC              }The message class (MSGCLASS).
+{  TOT-LINES       }The number of output lines of the job.
+}
+}  Times are hh:mm:ss, dates yy.ddd (year and day of the year).
+}  Enter: next topic   PF7: Status panel help   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFHSTO
+  &ZUP = ISFHST
+)END

@@ -1,0 +1,53 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Index -- R to Z                          !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}  Type the number of a subject and press Enter.
+}
+@     1 }RAKF profiles
+@     2 }replies, outstanding
+@     3 }RETRIEVE command
+@     4 }RFIND command
+@     5 }SCROLL field
+@     6 }SDSF.OPER profile
+@     7 }SET HEX command
+@     8 }ST command
+@     9 }Status panel
+@    10 }Status panel, fields of
+@    11 }SYSID command
+@    12 }TOP command
+@    13 }TSO commands
+@    14 }tutorial
+@    15 }WHO command
+}
+}
+}
+}
+}  Enter: contents   T: contents   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZSEL = TRANS(&ISFHCMD
+                 1,ISFHAUTH
+                 2,ISFKACT
+                 3,ISFKWHO
+                 4,ISFKFIND
+                 5,ISFKSCR
+                 6,ISFHAUTH
+                 7,ISFKSET
+                 8,ISFHSTC
+                 9,ISFHST
+                10,ISFHSTF
+                11,ISFKSYS
+                12,ISFKSCR
+                13,ISFKSL
+                14,ISFTUTOR
+                15,ISFKWHO
+                *,'?')
+  &ZCONT = ISFHTOC
+  &ZUP = ISFXA
+)END

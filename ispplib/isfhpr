@@ -1,0 +1,42 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Printer Panel                            !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}
+}  The Printer panel (PR) lists the JES2 printers of this system: their
+}  state, the forms and classes they print, and the job an active
+}  printer is printing. Active printers are white, the others blue.
+}
+}  SDSF asks JES2 for the printers each time it shows the panel ($DU with
+}  PRTS) and reads the answer from the system log, so the command and its
+}  answer appear in the log every time.
+}
+}  The panel needs READ access to SDSF.OPER (topic 13 of the contents);
+}  without it: COMMAND NOT AUTHORIZED. NO ANSWER FROM JES2 means JES2 did
+}  not answer within a few seconds.
+}
+}  Type the number of a topic, or press Enter to see them in order.
+}
+@     1 }The PR command: which printers
+@     2 }Action characters: start, stop, halt, ...
+@     3 }The fields of the panel
+@     4 }Commands on the list panels
+}
+}
+}  Enter: topic 1   PF7: contents   PF10: back   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZSEL = TRANS(&ISFHCMD
+                 1,ISFHPRC
+                 2,ISFHPRA
+                 3,ISFHPRF
+                 4,ISFHLSM
+                *,'?')
+  &ZCONT = ISFHPRC
+  &ZUP = ISFHTOC
+)END

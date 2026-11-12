@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@HELP: Commands -- FIND                         !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+@  FIND}string [direction] [kind] [col1 [col2]]     or F
+{  string     }a word; 'two words' or "two words" with blanks; X'C1C2'
+}             in hexadecimal; * the last string; none: FIND again
+{  direction  }NEXT (the default), PREV, FIRST, LAST, or ALL to count
+}             the lines that hold it and go to the first
+{  kind       }CHARS (the default), anywhere; WORD, a word of its own;
+}             PREFIX or PRE, the start of a word; SUFFIX or SUF, its end
+{  col1 col2  }the string must begin in col1, or lie within col1 to col2
+}
+}  The line found goes to the top. PF5 (RFIND), or RFIND, finds the next.
+}  Upper and lower case are the same, except in X'..'. Letters, digits,
+}  $, # and the at sign make up words.
+}
+}  At the end of the data: BOTTOM OF DATA REACHED; the next FIND starts
+}  over from the top. PREV the same way from the top. If the string is
+}  nowhere: NO CHARS 'string' FOUND.
+}
+}  On the lists, FIND looks for the string in the rows as shown; kind and
+}  columns are taken there but make no difference.
+}
+}
+}  Enter: next topic   PF7: commands   PF3: back to SDSF
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFKFND2
+  &ZUP = ISFKALL
+)END

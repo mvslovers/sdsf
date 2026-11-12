@@ -1,0 +1,36 @@
+)ATTR DEFAULT(@}_)
+ @ TYPE(TEXT)   INTENS(HIGH) COLOR(WHITE)
+ } TYPE(TEXT)   INTENS(LOW)  COLOR(GREEN)
+ { TYPE(TEXT)   INTENS(LOW)  COLOR(TURQ)
+ _ TYPE(INPUT)  INTENS(HIGH) COLOR(RED)    CAPS(ON) JUST(LEFT)
+ ! TYPE(OUTPUT) INTENS(HIGH) COLOR(YELLOW) CAPS(OFF) JUST(LEFT)
+)BODY
+@TUTORIAL: Following a Job                      !ISFHMSG                      }
+@COMMAND INPUT ===>_ISFHCMD                                                   }
+}
+}  You have submitted a job, MYJOB. Where is it now? Type ST on the
+}  command line: the Status panel lists it with all the others you may
+}  see. Its QUEUE field tells where it is:
+}
+{  INPUT      }read in, waiting for an initiator of its class. POS says
+}               how many jobs of that class are ahead of it.
+{  EXECUTION  }running. The row is white.
+{  PRINT      }ended; its output waits to be printed, or is held.
+}
+}  If the list is long, find your job with FIND:
+{    F MYJOB    }the row of MYJOB goes to the top.
+}  Or show only your jobs: ST MYJOB, or ST MY* for all names that begin
+}  with MY (part 6).
+}
+}  Press Enter to see the Status panel.
+}
+}
+}
+}
+}
+}  Enter: next   PF10: back   PF7: list of parts   PF3: leave
+)PROC
+  &ISFHPFK = .PFKEY
+  &ZCONT = ISFTJOB2
+  &ZUP = ISFTUTOR
+)END
