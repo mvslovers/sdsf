@@ -153,8 +153,9 @@ the default key.
       #cmd("FIND") (@ug-search).],
     [the Up key (PF7), the Down key (PF8)], [Scroll up and down
       (@ug-start-scroll).],
-    [the Left key (PF10), the Right key (PF11)], [Move the columns of a wide
-      panel to the left and to the right (@ug-start-scroll).],
+    [the Left key (PF10), the Right key (PF11)], [Move the columns of a row
+      that is wider than the screen to the left and to the right, on the
+      panels where that applies (@ug-start-scroll).],
     [the Retrieve key (PF12)], [Puts the command you typed before back on the
       command line. Each further press goes one command further back. SDSF
       keeps the last 10 commands.],
@@ -220,13 +221,16 @@ These are the action characters of the Status panel:
 ask again before it does what you typed. Look at the row before you press
 Enter. #cmd("P") also takes away the output of the job.
 
-Except for #cmd("?") and #cmd("S"), an action character makes SDSF give a
-command to JES2. The message #cmd("COMMAND ISSUED") on the title line says
-that SDSF gave the command, not that JES2 took it. The answer of JES2 is in the
-system log; show it with #cmd("LOG"). On the Status panel the rows stay as they
-were until you press Enter with nothing typed, which reads the list again, so
-that you see the new state of the job. After #cmd("P") the list is read again
-at once.
+Except for #cmd("?"), #cmd("S") and, on the Status panel, #cmd("P"), an action
+character makes SDSF give a command to JES2. The message #cmd("COMMAND ISSUED")
+on the title line says that SDSF gave the command, not that JES2 took it. The
+answer of JES2 is in the system log; show it with #cmd("LOG"). On the Status
+panel the rows stay as they were until you press Enter with nothing typed,
+which reads the list again, so that you see the new state of the job.
+
+#cmd("P") on the Status panel is not a command. SDSF asks JES2 itself to cancel
+the job and to purge its output. The title line shows nothing if that worked,
+and the list is read again at once, so that the job is gone from it.
 
 How to type them:
 
@@ -262,9 +266,14 @@ access it needs are in the _SDSF Reference_, chapter "Action Characters".
 When a panel has more rows or lines than the screen holds, use the Up key
 (PF7) and the Down key (PF8) to scroll up and down. The Left key (PF10) and
 the Right key (PF11) move the columns of a row that is wider than the screen;
-the first columns, #cmd("NP") and the name of the job, stay where they are. On
-the Output Data Set panel and on the system log they move the text of the
-lines.
+the first columns, #cmd("NP") and the first name column, stay where they are.
+(That name is the name of the job on #cmd("ST"), the name of the printer on
+#cmd("PR") and #cmd("DDNAME") on the Job Data Set panel.) On the Status and
+the Input Queue panel the keys move the columns only after you have typed
+#cmd("?") alone on the command line; without it they read the Status list
+again and do nothing on the Input Queue panel. On the Initiator panel they do
+nothing. On the Output Data Set panel and on the system log they move the text
+of the lines.
 
 *How far a key scrolls.* The amount is the value in the SCROLL field, which is
 on every panel:
@@ -347,17 +356,18 @@ reads them when it starts and writes one when it changes.
     [#cmd("DEST")], [The destinations that limit the lists, four at most.],
     [#cmd("ACTION")], [Which outstanding replies the log shows. At first
       #cmd("OFF").],
-    [The last #cmd("FIND")], [The last string you looked for, with its
-      direction, so that the Repeat-FIND key (PF5) works in the next session
-      too.],
+    [The last #cmd("FIND")], [The last string you looked for with #cmd("FIND")
+      on the system log or on output, with its direction, so that the
+      Repeat-FIND key (PF5) works there in the next session too.],
   )
 ]
 
 Everything else lasts until you leave SDSF: the classes and the name that you
 gave with #cmd("ST"), the classes of #cmd("I"), #cmd("O") and #cmd("H"), the
 types and positions of #cmd("DA"), #cmd("SYSID"), #cmd("INPUT"),
-#cmd("SET HEX"), the limit of #cmd("FINDLIM"), and the column scale of
-#cmd("COLS"). The next time you start SDSF they have their defaults again.
+#cmd("SET HEX") and the limit of #cmd("FINDLIM"). The next time you start SDSF
+they have their defaults again. The scale line of #cmd("COLS") lasts even less:
+only while the output or log display it was shown on stays open.
 
 If the lists are shorter than you expect, a #cmd("PREFIX") or #cmd("DEST")
 that you set in an earlier session may be the cause, because SDSF has kept it.
