@@ -64,6 +64,16 @@ each:
   `PRTY`, `QUEUE`, ...). Each panel's help lists and explains them; the
   Status panel's are in `ispplib/isfhstf` and `ispplib/isfhstf2`.
 
+## Looking at a job
+
+- **data set** (of a job): one output data set of a job, a row of the Job
+  Data Set panel; with `INPUT ON` also its input. Not "spool file". JES2
+  writes three of its own: `JESMSGLG` (the job log), `JESJCL`, `JESYSMSG`.
+- **the prefix**: the job name limit set by `PREFIX`, kept in the profile;
+  the name given to `ST` is "the name", not "the prefix".
+- **follow a job**: watch its `QUEUE` on the Status panel (`EXECUTION`,
+  then `PRINT`) by reading the list again with Enter.
+
 ## Commands
 
 - **command**: what is typed on the command line. **SDSF command**: one of
