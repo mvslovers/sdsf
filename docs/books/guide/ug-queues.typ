@@ -104,7 +104,8 @@ batch jobs of every class. A row has several fields, among them:
 The waiting jobs come first, by class, then by priority, the highest first,
 and then by job number; the executing jobs follow. Executing jobs are white,
 the others blue. #cmd("POS") is the place of a job in the line of its class:
-#cmd("POS") 1 is the job that is next. A held job shows no #cmd("POS"): it takes no place in the line until it
+#cmd("POS") 1 is the job that is next. A held job shows no #cmd("POS"): it
+takes no place in the line until it
 is released.
 
 #cmd("?") typed alone on the command line adds more fields after these, those
@@ -238,14 +239,14 @@ reading: the output stays held.
 SDSF gives JES2 the release command and shows #cmd("COMMAND ISSUED"). The
 list is read again at once, and the job whose output has been released is no
 longer on it. If the job is still there, JES2 has not carried out the release
-yet: press Enter again. Output that is not held and waits to be printed is what the
-Output Queue panel shows (@ug-queues-output). #cmd("O") needs update access to
-the job; without it the answer is #cmd("NOT AUTHORIZED FOR JOB").
+yet: press Enter again. Output that is not held and waits to be printed is
+what the Output Queue panel shows (@ug-queues-output). #cmd("O") needs update
+access to the job; without it the answer is #cmd("NOT AUTHORIZED FOR JOB").
 
 To send the output somewhere else as it is released, type the new destination
 over the #cmd("DEST") field of the row (for example #cmd("LOCAL"),
-#cmd("R")#var("n") or #cmd("U")#var("n")) and put #cmd("O") in the NP column, both in the same
-Enter. SDSF gives JES2 the destination first and then the release. A new
+#cmd("R")#var("n") or #cmd("U")#var("n")) and put #cmd("O") in the NP column,
+both in the same Enter. SDSF gives JES2 the destination first and then the release. A new
 #cmd("DEST") without the #cmd("O") is refused with
 #cmd("\"O\" ACTION REQUIRED")\; the value stays on the screen, so that you can
 add the #cmd("O") and press Enter again. The field can be typed over only
@@ -254,9 +255,9 @@ while it is on the screen, that is, on the first screen of columns.
 There is no action character on this panel that deletes held output. To purge
 it, use #cmd("P") on the Status panel: find the job there, type #cmd("P") in its
 NP column and press Enter. SDSF deletes the held output and does not ask
-again, so make sure the row is the right one. The Held Output panel is read
-again at once and the job is no longer on it; the title line shows nothing if
-it worked.
+again, so make sure the row is the right one. The Status panel is read again
+at once and the job is no longer on it; the title line shows nothing if it
+worked. The next #cmd("H") does not list the job either.
 
 == Output Waiting to Print <ug-queues-output>
 
@@ -311,6 +312,6 @@ As on the Held Output panel, the field can be typed over only while it is on
 the screen, that is, on the first screen of columns.
 
 To delete output that waits to be printed, use #cmd("P") on the Status panel,
-as for held output; the Output Queue panel is read again at once, and the job
-is no longer on it. To print it, a printer must be started; that is done on
-the Printer panel (@ug-devices).
+as for held output; the Status panel is read again at once, and the next
+#cmd("O") does not list the job. To print it, a printer must be started; that
+is done on the Printer panel (@ug-devices).
