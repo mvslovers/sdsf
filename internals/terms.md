@@ -109,7 +109,10 @@ each:
 - **the index**: `I`.
 - Keys: **Enter**, **the Help key (PF1)**, **the End key (PF3)**, **the Up
   key (PF7)**, **the Down key (PF8)**, **the Left key (PF10)**, **the Right
-  key (PF11)**. The defaults of ISPF; a user may have moved them.
+  key (PF11)**, **the Repeat-FIND key (PF5)** (`RFIND`), **the Retrieve key
+  (PF12)** (`RETRIEVE`). The defaults of ISPF; a user may have moved them.
+  A key SDSF does not act on (PF2, PF4, PF6, PF9) is named by its ISPF
+  command and position: "the `SPLIT` key (PF2)".
 
 Panel names: `ISFH*` help, `ISFK*` help for commands, `ISFX*` index,
 `ISFT*` tutorial (`src/isfhelp.c`).
