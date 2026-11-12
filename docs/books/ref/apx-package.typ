@@ -175,9 +175,10 @@ the panel library. The defaults of the volumes are those of MVS/CE
 for TK5.
 
 #note[#cmd("ISF.LINKLIB") must be APF-authorized and in the link list, and
-must not be in #cmd("ISPLLIB"). A program loaded from #cmd("ISPLLIB") is not
-loaded as authorized, and SDSF then falls back to SVC 244. See
-@apx-package-system.]
+must not be in #cmd("ISPLLIB"), nor in a #cmd("STEPLIB") that is not all
+APF-authorized. A program loaded from there is not loaded as authorized, and
+SDSF then falls back to SVC 244. The installation guide, in the package,
+gives the steps.]
 
 == The Members <apx-package-members>
 
@@ -204,8 +205,8 @@ The library has one member.
 #cmd("IGX00011") is the SVC routine of SDSF: an extended SVC routine, SVC 109
 with code 11. It grants the switch to the authorized state only to a program
 whose name begins with #cmd("ISF") and that was loaded from an
-APF-authorized library or the LPA. It is written in assembler, reentrant and
-serially reusable. @apx-svc describes it.
+APF-authorized library or the LPA. It is written in assembler, reentrant,
+serially reusable and refreshable. @apx-svc describes it.
 
 The package does not carry it as a load module but as assembler source, inside
 the installation job. The step #cmd("ASSEM") assembles it, and SMP links it
@@ -352,7 +353,7 @@ overtypeable fields. The Help key shows the page of the panel you are on.
   #table(columns: (0.95in, 1fr),
     [Member], [What it shows],
     [#cmd("ISFHTOC")], [The table of contents of the help: the topic that each
-      number leads to. The #cmd("T") key of every help page shows it.],
+      number leads to. Typing #cmd("T") on any help page shows it.],
     [#cmd("ISFHHELP")], [Using the help and the tutorial: the keys and the
       topic numbers.],
     [#cmd("ISFHAUTH")], [Who may see and do what: the rules for jobs and for
@@ -383,7 +384,7 @@ members divide the alphabet.
 
 #idx("index", "of the help")
 The index lists the subjects of the help in alphabetical order. The number of
-a subject leads to its topic. The #cmd("I") key of a help page shows it.
+a subject leads to its topic. Typing #cmd("I") on a help page shows it.
 
 #tab(caption: [The index pages])[
   #table(columns: (0.95in, 1fr),
@@ -530,8 +531,8 @@ rest of the installation is yours to do, and it changes the system.
     [the SYSPROC concatenation], [#cmd("ISF.ISFCLST") is added.],
     [the RAKF profiles], [The FACILITY profile #cmd("SDSF.OPER"), and for the
       jobs of other users profiles in the class JESSPOOL. On TK5 and on MVS/CE
-      RAKF reads its profiles from #cmd("SYS1.SECURE.CNTL(PROFILES)"). An
-      unchanged MVS/CE has no JESSPOOL profile. @ref-auth describes the
+      RAKF reads its profiles from #cmd("SYS1.SECURE.CNTL(PROFILES)").
+      @ref-auth describes the
       profiles.],
   )
 ]
