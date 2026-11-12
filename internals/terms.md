@@ -126,8 +126,10 @@ Panel names: `ISFH*` help, `ISFK*` help for commands, `ISFX*` index,
 - **element**: a member that SMP installs by name: the load modules and,
   as macros (`++MAC`), the panels and the CLIST. SMP's word.
 - **the SVC routine**: `IGX00011`, SDSF's own extended SVC routine (SVC 109,
-  code 11), linked by SMP into `SYS1.LPALIB`. The help says "an SVC routine
-  of its own".
+  code 11), linked by SMP into `SYS1.LPALIB`, which grants SDSF the
+  authorized state. The help says "an SVC routine of its own". Not "the SDSF
+  SVC", not "ESR". Where it is not installed, SDSF uses **SVC 244**. The
+  books describe it in Reference Appendix C.
 - **FMID**: the SYSMOD's identifier (`TISF120` for 1.2.0), the word of SMP.
 - **the beta**: version 0.9.0 (`TISF090`). There is no upgrade from it: it is
   removed first, then 1.2.0 is installed as a first installation.
