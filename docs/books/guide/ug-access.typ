@@ -28,9 +28,9 @@ thing besides RAKF, the authorized state. It is described at the end of
 
 #idx("own jobs")
 The jobs that run under your user id are yours. You see them on every list
-and you may do everything to them. SDSF does not ask RAKF about them, so no
-profile can take them away from you or limit what you do with them. You need
-no profile at all to work with your own jobs.
+and you may do to them everything the panel offers. SDSF does not ask RAKF
+about them, so no profile can take them away from you or limit what you do
+with them. You need no profile at all to work with your own jobs.
 
 SDSF finds the owner of a job like this:
 
@@ -121,7 +121,7 @@ profiles.
 *RAKF looks at the first eight characters only.* It cuts a JESSPOOL entity to
 its first eight characters before it looks for a profile, and does not
 compare what follows. For an owner of seven or eight characters, those eight
-are the owner's name. For a shorter owner, such as #cmd("HERC02") or
+begin with the owner's name. For a shorter owner, such as #cmd("HERC02") or
 #cmd("SYSTEM"), the first characters of the job name are among them. A profile
 such as #cmd("HERC02.P*") therefore decides for the jobs of #cmd("HERC02")
 whose names begin with P, and the profile #cmd("*") decides for all jobs. A
@@ -129,7 +129,9 @@ profile cannot tell jobs apart by more than these eight characters.
 
 *The profile that sorts last wins.* Several profiles can cover one entity.
 The one that sorts last in EBCDIC order is used, not the most specific one:
-#cmd("OWN*") wins over #cmd("OWN.*").
+#cmd("OWN*") wins over #cmd("OWN.*"). A profile that wins replaces the lines
+of the others: every group that needs access to the jobs it covers must have a
+line of its own in it.
 #idx("profile", "which wins")
 
 == The Operator Profile <ug-access-oper>
@@ -296,13 +298,16 @@ Add these lines to the JESSPOOL lines of the first example, after the lines of
 
 #screen(```
 JESSPOOLHERC02.*                                            NONE
+JESSPOOLHERC02.*                                    ADMIN   UPDATE
 JESSPOOLHERC02.*                                    TEAM    READ
 ```)
 
 The group TEAM now has read access to the jobs of #cmd("HERC02"). For the jobs
 of the other users nothing changes. The profile #cmd("HERC02.*") sorts after
 #cmd("*"), so it is the one that counts for the jobs of #cmd("HERC02")
-(@ug-access-cover). Write #cmd("HERC02.P*") instead to limit it to the jobs of
+(@ug-access-cover). It replaces the lines of #cmd("*") for these jobs, which is
+why it repeats the line of ADMIN: without it, ADMIN would get the universal
+access NONE for the jobs of #cmd("HERC02"). Write #cmd("HERC02.P*") instead to limit it to the jobs of
 #cmd("HERC02") whose names begin with P.
 
 === Checking a Profile <ug-access-check>
