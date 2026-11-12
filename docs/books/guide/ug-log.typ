@@ -23,7 +23,7 @@ press Enter. The title line reads #cmd("SDSF SYSLOG"), followed by the system,
 the date, #cmd("LINE") with the number of the line at the top, and
 #cmd("COLUMNS") with the first and the last column shown. The log opens at its
 end: the newest lines are on the screen, and the last one is followed by
-#cmd("BOTTOM OF DATA"). You need read access to #cmd("SDSF.OPER"); without
+#cmd("BOTTOM OF DATA"). You need read access to #cmd("SDSF.OPER")\; without
 it SDSF answers #cmd("COMMAND NOT AUTHORIZED") and does not show the log.
 
 *What the log holds.* SDSF reads the lines from the master trace table, the
