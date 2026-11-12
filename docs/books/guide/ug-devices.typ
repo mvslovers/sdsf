@@ -27,17 +27,22 @@ and "Action Characters".
 menu, or of any other SDSF panel, and press Enter. The title line reads
 #cmd("SDSF PRINTER DISPLAY"), and below the heading line there is one row per
 printer. Without read access to #cmd("SDSF.OPER") the answer is
-#cmd("COMMAND NOT AUTHORIZED") and the panel does not open.
+#cmd("COMMAND NOT AUTHORIZED") and the panel does not open. The same message
+with an empty panel means that SDSF could not enter the authorized state it
+needs to ask JES2 (see the last section of this chapter).
 
-To see only some of the printers, give numbers after the command:
+To see only some of the printers, give words after the command, up to four:
 #cmd("PR 1") shows #cmd("PRINTER1"), and #cmd("PR 1-3 5") shows
-#cmd("PRINTER1") to #cmd("PRINTER3") and #cmd("PRINTER5"). #cmd("PR") alone
-shows all of them.
+#cmd("PRINTER1") to #cmd("PRINTER3") and #cmd("PRINTER5"). #cmd("LCL") shows
+all the local printers, which is all of them. #cmd("R")#var("n") and
+#cmd("RMT") are accepted but show nothing, since JES2 tells SDSF only about
+local printers. #cmd("PR") alone shows all of them.
 
 *Where the rows come from.* SDSF does not keep a list of printers. Each time it
-shows the panel, it gives JES2 the command #cmd("$DU,PRTS") and reads JES2's
+reads the printers, it gives JES2 the command #cmd("$DU,PRTS") and reads JES2's
 answer from the system log. So the command and its answer appear in the log
-every time you press Enter on this panel. If JES2 does not answer within a few
+each time SDSF reads the printers: when the panel opens, and each time you
+press Enter with nothing typed. If JES2 does not answer within a few
 seconds, the title line says #cmd("NO ANSWER FROM JES2")\; press Enter to ask
 again.
 
@@ -98,7 +103,10 @@ down. The title line shows the message of the last one only.
 === Changing What a Printer Prints <ug-devices-print>
 
 Some fields of a row can be overtyped: #cmd("SFORM"), #cmd("SCLASS"),
-#cmd("SEP"), #cmd("SFCB") and #cmd("SDEST1"). To change one, type the new
+#cmd("SEP"), #cmd("SFCB") and #cmd("SDEST1"). #cmd("SFORM") and #cmd("SCLASS")
+share one input field, and #cmd("SEP"), #cmd("SFCB") and #cmd("SDEST1") are on
+the pages that the Right key (PF11) shows; a field can be overtyped only where
+it is on the screen. To change one, type the new
 value over it and press Enter. SDSF gives JES2 the command that sets it, and
 the title line says #cmd("COMMAND ISSUED"). Press Enter again to read the new
 value. A value that is not valid is refused before any command is given:
@@ -119,7 +127,8 @@ rules for every field are in the Reference, under "Action Characters",
 #cmd("SDSF INITIATOR DISPLAY"), and there is one row per initiator.
 #cmd("INIT") takes no parameters; a word after it gives #cmd("TOO MANY PARMS").
 As for the printers, you need read access to #cmd("SDSF.OPER"), and SDSF
-reads the rows from JES2: it gives #cmd("$DI") each time it shows the panel
+reads the rows from JES2: it gives #cmd("$DI") each time it reads the
+initiators, when the panel opens and when you press Enter with nothing typed,
 and reads the answer from the log. The messages #cmd("NO ANSWER FROM JES2") and
 #cmd("COMMAND NOT AUTHORIZED") mean what they mean on the Printer panel.
 
@@ -155,16 +164,17 @@ initiators again.
 
 *Changing the classes.* The #cmd("CLASSES") field can be overtyped. Type the new
 classes over it and press Enter; SDSF gives JES2 the command that sets them.
-Classes are the letters A to Z and the digits 0 to 9, and JES2 keeps five at
-most. A value that is not a list of classes is refused with
-#cmd("INVALID CLASS").
+Classes are the letters A to Z and the digits 0 to 9. SDSF takes up to eight
+and gives them to JES2, which keeps five at most, so after #cmd("COMMAND ISSUED")
+look at the row or at the log. A value that is not a list of classes is refused
+with #cmd("INVALID CLASS").
 
 == Actions That Go to JES2 <ug-devices-jes2>
 
 #idx("JES2 command")
 #idx("COMMAND ISSUED")
 Every action character and every overtyped field on these two panels becomes a
-JES2 command. SDSF builds the command from the action and from the number of
+JES2 command, and the checks below apply to both. SDSF builds the command from the action and from the number of
 the printer or of the initiator in the row: #cmd("S") on the row of
 #cmd("PRINTER1") gives #cmd("$SPRT1"), and #cmd("P") on initiator 2 gives
 #cmd("$PI2"). The Reference lists the command each action character gives under
@@ -182,8 +192,9 @@ command is given:
     or the text after #cmd("B") or #cmd("F") is not one it takes. The character
     stays in the NP column, so that you can correct it.],
   [#cmd("NOT AUTHORIZED FOR PRT")], [You have no update access to
-    #cmd("SDSF.OPER") (for #cmd("D"), no read access). On the Initiator panel
-    the message is #cmd("NOT AUTHORIZED FOR INIT").],
+    #cmd("SDSF.OPER") (for #cmd("D"), no read access), for an action character
+    as well as for an overtyped field. On the Initiator panel the message is
+    #cmd("NOT AUTHORIZED FOR INIT").],
   [#cmd("COMMAND NOT AUTHORIZED")], [SDSF could not enter the authorized state
     that it needs to give a command. The Reference says when that is so, under
     "Action Characters", "The Access Each Action Needs".],
@@ -196,8 +207,7 @@ the command, for instance because the printer is not in a state for it, the
 panel does not show it. JES2's answer, the acceptance or the refusal, is
 written to the system log:
 
-+ Type #cmd("LOG") and press Enter.
-+ Type #cmd("BOTTOM") and press Enter, to go to the end of the log.
++ Type #cmd("LOG") and press Enter. The log opens at its end.
 + Look for the command you gave, such as #cmd("$SPRT1"). JES2's answer is on
   the lines after it.
 
