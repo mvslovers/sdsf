@@ -75,6 +75,24 @@ each:
 - **MVS command**: the command an overtype makes SDSF give to MVS itself and
   not to JES2 (PGN on DA: `E name,PERFORM=n`).
 
+## The log and operator work
+
+- **the system log**, **the log**: what `LOG` shows. SDSF reads it from the
+  master trace table, so it holds only what the system still keeps in
+  storage. Not "SYSLOG" in prose, except as the name on the title line
+  (`SDSF SYSLOG`).
+- **outstanding reply**: a message of the system that waits for an answer;
+  the `ACTION` command chooses which SDSF shows after the last line of the
+  log. Not "WTOR" in the books.
+- **routing code**: the number 1 to 16 of a message, by which `ACTION`
+  chooses the outstanding replies.
+- **reply number**: the number after the `@` in the line of an outstanding
+  reply, the one `/R nn,answer` names.
+- **system** (`SYSID`): the system whose log the log panel shows; SDSF reads
+  the log of its own system only.
+- **destination** (`DEST`): where the output of a job goes (`LOCAL`, `Rn`,
+  `Un`); `DEST` limits the lists by it. Not the same as the system.
+
 ## Who may see and do what
 
 - **RAKF**: the security product the authorization asks; the help says RAKF,
