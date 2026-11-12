@@ -16,7 +16,7 @@
 {  1 to 16   }the replies routed to that code
 {  MVS       }codes 1 to 12        {  USER  }codes 13 to 16
 {  ALL       }all replies          {  OFF   }none
-{  ?         }puts the current setting on the command line
+{  ?         }shows the current setting on the title line
 }
 }  The codes named are added to those set before. ACTION OFF stands
 }  alone. The panel says what is now set: ACTION=ALL, ACTION=1,2,3 or
