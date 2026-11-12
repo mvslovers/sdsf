@@ -75,6 +75,21 @@ each:
 - **MVS command**: the command an overtype makes SDSF give to MVS itself and
   not to JES2 (PGN on DA: `E name,PERFORM=n`).
 
+## Jobs and output on the queues
+
+- **the input queue**: the jobs that have been read in and wait to execute
+  or execute (panel `I`). **the output queue**: the jobs with output waiting
+  to be printed that is not held (panel `O`). **held output**: output that is
+  not printed until it is released (panel `H`). The Status panel shows all of
+  them in one list.
+- **held job**: a job that waits to execute and does not start (`HOLD` in
+  `STAT`); made by `H` on ST, undone by `A`. Not "held output", which is the
+  output of a job that has ended: do not say "hold" for either when the other
+  could be meant.
+- **release**: `A` on a held job; `O` on held output, which releases it for
+  printing. **cancel**: `C`, the job ends and its output stays. **purge**:
+  `P` on ST, the job ends and its output is deleted. Not "delete a job".
+
 ## Who may see and do what
 
 - **RAKF**: the security product the authorization asks; the help says RAKF,
