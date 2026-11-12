@@ -148,7 +148,9 @@ SDSF gives JES2 the command and shows #cmd("COMMAND ISSUED")\; press Enter
 again, and the row shows #cmd("HOLD"). The job is now on the list of
 #cmd("I H"). #cmd("A") on the Status panel releases it, and #cmd("C") cancels
 it. #cmd("P") purges it: it cancels the job and deletes its output, and SDSF
-does not ask before it does.
+does not ask before it does. The list is read again at once and the job is no
+longer on it; the title line shows nothing if it worked. If it did not, it
+shows the reason, for example #cmd("CANNOT CANCEL THIS JOB").
 
 Three fields of a row can be changed here, by typing over them and pressing
 Enter:
@@ -158,8 +160,10 @@ Enter:
     takes.],
   [#cmd("C")], [the class: one class, A to Z or 0 to 9. This is how a job is
     moved to another class.],
-  [#cmd("DEST")], [the destination: #cmd("LOCAL"), #cmd("R")#var("n") for a
-    remote, or #cmd("U")#var("n").],
+  [#cmd("DEST")], [the destination, for example #cmd("LOCAL"),
+    #cmd("ANYLOCAL"), #cmd("R")#var("n"), #cmd("RM")#var("n"),
+    #cmd("RMT")#var("n") or #cmd("U")#var("n"). The _SDSF Reference_, chapter
+    "Action Characters", lists the forms.],
 )
 
 #cmd("PRTY") and #cmd("C") stand side by side in one field: type over either
@@ -245,7 +249,9 @@ while it is on the screen, that is, on the first screen of columns.
 There is no action character on this panel that deletes held output. To purge
 it, use #cmd("P") on the Status panel: find the job there, type #cmd("P") in its
 NP column and press Enter. SDSF deletes the held output and does not ask
-again, so make sure the row is the right one.
+again, so make sure the row is the right one. The Held Output panel is read
+again at once and the job is no longer on it; the title line shows nothing if
+it worked.
 
 == Output Waiting to Print <ug-queues-output>
 
@@ -298,5 +304,6 @@ and the title line shows #cmd("COMMAND ISSUED"). It needs update access to the
 job. The other fields only show, since JES2 has no command to change them.
 
 To delete output that waits to be printed, use #cmd("P") on the Status panel,
-as for held output. To print it, a printer must be started; that is done on
+as for held output; the Output Queue panel is read again at once, and the job
+is no longer on it. To print it, a printer must be started; that is done on
 the Printer panel (@ug-devices).
