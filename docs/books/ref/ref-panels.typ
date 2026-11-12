@@ -460,7 +460,9 @@ need read access to #cmd("SDSF.OPER").
 of the row (@ref-actions). #cmd("O") is not taken here and gives
 #cmd("INVALID COMMAND"). A row without a JES2 job gives #cmd("JOB NOT FOUND").
 The list is read again after an action. SDSF takes the job number from JES2:
-it is that of the executing job of the same name.
+it is that of the executing job of the same name and type. The master address
+space (ASID 1) shows the number of the executing #cmd("SYSLOG") task, and the
+action characters on its row act on that task.
 
 *Overtyping.* #cmd("PGN") moves the address space to another performance
 group: SDSF gives the operator command #cmd("E") #var("name")#cmd(",PERFORM=")#var("n").
