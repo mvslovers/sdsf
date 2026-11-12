@@ -46,9 +46,11 @@ the Reference, under "Panels", "ST: Status".
   [#cmd("QUEUE")], [Where the job is: #cmd("EXECUTION") while it waits for an
     initiator and while it runs, #cmd("PRINT") when it has ended and its
     output is still on the spool.],
-  [#cmd("C")], [The job class of a batch job. A job that has ended, a started
-    task and a TSO user have none.],
-  [#cmd("POS")], [The place of a waiting job among the jobs of its class.],
+  [#cmd("C")], [The job class of a batch job. A batch job that has ended
+    keeps the class it was read with. A started task and a TSO user have
+    none.],
+  [#cmd("POS")], [The place of a waiting job in the queue of the waiting jobs
+    of its class. A held job has none.],
   [#cmd("HDN")], [The number of the job's held output data sets; blank when
     there is none.],
   [#cmd("DEST")], [Where the output goes: #cmd("LOCAL") or a remote.],
@@ -57,7 +59,7 @@ the Reference, under "Panels", "ST: Status".
 
 Executing jobs are white; the others are blue. A job that waits to execute
 shows #cmd("EXECUTION") in #cmd("QUEUE"), not #cmd("INPUT")\; its #cmd("POS")
-tells how many jobs of its class are ahead of it.
+is its place in the queue of its class.
 
 *The order of the rows.* The jobs that wait to execute come first, by class,
 then by priority, the highest first, then by job number. After them come the
@@ -78,8 +80,9 @@ You have submitted the job #cmd("MYJOB"). To see where it is:
 
 The list does not change by itself. A job that ended after SDSF read the list
 is still shown as executing until you press Enter on an empty command line.
-The same is true after an action character: the row stays as it was until the
-list is read again.
+The same is true after most action characters: the row stays as it was until
+the next empty Enter. The exception is #cmd("P"), which purges the job: SDSF
+reads the list again at once, and the purged job is no longer on it.
 
 *Finding a job in a long list.* Type #cmd("FIND MYJOB") and press Enter: the
 row with the name goes to the top of the list. The Repeat-FIND key (PF5)
@@ -116,10 +119,11 @@ character, #cmd("1"). Without a wildcard the whole name must match:
 #cmd("ST MYJOB") shows only the jobs named #cmd("MYJOB").
 
 When you give classes, the title line reads #cmd("SDSF STATUS DISPLAY CLASS A")
-(with the classes you gave), and *the list leaves out the jobs that have no
-class*: the jobs that have ended and wait on the print queue, the TSO users
-and the started tasks. If you look for a job that has ended, do not give a
-class.
+(with the classes you gave), and *the list leaves out the jobs on the print
+queue*, that is, the jobs that have ended, although a batch job that has ended
+shows a class in the #cmd("C") column. It also leaves out the TSO users and
+the started tasks, which have no class. If you look for a job that has ended,
+do not give a class.
 
 The classes and the name last until the next #cmd("ST"). Typing #cmd("ST")
 alone starts again with all of them.
@@ -180,19 +184,17 @@ The others are the data sets that the programs of the job write, such as
 *Pick a data set.*
 
 + On the Status panel, move the cursor to the NP column of the row of the job.
-  The Tab key goes from field to field; a row has more fields than NP, since
-  #cmd("PRTY") and #cmd("DEST") can be overtyped.
 + Type #cmd("?") and press Enter. The Job Data Set panel appears
   (@ug-jobs-jds).
 + Type #cmd("S") in the NP column of the data set you want and press Enter.
   The Output Data Set panel shows its text (@ug-jobs-ods).
 + Press the End key (PF3) to go back to the Job Data Set panel, and again to
-  go back to the Status panel.
+  go back to the panel on which you chose the job, here the Status panel.
 
 *Read everything.* Type #cmd("S") in the NP column of the job on the Status
 panel instead of #cmd("?"), and press Enter. The Output Data Set panel shows
 all the data sets of the job one after the other. Press the End key (PF3) to
-go back to the Status panel.
+go back to the panel on which you chose the job.
 
 #cmd("?") and #cmd("S") work in the same way on the DA, Input Queue, Output
 Queue and Held Output panels (@ug-queues and @ug-running). Whichever panel you start
@@ -260,7 +262,7 @@ printed. You get it with #cmd("S") on a job, which shows all its data sets
 one after the other, or with #cmd("S") on a data set of the Job Data Set
 panel, which shows that data set only.
 
-#code("SDSF OUTPUT DISPLAY MYJOB    JOB  1240 DSID   102 LINE       1
+#code("SDSF OUTPUT DISPLAY MYJOB    JOB  1240 DSID   102 LINE       0 COLUMNS  02-  81
 COMMAND INPUT ===>                                        SCROLL ===> PAGE
 ***************************** TOP OF DATA *****************************
  IDCAMS  SYSTEM SERVICES
@@ -306,8 +308,9 @@ set of your own; the Reference describes it under "Commands".
 *You cannot change the output.* What you type over the lines is not kept.
 
 *Leaving.* The End key (PF3) goes back to the panel before: to the Job Data
-Set panel if you came by it, otherwise to the Status panel. The command
-#cmd("ST") goes to a new Status panel at once, and says
+Set panel if you came by it, otherwise to the panel on which you chose the
+job, which is the Status, DA, Input Queue, Output Queue or Held Output panel.
+The command #cmd("ST") goes to a new Status panel at once, and says
 #cmd("DATA SET DISPLAYED") on the title line.
 
 *Big output.* If the output is bigger than the storage SDSF has, the panel
