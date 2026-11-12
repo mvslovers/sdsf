@@ -8,8 +8,8 @@
 @TUTORIAL: Showing Fewer Jobs, Class A          !ISFHMSG                      }
 @COMMAND INPUT ===>_ISFHCMD                                                   }
 }
-}  Only the batch jobs of class A are left. MYJOB has ended and has no
-}  class any more; JES2 and your TSO session have none either.
+}  Only the batch jobs of class A are left. MYJOB has ended: classes
+}  take no job from the print queue. JES2 and your TSO session have none.
 }
 }  +---------------------------------------------------------------------------
 }  |@SDSF STATUS DISPLAY CLASS A                            LINE 1-1 (1)

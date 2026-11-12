@@ -19,14 +19,14 @@
 {   A  }Release the job ($AJ).
 {   H  }Hold the job ($HJ).
 {   E  }Restart the job ($EJ).
-}
 }  JES2's answers go to the system log (LOG). The list is read again
 }  after the actions. A row without a JES2 job, such as an idle initiator
 }  or the master scheduler, takes none: JOB NOT FOUND.
 }
 }  D and L need read access to the job, the others update access; your
-}  own jobs you may always act on. Without the access the panel says
-}  NOT AUTHORIZED FOR JOB. O is not taken on DA: INVALID COMMAND.
+}  own jobs you may always act on. DA reads the jobs again: a job you may
+}  no longer read gives JOB NOT FOUND, an action you may not take gives
+}  NOT AUTHORIZED FOR JOB. ? and S take the row as shown. O: INVALID COMMAND.
 }
 }  Enter: next topic   PF7: DA panel help   PF3: back to SDSF
 )PROC

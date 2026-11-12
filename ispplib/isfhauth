@@ -25,7 +25,7 @@
 {    UPDATE  }/ commands; the other actions on printers and initiators.
 }  Without it: COMMAND NOT AUTHORIZED, NOT AUTHORIZED FOR CMD, PRT or INIT.
 }
-}  RAKF before 2.0.0 has no class JESSPOOL: then you see your own jobs only.
+}  Without a JESSPOOL profile that permits you, you see only your own jobs.
 }
 }
 }  Enter: next page   PF7: contents   PF10: back   PF3: back to SDSF

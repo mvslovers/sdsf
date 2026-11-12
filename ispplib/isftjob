@@ -12,8 +12,8 @@
 }  command line: the Status panel lists it with all the others you may
 }  see. Its QUEUE field tells where it is:
 }
-{  INPUT      }read in, waiting for an initiator of its class. POS says
-}               how many jobs of that class are ahead of it.
+{  INPUT      }read in, waiting for an initiator of its class. POS is
+}               its place in line, 1 the first; a held job has none.
 {  EXECUTION  }running. The row is white.
 {  PRINT      }ended; its output waits to be printed, or is held.
 }

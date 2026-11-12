@@ -9,8 +9,8 @@
 @COMMAND INPUT ===>_ISFHCMD                                                   }
 }
 }  SDSF gave JES2 the command $HJ1201. After Enter, the list shows
-}  PAYROLL held: HOLD in the STAT field.
-}
+}  PAYROLL held: HOLD in the STAT field, and POS is empty: a held job
+}  has no place in line.
 }  +---------------------------------------------------------------------------
 }  |@SDSF STATUS DISPLAY ALL CLASSES                        LINE 1-4 (4)
 }  |@COMMAND INPUT ===>                                        SCROLL ===> PAGE
@@ -18,7 +18,7 @@
 }  |@   JES2     STC    12   15 EXECUTION             LOCAL
 }  |@   HERC01   TSU   104   15 EXECUTION             LOCAL
 }  |    PAYROLL  JOB  1201    9 INPUT      A          LOCAL              HOLD
-}  |    MYJOB    JOB  1240    1 PRINT                 LOCAL
+}  |    MYJOB    JOB  1240    1 PRINT      A          LOCAL
 }  +---------------------------------------------------------------------------
 }
 }  A in the NP column releases it again. The green fields can be
