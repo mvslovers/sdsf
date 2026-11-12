@@ -83,6 +83,16 @@ each:
   every action allowed.
 - **SDSF.OPER**: the FACILITY profile for the system's side (the log,
   printers, initiators, `/` commands). READ and UPDATE as above.
+- **profile**, **class**, **entity**: RAKF's words. A profile is a rule in a
+  class; SDSF asks RAKF for an access level to an entity (the name of the
+  thing, such as a job's `<owner>.<jobname>.<jobid>`), and the profile that
+  covers the entity answers. Say "profile" for the rule and "entity" for the
+  name SDSF asks about; never "resource" for either.
+- **authorized state**: the second condition besides RAKF. SDSF's own SVC or
+  SVC 244 (where the own SVC is not installed or refuses the call) puts SDSF
+  into it for the actions that need it; where it is not
+  available the action is refused with a message of its own. Not to be
+  confused with "authorized" in the sense of RAKF access.
 - The messages on the screen are quoted exactly: `NOT AUTHORIZED FOR JOB`,
   `COMMAND NOT AUTHORIZED`.
 
