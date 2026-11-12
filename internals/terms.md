@@ -64,6 +64,21 @@ each:
   `PRTY`, `QUEUE`, ...). Each panel's help lists and explains them; the
   Status panel's are in `ispplib/isfhstf` and `ispplib/isfhstf2`.
 
+## On the DA panel
+
+- **address space**: what a row of the DA panel is: a batch job, a started
+  task, a TSO user, or an idle initiator, running on the system. Say "address
+  space" where the text is about the system, "job" where it is about the JES2
+  job.
+- **idle initiator**: an initiator with no job; its row has type `INIT` and no
+  job number. An initiator that runs a job shows as that job.
+- **the master address space**: ASID 1; its row shows the job number of the
+  executing `SYSLOG` task, and the action characters on it act on that task.
+- **position**: whether an address space is in storage (`IN`) or swapped out
+  (`OUT`); `N/S`, not swappable, counts as in.
+- **the right part** of a DA row: the columns the Right key (PF11) brings
+  into view. The help calls them "further fields", as on ST.
+
 ## Commands
 
 - **command**: what is typed on the command line. **SDSF command**: one of
