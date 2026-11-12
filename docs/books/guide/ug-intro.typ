@@ -83,11 +83,14 @@ SDSF V1R2 shows to its users. The panels, the help and the manuals are
 written for SDSF itself. Where this book must name IBM's product, it says
 "IBM's SDSF V1R2"; "SDSF" alone is always this product.
 
-The comparison with IBM's SDSF V1R2 covers what you can see and do: the
-panels, the commands, the action characters, the messages and the
-authorization. Where SDSF differs on purpose, or does not do what IBM's SDSF
-V1R2 does, the chapter "Differences from IBM's SDSF V1R2" in the _SDSF
-Reference_ lists it. This book does not repeat that list.
+The model covers what you can see and do: the panels, the commands, the
+action characters and the messages. Where SDSF differs on purpose, or does not
+do what IBM's SDSF V1R2 does, the chapter "Differences from IBM's SDSF V1R2"
+in the _SDSF Reference_ lists it. This book does not repeat that list.
+
+The authorization is not modeled on IBM's SDSF V1R2. It is SDSF's own
+solution, built on RAKF; the chapter "Authorization" in the _SDSF Reference_
+describes it.
 
 IBM, MVS and SDSF are trademarks of International Business Machines
 Corporation.
@@ -114,8 +117,10 @@ This book follows the spelling of the screen and of the _SDSF Reference_.
     matters.],
   [Keys], [A key is named by the command it stands for, and its default
     follows in parentheses: "the End key (PF3)", "the Help key (PF1)". The
-    defaults are those of ISPF. A user may have moved a key; the command
-    stays the same, and you can type it instead.],
+    defaults are usually those of ISPF. A user may have moved a key; the
+    command stays the same, and you can type it instead. The appendix "PF Key
+    Assignments" in the _SDSF Reference_ lists the keys and what each one does
+    on each panel.],
   [Messages], [A message is quoted exactly as it appears on the screen, in the
     type of a screen name: #cmd("NOT AUTHORIZED FOR JOB"). A message appears
     on the title line, on the right.],
