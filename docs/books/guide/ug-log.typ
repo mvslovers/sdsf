@@ -31,6 +31,10 @@ part of the log that the system keeps in storage. It is not the whole history
 of the system: when new lines come, the oldest ones drop out. A message older
 than the table reaches is not there to be found.
 
+*Dates.* The lines of the log carry no date, only the time. The date in the
+title line is today's. If the table has run past midnight, a
+#cmd("LOCATE hh.mm.ss") may stop at a line from the day before.
+
 === Reading the Log <ug-log-read>
 
 #deflist(width: 2.1in,
@@ -67,7 +71,8 @@ To keep a part of the log, print it to a SYSOUT data set.
   if it is not open yet, and prints the lines from 100 to 250 in pages of 60
   lines. The message gives the number of pages, #cmd("PAGES PRINTED").
 + Type #cmd("PRINT CLOSE") and press Enter. SDSF closes the data set, and the
-  system prints it. The message is #cmd("PRINT CLOSED").
+  system prints it. The message is #cmd("PRINT CLOSED n LINE"), where #var("n")
+  is the number of lines that were printed.
 
 Without a class, the print goes with the output of your session. A file that is
 still open when you leave SDSF is closed for you. The class, the number of
@@ -97,7 +102,7 @@ each message.
 + Type #cmd("ACTION ALL") and press Enter. All outstanding replies will be
   shown, whatever their routing codes.
 + Type #cmd("LOG") and press Enter. After the last line of the log come the
-  replies, the newest first, in white, up to 30 of them. Each begins with its
+  replies, the newest first, up to 30 of them. Each begins with its
   routing codes as four hexadecimal digits and goes on with the message as the
   log shows it, with the time and the job that asked.
 + To see which setting is in force, type #cmd("ACTION ?") and press Enter. The
@@ -266,9 +271,13 @@ log is empty, and the title line says #cmd("NO SYSLOG FOUND"). The command is
 for the log; the other panels do not change with it. The setting does not
 last: it is gone when you leave SDSF.
 
-*Find the ID of your system.* Show the log. The title line shows the ID of the
-system after #cmd("MTT"). Or type #cmd("SYSID ?") and press Enter: SDSF puts
-#cmd("SYSID") and the ID of the system on the command line.
+*Find the ID of your system.* Show the log. As long as no #cmd("SYSID") is set,
+the title line shows the ID of your system after #cmd("MTT"). Type
+#cmd("SYSID ?") and press Enter: SDSF puts #cmd("SYSID") and the ID that is in
+force on the command line. With no #cmd("SYSID") set that is your own system's;
+after a #cmd("SYSID") for another system it is the ID you set, and not your own.
+Then the title line no longer shows your ID either (see below). The setting is
+gone when you leave SDSF, so leave SDSF, start it again and show the log.
 
 *Set a system.* Type #cmd("SYSID") and the ID, up to four characters, and press
 Enter. On the log the command takes effect at once. For an ID that is not your
@@ -285,11 +294,12 @@ keeps what you typed, so that you can correct it.
 #idx("DEST command")
 #idx("destination")
 The destination of a job is where its output goes: #cmd("LOCAL") for the local
-destination, or a remote or a user destination. The Status, Output Queue and
-Held Output panels show it in the #cmd("DEST") column. The #cmd("DEST")
+destination, or a remote or a user destination. The Status, Input Queue,
+Output Queue and Held Output panels show it in the #cmd("DEST") column. The #cmd("DEST")
 command limits the Status, Input Queue, Output Queue and Held Output panels to
 the jobs whose output goes to the destinations you name, by the destination of
-the job as the Status panel shows it. The Reference, under "Commands", has the
+the job as the Status panel shows it. @ug-jobs describes the destination along
+with the prefix and the classes; the Reference, under "Commands", has the
 rules.
 
 #deflist(width: 1.6in,
@@ -306,11 +316,10 @@ rules.
 )
 
 A name that is not a destination gets #cmd("INVALID DESTINATION NAME"), and
-the cursor stands on it. SDSF keeps the destination in your profile, as it
-keeps the prefix, so it is still in force the next time you start SDSF. A
-destination you forgot is a common reason for a list that lacks jobs you know
-exist: when a list is shorter than you expect, type #cmd("DEST ?") and
-#cmd("PREFIX ?"), and take away what is not needed (@ug-jobs).
+the cursor stands on it. SDSF keeps the destination in your profile, so it is
+still in force the next time you start SDSF. A destination you forgot is a
+common reason for a list that lacks jobs you know exist: type #cmd("DEST ?")
+and look (@ug-jobs).
 
 The command only limits the lists. To change where the output of a job goes,
 overtype the #cmd("DEST") field in the row of the job. @ug-jobs and
