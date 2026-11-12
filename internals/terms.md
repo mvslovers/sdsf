@@ -148,5 +148,6 @@ Panel names: `ISFH*` help, `ISFK*` help for commands, `ISFX*` index,
   library in the link list needs one as well. Not to be confused with SDSF's
   "authorized state" (see above), which is what the programs of the library
   get from it.
-- **the preview**: an SDSF version before the beta that was installed by
-  hand, without SMP. It is removed before 1.2.0 is installed.
+- **the preview**: an earlier SDSF that came with TK5 and sits in the
+  system's own libraries (`SYS2.SDSF.LOAD`, `SYS2.ISP.PLIB`,
+  `SYS2.CMDPROC`). It is removed before 1.2.0 is installed. Not the beta.
