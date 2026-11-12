@@ -9,8 +9,9 @@ to be printed or is held until somebody releases it. This chapter is about
 the three lists that show those stages: the Input Queue panel (#cmd("I")),
 the Held Output panel (#cmd("H")) and the Output Queue panel (#cmd("O")).
 The Status panel (#cmd("ST")), described in @ug-jobs, shows all the stages
-in one list; each panel here shows one, and all three are limited the same
-way.
+in one list; each panel here shows one. All three are limited by the classes
+written directly after the command, and the Held Output panel limits by job
+name as well.
 
 #tab(caption: [The three queue panels])[
   #table(columns: (0.9in, 1.55in, 1fr),
@@ -26,9 +27,10 @@ way.
 
 What you do with a job on these panels is small on purpose. An action
 character typed in the NP column (@ug-start) takes you to the data sets of
-the job or to its output. The changes are made either on the Status panel,
-which takes the action characters that hold, release, cancel and purge, or by
-typing over a field of the row. The table shows where each change is made;
+the job or to its output, and #cmd("O") on the Held Output panel releases
+held output for printing. The other changes are made either on the Status
+panel, which takes the action characters that hold, release, cancel and purge,
+or by typing over a field of the row. The table shows where each change is made;
 the sections that follow explain them.
 
 #tab(caption: [What you want to do, and where])[
@@ -85,7 +87,7 @@ list is limited, #cmd("SDSF INPUT QUEUE DISPLAY CLASS") and the classes.
 === Looking at the Queue
 
 Type #cmd("I") on the command line. Without anything else the panel shows
-batch jobs of every class. A row has these fields:
+batch jobs of every class. A row has several fields, among them:
 
 #deflist(width: 1.0in,
   [#cmd("JOBNAME")], [the name of the job.],
@@ -101,8 +103,8 @@ batch jobs of every class. A row has these fields:
 
 The waiting jobs come first, by class, then by priority, the highest first,
 and then by job number; the executing jobs follow. Executing jobs are white,
-the others blue. #cmd("POS") tells you how many jobs of the class are ahead of
-yours. A held job shows no #cmd("POS"): it takes no place in the line until it
+the others blue. #cmd("POS") is the place of a job in the line of its class:
+#cmd("POS") 1 is the job that is next. A held job shows no #cmd("POS"): it takes no place in the line until it
 is released.
 
 #cmd("?") typed alone on the command line adds more fields after these, those
@@ -200,7 +202,8 @@ not start. Held output belongs to a job that has ended, and does not print.
 
 === Looking at Held Output
 
-Type #cmd("H"). Without anything else the panel shows only your own jobs:
+Type #cmd("H"). Without anything else the panel shows the held output of the
+jobs whose names begin with your user id:
 
 #deflist(width: 1.2in,
   [#cmd("H")], [the held output of the jobs whose names begin with your user
@@ -213,9 +216,10 @@ Type #cmd("H"). Without anything else the panel shows only your own jobs:
 
 A #cmd("PREFIX") that you have set takes the place of the user id rule, and
 #cmd("DEST") limits the list as well. If the panel is empty and you expect
-output, try #cmd("H ALL") first, and then #cmd("PREFIX ?"). Unlike on the
-Input Queue panel, #cmd("H ?") does not show further fields: the #cmd("?") is
-taken as a job name, and nothing is listed.
+output, try #cmd("H ALL") first, and then #cmd("PREFIX ?"). On the Input Queue
+panel a #cmd("?") typed alone on the command line adds fields; on this panel it
+is accepted and changes nothing. #cmd("H ?") is something else: the #cmd("?")
+is then taken as a job name, and nothing is listed.
 
 The oldest comes first, by the time the job ended. The row is wide:
 #cmd("NP") and #cmd("JOBNAME") stay in place, and the Right key (PF11) and the
@@ -231,15 +235,16 @@ after the other, and #cmd("?") shows the list of its data sets. Both are for
 reading: the output stays held.
 
 #cmd("O") in the NP column releases the held output of the job for printing.
-SDSF gives JES2 the release command and shows #cmd("COMMAND ISSUED"). Press
-Enter to read the list again: the job whose output has been released is no
-longer on it. Output that is not held and waits to be printed is what the
+SDSF gives JES2 the release command and shows #cmd("COMMAND ISSUED"). The
+list is read again at once, and the job whose output has been released is no
+longer on it. If the job is still there, JES2 has not carried out the release
+yet: press Enter again. Output that is not held and waits to be printed is what the
 Output Queue panel shows (@ug-queues-output). #cmd("O") needs update access to
 the job; without it the answer is #cmd("NOT AUTHORIZED FOR JOB").
 
 To send the output somewhere else as it is released, type the new destination
-over the #cmd("DEST") field of the row (#cmd("LOCAL"), #cmd("R")#var("n") or
-#cmd("U")#var("n")) and put #cmd("O") in the NP column, both in the same
+over the #cmd("DEST") field of the row (for example #cmd("LOCAL"),
+#cmd("R")#var("n") or #cmd("U")#var("n")) and put #cmd("O") in the NP column, both in the same
 Enter. SDSF gives JES2 the destination first and then the release. A new
 #cmd("DEST") without the #cmd("O") is refused with
 #cmd("\"O\" ACTION REQUIRED")\; the value stays on the screen, so that you can
@@ -302,6 +307,8 @@ One field can be changed, #cmd("DEST"): type the new destination over it and
 press Enter, and the output of the job goes there. SDSF gives JES2 the command
 and the title line shows #cmd("COMMAND ISSUED"). It needs update access to the
 job. The other fields only show, since JES2 has no command to change them.
+As on the Held Output panel, the field can be typed over only while it is on
+the screen, that is, on the first screen of columns.
 
 To delete output that waits to be printed, use #cmd("P") on the Status panel,
 as for held output; the Output Queue panel is read again at once, and the job
