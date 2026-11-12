@@ -58,6 +58,11 @@ each:
   such a field is an **overtypeable field** (on ST: `PRTY`, `DEST`).
 - **field** (of a row) and **column** (of the panel) are the same thing seen
   from the row or from the panel; the help says "field".
+- **start**, **stop**, **halt** (a printer or an initiator): `S` starts it;
+  `P` stops it when its output (printer) or its job (initiator) is done; `Z`
+  halts it at once, and `S` lets it go on.
+- **`COMMAND ISSUED`**: SDSF gave the JES2 command to the system. It does not
+  say that JES2 took it; JES2's answer is in the system log.
 - **the further fields**: what `?` typed alone on the command line of ST and
   I shows in place of the usual fields.
 - The columns' names are the headings on the screen (`JOBNAME`, `JNUM`,
