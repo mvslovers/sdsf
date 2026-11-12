@@ -32,10 +32,11 @@ SDSF learns what a key means in one of three ways:
 
 The commands of the Help, End, Up, Down, Repeat-FIND and Retrieve keys can
 also be typed on the command line, except #cmd("UP") and #cmd("DOWN") on the
-primary option menu, and #cmd("RFIND") there, which give #cmd("INVALID
-COMMAND"). The commands of the Left and Right keys can be typed on two panels
-only: #cmd("LEFT") and #cmd("RIGHT") work on the Output Data Set panel and the
-system log. On every other panel they give #cmd("INVALID COMMAND").
+primary option menu, and #cmd("RFIND") there, which give
+#cmd("INVALID COMMAND"). The commands of the Left and Right keys can be typed
+on two panels only: #cmd("LEFT") and #cmd("RIGHT") work on the Output Data
+Set panel and the system log. On every other panel they give
+#cmd("INVALID COMMAND").
 
 == The Default Keys <apx-pfkeys-defaults>
 
