@@ -377,7 +377,8 @@ reads #cmd("SDSF DA"), the system id, #cmd("PAGING 0.00"), #cmd("SIO") and
 #cmd("CPU"). #cmd("SIO") and #cmd("CPU") add up the rates only of the address
 spaces that were also in the previous measurement, so both are 0 the first
 time the panel is shown. The sum includes address spaces that the panel does
-not show, so it can be larger than the sum of the rows on the screen. #cmd("PAGING") is always 0.00.
+not show, so it can be larger than the sum of the rows on the screen.
+#cmd("PAGING") is always 0.00.
 
 *Columns.* In the order they have when the panel is first shown:
 
@@ -391,7 +392,8 @@ not show, so it can be larger than the sum of the rows on the screen. #cmd("PAGI
     terminal.],
   [#cmd("TYPE")], [#cmd("JOB"), #cmd("STC") or #cmd("TSU")\; blank for an idle
     initiator.],
-  [#cmd("JNUM")], [the JES2 job number, if the address space has one.],
+  [#cmd("JNUM")], [the JES2 job number, if the address space has one. The master
+    address space shows the number of the executing #cmd("SYSLOG") task.],
   [#cmd("C")], [the job class.],
   [#cmd("POS")], [#cmd("IN") in storage, #cmd("OUT") swapped out, #cmd("N/S")
     not swappable.],
@@ -453,7 +455,8 @@ job shows as that job. The panel has no limit by name, and #cmd("PREFIX") and
 
 *Who sees what.* A row that has a JES2 job is shown when the user may read the
 job (@ref-auth). The rows that have none, such as JES2 and idle initiators,
-need read access to #cmd("SDSF.OPER").
+need read access to #cmd("SDSF.OPER"). The master address space is such a row
+only while no #cmd("SYSLOG") task is executing.
 
 *Action characters.* #cmd("?"), #cmd("S"), #cmd("D"), #cmd("L"), #cmd("C"),
 #cmd("CD"), #cmd("P"), #cmd("A"), #cmd("H") and #cmd("E") act on the JES2 job
