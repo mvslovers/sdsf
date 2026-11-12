@@ -138,3 +138,15 @@ Panel names: `ISFH*` help, `ISFK*` help for commands, `ISFX*` index,
 - **FMID**: the SYSMOD's identifier (`TISF120` for 1.2.0), the word of SMP.
 - **the beta**: version 0.9.0 (`TISF090`). There is no upgrade from it: it is
   removed first, then 1.2.0 is installed as a first installation.
+- **IPL with CLPA**: the restart of the system that rebuilds the link pack
+  area from `SYS1.LPALIB`. The SVC routine takes effect only after one.
+  Say "an IPL with CLPA", not "a reboot" or "a cold start".
+- **the link list**: the libraries MVS searches for a program when the job
+  gives no STEPLIB (`LNKLST00`); `ISF.LINKLIB` is put into it.
+- **APF-authorized library**, **APF entry**: a library that holds programs
+  allowed to run in the authorized state, and its line in `IEAAPF00`. A
+  library in the link list needs one as well. Not to be confused with SDSF's
+  "authorized state" (see above), which is what the programs of the library
+  get from it.
+- **the preview**: an SDSF version before the beta that was installed by
+  hand, without SMP. It is removed before 1.2.0 is installed.
