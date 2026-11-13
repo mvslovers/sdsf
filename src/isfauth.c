@@ -10,7 +10,7 @@
 ** - the system (the log, printers, initiators, the system's address
 **   spaces, / commands) through the FACILITY profile SDSF.OPER: READ to
 **   see, UPDATE to act.
-** Only a permit (return code 0) allows: no profile (4) refuses, as in FTPD.
+** Only a permit (return code 0) allows: no profile (4) refuses.
 */
 #include <stdio.h>
 #include <string.h>

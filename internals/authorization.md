@@ -9,7 +9,7 @@ The Reference chapter "Authorization" and the User's Guide chapter "Who May Do W
 
 ## RAKF
 
-All checks go through libc370's `racf_auth` with `LOG=NONE`, so a refusal writes nothing on the console. Only a return code of 0 allows (`permitted()`). Any other answer is a refusal, including "no profile" (RC 4), and there is no lenient fallback.
+All checks go through libc370's `racf_auth` with `LOG=NONE`, so a refusal writes nothing on the console. Only a return code of 0 allows (`permitted()`). Any other answer is a refusal, including "no profile" (RC 4): a missing profile must never open a door, so SDSF fails closed, and there is no lenient fallback.
 
 | What | Class | Entity | Level |
 |---|---|---|---|
