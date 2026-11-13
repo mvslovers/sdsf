@@ -63,16 +63,11 @@ and no #cmd("IGX00011"), so no routine answers to code 11 until SDSF is
 installed. Check before you install: if a site has an #cmd("IGX00011") of its
 own, SDSF sees code 11 as installed and calls that routine instead.
 
-Two things to settle before you begin.
-
-- *Remove an earlier preview first.* The previews of TK5 put SDSF into
-  #cmd("SYS2.SDSF.LOAD"), its panels #cmd("ISFMENU") and #cmd("ISFLIST") into
-  #cmd("SYS2.ISP.PLIB") and its CLIST #cmd("SDSF") into #cmd("SYS2.CMDPROC").
-  Delete them where they exist. Otherwise the old CLIST and panels are found
-  before the new ones.
-- *There is no upgrade from the beta 0.9.0.* Remove it first
-  (@ug-install-beta), then install 1.2.0 as for a first installation.
-#idx("beta")
+*Remove an earlier preview first.* The previews of TK5 put SDSF into
+#cmd("SYS2.SDSF.LOAD"), its panels #cmd("ISFMENU") and #cmd("ISFLIST") into
+#cmd("SYS2.ISP.PLIB") and its CLIST #cmd("SDSF") into #cmd("SYS2.CMDPROC").
+Delete them where they exist. Otherwise the old CLIST and panels are found
+before the new ones.
 
 === Upload the Files <ug-install-upload>
 
@@ -400,35 +395,6 @@ A return code says only that a job ran. Check that:
   #cmd("IGX00011");
 - no logon procedure or CLIST still names a library of SDSF.
 
-=== Removing the Beta 0.9.0 <ug-install-beta>
-
-The beta is not upgraded to 1.2.0. Remove it, then install 1.2.0 as for a
-first installation. #cmd("uninstall.md") has its jobs under "Removing the beta
-0.9.0".
-
-The SYSMOD #cmd("TISF090") owns only the two modules. Its panels and its CLIST
-were not SMP elements: they were received into #cmd("ISF.ISPPLIB") and
-#cmd("ISF.CLIST"). Do not name any #cmd("MAC") in its #cmd("UCLIN"). A
-#cmd("DEL") of an entry that does not exist gives #cmd("HMA2532"), and that
-stops the rest of the step. The #cmd("LIST") step ends with return code 4 when
-nothing of #cmd("TISF090") is left.
-
-The job #cmd("isflpa.jcl") of the beta copied #cmd("IGX00011") into
-#cmd("SYS1.LPALIB") by hand. The second job deletes it there. If the old copy
-stayed, SMP would include it in the link of 1.2.0, and the result would not
-be marked refreshable. The IDCAMS job also deletes #cmd("ISF.LINKLIB"),
-#cmd("ISF.AISFLOAD"), #cmd("ISF.ISPPLIB") and #cmd("ISF.CLIST").
-
-What stays:
-
-- The lines for #cmd("ISF.LINKLIB") in #cmd("IEAAPF00") and #cmd("LNKLST00").
-  1.2.0 uses the same library.
-- The logon lines for #cmd("ISF.ISPPLIB") and #cmd("ISF.CLIST") must change to
-  #cmd("ISF.ISFPLIB") and #cmd("ISF.ISFCLST") (@ug-install-ispf), since the
-  old data sets are gone.
-
-The IPL with CLPA of the installation of 1.2.0 follows anyway.
-
 == Troubleshooting <ug-install-trouble>
 
 #idx("troubleshooting")
@@ -444,7 +410,7 @@ lists them all.
     [The allocation job ends with return code 8 and allocates nothing: the step
       #cmd("CHECK") ended with 8.],
       [A library of SDSF is already in the catalog.],
-      [Find out which: an earlier installation, the beta, or an earlier
+      [Find out which: an earlier installation or an earlier
        attempt. Remove it (@ug-install-remove), then run the job again.],
     [A #cmd("RECEIVE") step of the installation job fails.],
       [For want of space or of a volume for the staging library.],
@@ -581,9 +547,8 @@ Appendix C, "The SVC Routine".
        entry in the target zone only.],
       [Take the #cmd("DEL LMOD") out of the block for #cmd("ACDS").],
     [#cmd("HMA2532"), and the rest of the #cmd("UCLIN") step does not run.],
-      [A #cmd("DEL") named an entry that does not exist. For the beta 0.9.0,
-       the panels and the CLIST are no SMP elements.],
-      [Do not name any #cmd("MAC") for #cmd("TISF090").],
+      [A #cmd("DEL") named an entry that does not exist.],
+      [Name only the entries that the job in #cmd("uninstall.md") names.],
     [Every logon names data sets that no longer exist.],
       [The logon lines for SDSF were not taken out before the data sets were
        deleted.],

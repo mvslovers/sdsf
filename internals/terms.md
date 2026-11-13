@@ -208,8 +208,6 @@ Panel names: `ISFH*` help, `ISFK*` help for commands, `ISFX*` index,
   SVC", not "ESR". Where it is not installed, SDSF uses **SVC 244**. The
   books describe it in Reference Appendix C.
 - **FMID**: the SYSMOD's identifier (`TISF120` for 1.2.0), the word of SMP.
-- **the beta**: version 0.9.0 (`TISF090`). There is no upgrade from it: it is
-  removed first, then 1.2.0 is installed as a first installation.
 - **IPL with CLPA**: the restart of the system that rebuilds the link pack
   area from `SYS1.LPALIB`. The SVC routine takes effect only after one.
   Say "an IPL with CLPA", not "a reboot" or "a cold start".
@@ -222,4 +220,4 @@ Panel names: `ISFH*` help, `ISFK*` help for commands, `ISFX*` index,
   get from it.
 - **the preview**: an earlier SDSF that came with TK5 and sits in the
   system's own libraries (`SYS2.SDSF.LOAD`, `SYS2.ISP.PLIB`,
-  `SYS2.CMDPROC`). It is removed before 1.2.0 is installed. Not the beta.
+  `SYS2.CMDPROC`). It is removed before 1.2.0 is installed.
