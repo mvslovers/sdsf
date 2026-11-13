@@ -58,11 +58,26 @@ each:
   such a field is an **overtypeable field** (on ST: `PRTY`, `DEST`).
 - **field** (of a row) and **column** (of the panel) are the same thing seen
   from the row or from the panel; the help says "field".
+- **start**, **stop**, **halt** (a printer or an initiator): `S` starts it;
+  `P` stops it when its output (printer) or its job (initiator) is done; `Z`
+  halts it at once, and `S` lets it go on.
+- **`COMMAND ISSUED`**: SDSF gave the JES2 command to the system. It does not
+  say that JES2 took it; JES2's answer is in the system log.
 - **the further fields**: what `?` typed alone on the command line of ST and
   I shows in place of the usual fields.
 - The columns' names are the headings on the screen (`JOBNAME`, `JNUM`,
   `PRTY`, `QUEUE`, ...). Each panel's help lists and explains them; the
   Status panel's are in `ispplib/isfhstf` and `ispplib/isfhstf2`.
+
+## Looking at a job
+
+- **data set** (of a job): one output data set of a job, a row of the Job
+  Data Set panel; with `INPUT ON` also its input. Not "spool file". JES2
+  writes three of its own: `JESMSGLG` (the job log), `JESJCL`, `JESYSMSG`.
+- **the prefix**: the job name limit set by `PREFIX`, kept in the profile;
+  the name given to `ST` is "the name", not "the prefix".
+- **follow a job**: watch its `QUEUE` on the Status panel (`EXECUTION`,
+  then `PRINT`) by reading the list again with Enter.
 
 ## On the DA panel
 
@@ -89,6 +104,24 @@ each:
   SDSF give to JES2 (`$CJ1234`). The help names it in parentheses.
 - **MVS command**: the command an overtype makes SDSF give to MVS itself and
   not to JES2 (PGN on DA: `E name,PERFORM=n`).
+
+## The log and operator work
+
+- **the system log**, **the log**: what `LOG` shows. SDSF reads it from the
+  master trace table, so it holds only what the system still keeps in
+  storage. Not "SYSLOG" in prose, except as the name on the title line
+  (`SDSF SYSLOG`).
+- **outstanding reply**: a message of the system that waits for an answer;
+  the `ACTION` command chooses which SDSF shows after the last line of the
+  log. Not "WTOR" in the books.
+- **routing code**: the number 1 to 16 of a message, by which `ACTION`
+  chooses the outstanding replies.
+- **reply number**: the number after the `@` in the line of an outstanding
+  reply, the one `/R nn,answer` names.
+- **system** (`SYSID`): the system whose log the log panel shows; SDSF reads
+  the log of its own system only.
+- **destination** (`DEST`): where the output of a job goes (`LOCAL`, `Rn`,
+  `Un`); `DEST` limits the lists by it. Not the same as the system.
 
 ## Who may see and do what
 
