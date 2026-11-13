@@ -15,7 +15,7 @@ Spelling: names that appear on the screen keep the screen's spelling
 | Term | Means | Not |
 |---|---|---|
 | SDSF | this product, the SDSF clone for MVS 3.8j (repo `sdsf`) | IBM's SDSF, which is "IBM's SDSF V1R2" where it must be named |
-| Wally ISPF | the ISPF of MVS 3.8j systems, ISPF 2.2 by Wally Mclaughlin | "ISPF" alone where the difference to IBM's ISPF matters |
+| Wally ISPF | the ISPF of MVS 3.8j systems, by Wally Mclaughlin | "ISPF" alone where the difference to IBM's ISPF matters |
 
 ## Panels
 
@@ -68,6 +68,11 @@ each:
 - The columns' names are the headings on the screen (`JOBNAME`, `JNUM`,
   `PRTY`, `QUEUE`, ...). Each panel's help lists and explains them; the
   Status panel's are in `ispplib/isfhstf` and `ispplib/isfhstf2`.
+- **wildcard**: in a name on ST or after `PREFIX`, `*` stands for any number
+  of characters and `%` for exactly one. Without one the whole name must
+  match.
+- **read again**: Enter with nothing typed reads the list or the log again.
+  Not "refresh" and not "update".
 
 ## Looking at a job
 
