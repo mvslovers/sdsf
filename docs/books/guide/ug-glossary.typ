@@ -165,8 +165,9 @@ rule in full\; the glossary says what a word means and where to read on.
    (@ug-search-columns).],
   [*IBM's SDSF V1R2*],
   [The product that SDSF is modeled on, as far as you can see and do things
-   with it. “SDSF” alone is always this product. The Reference lists the
-   differences in the chapter “Differences from IBM's SDSF V1R2” (@ug-intro).],
+   with it. Where the books must name it, they call it by its full name;
+   “SDSF” alone always means this SDSF. The Reference lists the differences
+   in the chapter “Differences from IBM's SDSF V1R2” (@ug-intro).],
   [*idle initiator*],
   [An initiator that runs no job. On the DA panel its #cmd("TYPE") is blank
    and it has no job number, and it is shown only if you ask for it
@@ -369,8 +370,9 @@ rule in full\; the glossary says what a word means and where to read on.
    FACILITY profile #cmd("SVC244") have it.],
   [*SVC routine*],
   [#cmd("IGX00011"), the extended SVC routine of SDSF (SVC 109, code 11). SMP
-   links it into #cmd("SYS1.LPALIB"). It gives the authorized state to the
-   modules of SDSF and to no other program. The Reference describes it in the
+   links it into #cmd("SYS1.LPALIB"). It accepts a call only from the modules
+   of SDSF; while the authorized state is on, the whole job step is
+   authorized. The Reference describes it in the
    appendix “The SVC Routine” (@ug-install).],
   [*system*],
   [The system whose log the log panel shows, set by #cmd("SYSID"). SDSF reads
@@ -402,8 +404,8 @@ rule in full\; the glossary says what a word means and where to read on.
   [*Up key (PF7)*],
   [Scrolls up by the scroll amount (@ug-start-scroll).],
   [*Wally ISPF*],
-  [The ISPF of MVS 3.8j systems, ISPF 2.2 by Wally Mclaughlin. SDSF runs as a
-   dialog under it (@ug-intro).],
+  [The ISPF of MVS 3.8j systems, by Wally Mclaughlin. SDSF runs as a dialog
+   under it (@ug-intro).],
   [*wildcard*],
   [In a name on #cmd("ST") or after #cmd("PREFIX"), #cmd("*") stands for any
    number of characters and #cmd("%") for exactly one. Without a wildcard the
