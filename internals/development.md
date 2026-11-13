@@ -28,17 +28,32 @@ MVS systems come from `~/.mbt/targets.toml`; `mbt target list` shows them. Name 
 eval "$(mvsce-target up)"            # mvs-docker's container tool; --dist tk5 for TK5
 mbt target ping env --tso --wait 60
 mbt deploy --target env
-mbt test --mvs --target env
+# ... the development system below, once per container
+mbt test --tso --target env
 mvsce-target down "$MVSCE_TARGET_NAME"
 ```
 
 A container is not a long-lived system. Check SMP and installation questions on a fresh TK5 and a fresh MVS/CE, as the release guide was checked.
 
+## The development system
+
+A fresh MVS/CE container does not know SDSF yet: `mbt deploy` only fills `ISF.DEV.LINKLIB`, and without the steps below every TSO test stops at the ISPF menu (no option `S`). Do them once per container, as IBMUSER, in this order:
+
+1. **Panels.** Allocate `ISF.DEV.ISPPLIB` (PDS, RECFM FB, LRECL 80), then `mbt run panels --target env`.
+2. **ISPF.** In `SYS1.CMDPROC(ISPF)` put `ISF.DEV.ISPPLIB` first in the `ALLOC` of `ISPPLIB` (continue the line with ` +`; a record is 80 bytes). Copy `ISP@PRIM` from `SYSGEN.ISPF.PLIB` into `ISF.DEV.ISPPLIB` and add a menu line `S` and, in the `)PROC` translation, `S,'PGM(ISFISP) NOCHECK NEWAPPL(ISF)'`. The tests type `S` at the menu.
+3. **APF and link list.** Add `ISF.DEV.LINKLIB WORK00` (data set and volume) to `SYS1.PARMLIB(IEAAPF00)` and `SYS1.PARMLIB(LNKLST00)`, with commas as in `docs/installation.md` section 5. `ISFISP` and every `ISF*` module must come from an APF library or the LPA, or `IGX00011` refuses. Measured: from the link list ISPF finds `ISFISP` without an ISPLLIB entry, and SDSF runs authorized.
+4. **The SVC routine.** Copy `IGX00011` from `ISF.DEV.LINKLIB` to `SYS1.LPALIB` with IEBCOPY (`SELECT MEMBER=IGX00011`). Put `CLPA,` into `SYS1.PARMLIB(IEASYS00)` and restart the container (`docker restart mvsce-NAME`) for the IPL. The published ports change on a restart: run `mvsce-target status NAME` again and `eval` its output.
+5. **RAKF.** In `SYS1.SECURE.CNTL(PROFILES)` add `FACILITY SDSF.OPER` (NONE; group ADMIN UPDATE) and `JESSPOOL *` (NONE; group ADMIN UPDATE) in sort order, columns as in `docs/installation.md` section 8, then `S RAKFPROF`. Without them IBMUSER has no rights and most tests report `COMMAND NOT AUTHORIZED`.
+
+A test that fails can leave its TSO session behind: the next logon says `IKJ56425I`. Cancel it with `C U=IBMUSER` and wait until `D TS,L` shows no user.
+
+`authz.lua` runs only for a user without rights (a TN3270 user other than IBMUSER, one that is not in the group ADMIN). IBMUSER skips it, so a green run as IBMUSER does not exercise the refusal paths.
+
 ## Deploy
 
 `mbt deploy` writes the load modules into `ISF.DEV.LINKLIB` (`[deploy]` in `mbt.toml`). `ISF.LINKLIB` belongs to SMP; only the install job writes it.
 
-- `ISFISP` is loaded from the ISPLLIB concatenation of the TSO user, because it loads ISPLINK from there. For a development system, put `ISF.DEV.LINKLIB` there, APF-authorized, ahead of `ISF.LINKLIB`.
+- `ISFISP` is loaded from the link list, APF-authorized (`ISF.LINKLIB` in production, `ISF.DEV.LINKLIB` on a development system: see above). ISPF itself loads ISPLINK from its own ISPLLIB.
 - `mbt run panels [DSN] [PATTERN]` puts the panels of `ispplib/` into `ISF.DEV.ISPPLIB` (or DSN). PATTERN limits them, for example `ispplib/isfh*`.
 - `IGX00011` only takes effect from `SYS1.LPALIB` after an IPL with CLPA. A deploy does not install it. Without it, SDSF uses SVC 244 (#74 removes that).
 
@@ -47,7 +62,7 @@ A container is not a long-lived system. Check SMP and installation questions on 
 `test/tso/*.lua` drive SDSF over TN3270 with mbt's TSO test driver: logon, `ISPF`, the menu, typing, PF keys, reading the screen and its colours (`t:color`). Each script is one test; the return code is the contract.
 
 ```sh
-mbt test --mvs --target NAME                # all
+mbt test --tso --target NAME                # all
 mbt test --tso --target NAME --only st      # one
 ```
 
