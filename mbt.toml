@@ -2,7 +2,7 @@ schema = 3
 
 [project]
 name = "sdsf"
-version = "1.2.0"
+version = "1.2.1-dev"
 kind = "application"
 
 [toolchain]
