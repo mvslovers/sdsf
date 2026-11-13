@@ -2,8 +2,9 @@
 **
 ** Started from the ISPF primary option menu with
 ** SELECT PGM(ISFISP) NOCHECK NEWAPPL(ISF). The panel ISFMENU (ispplib/)
-** must be in the ISPPLIB concatenation, this module in the ISPLLIB one:
-** ISPLINK is loaded from there.
+** must be in the ISPPLIB concatenation. This module comes from an
+** APF-authorized library in the link list (the SVC refuses it otherwise);
+** ISPLINK is loaded from ISPF's own ISPLLIB.
 */
 #include <ctype.h>
 #include <stdio.h>
