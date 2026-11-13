@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
-## [1.2.0] - 2026-11-14
+## [1.2.0] - 2026-11-13
 
 The first release of SDSF: a spool and system display facility for MVS 3.8j
 under Wally ISPF, modeled after the behaviour of IBM SDSF V1R2. It is
