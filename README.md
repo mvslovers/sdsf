@@ -14,7 +14,7 @@ modeled after the behaviour of IBM SDSF V1R2.
 | **Runs on** | MVS 3.8j with JES2 and Wally ISPF, such as TK5 and MVS/CE |
 | **Security** | RAKF: JESSPOOL for jobs, the FACILITY profile `SDSF.OPER` for the system |
 | **Package** | SMP 4, FMID `TISF120` for 1.2.0 |
-| **Status** | 0.9.0 was a beta; 1.2.0 is the first release and is being prepared |
+| **Status** | 1.2.0, released 2026-11-13: [download](https://github.com/mvslovers/sdsf/releases/latest) |
 
 ## Panels
 
@@ -83,12 +83,14 @@ the load module, the panels, the CLIST, the jobs and two guides:
 - [`docs/installation.md`](docs/installation.md): allocation, RECEIVE,
   APPLY and ACCEPT, the system changes (APF, link list, IPL with CLPA), the
   ISPF set-up, RAKF, and a check that it works. It covers TK5 and MVS/CE.
-- [`docs/uninstall.md`](docs/uninstall.md): removing SDSF, and removing the
-  beta 0.9.0 before installing 1.2.0.
+- [`docs/uninstall.md`](docs/uninstall.md): removing SDSF.
 
 ## Documentation
 
-Two books are being written for 1.2.0, in `docs/books/`:
+Two books come with 1.2.0, as PDF with the
+[release](https://github.com/mvslovers/sdsf/releases/latest) and
+[online](https://mvslovers.readthedocs.io/projects/sdsf/); the source is in
+`docs/books/`:
 
 - **ML11-0001**, *SDSF User's Guide*: how to use the panels, from the first
   logon to the commands of every day.
