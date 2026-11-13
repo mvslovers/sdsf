@@ -117,8 +117,8 @@ This book follows the spelling of the screen and of the _SDSF Reference_.
     matters.],
   [Keys], [A key is named by the command it stands for, and its default
     follows in parentheses: "the End key (PF3)", "the Help key (PF1)". The
-    defaults are usually those of ISPF. A user may have moved a key; the
-    command stays the same, and you can type it instead. The appendix "PF Key
+    defaults are those of ISPF. A user may have moved a key; the command
+    stays the same, and you can usually type it instead. The appendix "PF Key
     Assignments" in the _SDSF Reference_ lists the keys and what each one does
     on each panel.],
   [Messages], [A message is quoted exactly as it appears on the screen, in the
