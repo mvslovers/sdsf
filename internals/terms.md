@@ -153,6 +153,10 @@ each:
   every action allowed.
 - **SDSF.OPER**: the FACILITY profile for the system's side (the log,
   printers, initiators, `/` commands). READ and UPDATE as above.
+- **the spool class**: the RAKF class `JESSPOOL`, which guards the jobs of
+  other users. **the operator profile**: `SDSF.OPER`. The User's Guide uses
+  both names; the Reference says "the class JESSPOOL" and "the profile
+  SDSF.OPER".
 - **profile**, **class**, **entity**: RAKF's words. A profile is a rule in a
   class; SDSF asks RAKF for an access level to an entity (the name of the
   thing, such as a job's `<owner>.<jobname>.<jobid>`), and the profile that

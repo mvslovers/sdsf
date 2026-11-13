@@ -251,10 +251,11 @@ FTPD uses. SDSF asks for the entity `<owner>.<jobname>.<jobid>`, for example
 | READ | the LOG with the outstanding replies, PR and INIT, and `D` on printers and initiators. DA also shows the system's address spaces |
 | UPDATE | also the other actions on printers and initiators, and `/` operator commands |
 
-On TK5 and MVS/CE, RAKF reads its profiles from `SYS1.SECURE.CNTL(PROFILES)`, kept in
-sort order. The class goes in columns 1-8, the profile from column 9, the
-group from column 53 and the access from column 61. For each profile, the
-line without a group comes first:
+On TK5 and MVS/CE, RAKF reads its profiles from `SYS1.SECURE.CNTL(PROFILES)`.
+RAKF 2.0.0 sorts the table itself when it loads it; with an earlier RAKF, keep
+the table in sort order. The class goes in columns 1-8, the profile from
+column 9, the group from column 53 and the access from column 61. For each
+profile, the line without a group comes first:
 
 ```
 FACILITYSDSF.OPER                                           NONE
