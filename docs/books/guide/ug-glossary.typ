@@ -44,10 +44,6 @@ rule in full\; the glossary says what a word means and where to read on.
   [*batch job*],
   [A job with TYPE #cmd("JOB"), as against a started task (#cmd("STC")) and a
    TSO user (#cmd("TSU")). See _job_.],
-  [*beta*],
-  [Version 0.9.0 of SDSF (FMID #cmd("TISF090")). There is no upgrade from it:
-   it is removed first, and then 1.2.0 is installed as a first installation
-   (@ug-install-beta).],
   [*cancel*],
   [#cmd("C") on a job: the job ends and its output stays. #cmd("CD") cancels
    it and asks for a dump. Compare _purge_.],
@@ -290,7 +286,7 @@ rule in full\; the glossary says what a word means and where to read on.
   [*preview*],
   [An earlier SDSF that came with TK5 and sits in the libraries of the system
    (#cmd("SYS2.SDSF.LOAD"), #cmd("SYS2.ISP.PLIB"), #cmd("SYS2.CMDPROC")). It
-   is removed before 1.2.0 is installed. Not the beta (@ug-install-before).],
+   is removed before 1.2.0 is installed (@ug-install-before).],
   [*primary option menu*],
   [The first panel of SDSF, titled #cmd("SDSF PRIMARY OPTION MENU"). You
    choose a panel by typing its name. #cmd("END") leaves SDSF

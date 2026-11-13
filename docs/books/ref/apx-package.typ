@@ -13,9 +13,7 @@ subject of the companion volume, the _SDSF User's Guide_.
 SDSF comes as an *SMP Release 4* package, for the SMP that ships with MVS
 3.8j (not SMP/E). Its identifier is the FMID #cmd("TISF120"). SMP installs
 every member: the load module #cmd("ISFISP"), the SVC routine
-#cmd("IGX00011"), the 82 panels and the CLIST #cmd("SDSF"). There is no
-upgrade from the beta 0.9.0 (#cmd("TISF090")); it is removed first
-(@apx-package-beta), and 1.2.0 is installed as a first installation.
+#cmd("IGX00011"), the 82 panels and the CLIST #cmd("SDSF").
 #idx("SMP")
 
 == The Files of the Package <apx-package-files>
@@ -47,8 +45,7 @@ own. The archive holds eight files.
       SYSMOD, then removal of the staging libraries.],
     [#cmd("README.md")], [The installation guide of the release (the file
       #cmd("docs/installation.md") of the repository).],
-    [#cmd("uninstall.md")], [How to remove SDSF, and the beta 0.9.0 before
-      installing 1.2.0 (the file #cmd("docs/uninstall.md") of the
+    [#cmd("uninstall.md")], [How to remove SDSF (the file #cmd("docs/uninstall.md") of the
       repository). @apx-package-remove summarizes it.],
   )
 ] <apx-package-tab-files>
@@ -435,7 +432,7 @@ Parts 2 to 6 have more than one page.
 The installation job carries one SYSMOD, a function, and receives it in its
 step #cmd("RECV"). Its identifier, the *FMID*, is made of #cmd("T"),
 #cmd("ISF") and the version without the dots: #cmd("TISF120") is the FMID of
-1.2.0. The beta 0.9.0 had #cmd("TISF090"). The header of the installation job
+1.2.0. The header of the installation job
 names the FMID.
 
 The SYSMOD:
@@ -578,27 +575,6 @@ return code 0: the #cmd("UCLIN") for #cmd("TISF120") reports #cmd("HMA2550")
 174 times, one for each of its statements. The #cmd("LIST") steps end with
 return code 4 and report every entry as not found. The IDCAMS job ends with
 return code 0.
-
-=== The Beta 0.9.0 <apx-package-beta>
-
-#idx("beta")
-The beta 0.9.0 (#cmd("TISF090")) was a different package. Its SYSMOD owned the
-two modules only. Its panels and its CLIST were not SMP elements: they were
-received into #cmd("ISF.ISPPLIB") and #cmd("ISF.CLIST"), and a job
-#cmd("isflpa.jcl") copied #cmd("IGX00011") into #cmd("SYS1.LPALIB") by hand.
-If you have it, remove it before you install 1.2.0, with the jobs under
-"Removing the beta 0.9.0" in #cmd("uninstall.md"), submitted as described in
-@apx-package-remove. The #cmd("UCLIN") for #cmd("TISF090") reports
-#cmd("HMA2550") 8 times, and its step ends with return code 0, as measured on
-MVS/CE. The jobs delete the entries of
-the SYSMOD and its modules, the libraries #cmd("ISF.LINKLIB"),
-#cmd("ISF.AISFLOAD"), #cmd("ISF.ISPPLIB") and #cmd("ISF.CLIST"), and the copy of
-#cmd("IGX00011") in #cmd("SYS1.LPALIB"). If the old copy stayed, SMP would
-include it in the link of 1.2.0, and the result would not be marked
-refreshable. The lines for #cmd("ISF.LINKLIB") in #cmd("IEAAPF00") and
-#cmd("LNKLST00") stay, because 1.2.0 uses the same library. The concatenation
-lines for #cmd("ISF.ISPPLIB") and #cmd("ISF.CLIST") change to
-#cmd("ISF.ISFPLIB") and #cmd("ISF.ISFCLST").
 
 == What Is Not in the Package <apx-package-not>
 

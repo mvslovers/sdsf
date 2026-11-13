@@ -2,9 +2,7 @@
 
 This removes SDSF 1.2.0 (FMID `TISF120`) from an MVS 3.8j system. It
 deletes the SMP inventory entries, then the data sets and the SVC routine in
-the LPA, and then the system changes the installation made. The last part
-removes the beta 0.9.0 (`TISF090`), which has to go before 1.2.0 is
-installed.
+the LPA, and then the system changes the installation made.
 
 ## Why UCLIN and not RESTORE or REJECT
 
@@ -270,70 +268,3 @@ exist. The copy of
 - Take the RAKF rules for SDSF out, if you no longer need them
   (installation section 8).
 - IPL with CLPA.
-
-## Removing the beta 0.9.0
-
-The beta is not upgraded to 1.2.0. Remove it, then install 1.2.0 as for a
-first installation.
-
-`TISF090` owns only the two modules. Its panels and CLIST were not SMP
-elements: they were received into `ISF.ISPPLIB` and `ISF.CLIST`. Do not
-name any `MAC` in its UCLIN. A `DEL` of an entry that does not exist gives
-`HMA2532`, and that stops the rest of the step.
-
-```jcl
-//ISFUCL0  JOB (SYS),'SDSF 0.9.0 UNINSTALL',CLASS=A,MSGCLASS=H,
-//             MSGLEVEL=(1,1)
-//UCLIN   EXEC SMPAPP
-//SMPCNTL  DD  *
- UCLIN CDS .
-  DEL SYSMOD(TISF090) .
-  DEL MOD(ISFISP) .
-  DEL MOD(IGX00011) .
-  DEL LMOD(ISFISP) .
-  DEL LMOD(IGX00011) .
- ENDUCL .
- UCLIN ACDS .
-  DEL SYSMOD(TISF090) .
-  DEL MOD(ISFISP) .
-  DEL MOD(IGX00011) .
- ENDUCL .
-/*
-//LIST    EXEC SMPAPP
-//SMPCNTL  DD  *
- LIST CDS  SYSMOD(TISF090) .
- LIST ACDS SYSMOD(TISF090) .
- LIST CDS  MOD(IGX00011,ISFISP) .
- LIST ACDS MOD(IGX00011,ISFISP) .
- LIST CDS  LMOD(IGX00011,ISFISP) .
-/*
-//
-//ISFDEL0  JOB (SYS),'SDSF 0.9.0 DELETE',CLASS=A,MSGCLASS=H,
-//             MSGLEVEL=(1,1)
-//DELETE  EXEC PGM=IDCAMS
-//SYSPRINT DD  SYSOUT=*
-//SYSIN    DD  *
-  DELETE ISF.LINKLIB NONVSAM SCRATCH PURGE
-  DELETE ISF.AISFLOAD NONVSAM SCRATCH PURGE
-  DELETE ISF.ISPPLIB NONVSAM SCRATCH PURGE
-  DELETE ISF.CLIST NONVSAM SCRATCH PURGE
-  DELETE SYS1.LPALIB(IGX00011) NONVSAM
-/*
-//
-```
-
-The `LIST` step ends with RC 04 when nothing of `TISF090` is left. The
-0.9.0 job `isflpa.jcl` copied `IGX00011` into `SYS1.LPALIB` by hand.
-Deleting it there lets the installation of 1.2.0 link the module afresh. If
-the old copy is left, SMP includes it in the link, and the result is not
-marked refreshable.
-
-What stays:
-
-- The lines for `ISF.LINKLIB` in `IEAAPF00` and `LNKLST00` stay; 1.2.0 uses
-  the same library.
-- The logon CLIST lines for `ISF.ISPPLIB` and `ISF.CLIST` must change to
-  `ISF.ISFPLIB` and `ISF.ISFCLST` (installation section 7), since the old
-  data sets are gone.
-
-The IPL with CLPA of the 1.2.0 installation follows anyway.

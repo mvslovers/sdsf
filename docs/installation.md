@@ -6,8 +6,7 @@ Release 4** package, for the SMP that ships with MVS 3.8j (not SMP/E).
 
 This guide is for **1.2.0**, FMID **`TISF120`**. The SMP installation was
 tested on fresh TK5 and MVS/CE systems, and the system changes, the IPL and
-the start of SDSF on MVS/CE. Removing SDSF, and the beta 0.9.0 before it, is
-described in `uninstall.md`.
+the start of SDSF on MVS/CE. Removing SDSF is described in `uninstall.md`.
 
 ## Read this first
 
@@ -20,9 +19,6 @@ described in `uninstall.md`.
   `SYS2.SDSF.LOAD`, its panels `ISFMENU` and `ISFLIST` into `SYS2.ISP.PLIB`
   and its CLIST `SDSF` into `SYS2.CMDPROC`. Delete them where they exist.
   Otherwise the old CLIST and panels are found before the new ones.
-- **There is no upgrade from the beta 0.9.0.** Remove it first, as
-  `uninstall.md` describes under "Removing the beta 0.9.0", then install
-  1.2.0 as for a first installation.
 - **`ISF.LINKLIB` must not be in ISPLLIB**, nor in a STEPLIB that is not
   all APF-authorized. A program from there is not loaded as authorized, and
   SDSF then falls back to SVC 244.
@@ -38,7 +34,7 @@ described in `uninstall.md`.
 | `sdsf-1.2.0-inst.jcl` | the installation job: RECEIVE, the source of the SVC routine `IGX00011` and its assembly, APPLY CHECK, APPLY |
 | `sdsf-1.2.0-accept.jcl` | the accept job |
 | `README.md` | this guide |
-| `uninstall.md` | how to remove SDSF, and the beta 0.9.0 before installing 1.2.0 |
+| `uninstall.md` | how to remove SDSF |
 
 The installation makes these data sets:
 
