@@ -125,7 +125,11 @@ begin with the owner's name. For a shorter owner, such as #cmd("HERC02") or
 #cmd("SYSTEM"), the first characters of the job name are among them. A profile
 such as #cmd("HERC02.P*") therefore decides for the jobs of #cmd("HERC02")
 whose names begin with P, and the profile #cmd("*") decides for all jobs. A
-profile cannot tell jobs apart by more than these eight characters.
+profile cannot tell jobs apart by more than these eight characters. A job
+without an owner, whose name does not begin with your user id, is asked about
+as #cmd(".jobname.jobid"), with nothing before the first period. Its entity
+starts with the period, so no profile that begins with an owner's name covers
+it; only a profile such as #cmd("*") does.
 
 *The profile that sorts last wins.* Several profiles can cover one entity.
 The one that sorts last in EBCDIC order is used, not the most specific one:
@@ -225,16 +229,19 @@ When SDSF cannot enter the authorized state, it says so in the title line:
 
 == Worked RAKF Examples <ug-access-examples>
 
-The RAKF profiles are lines in a table. The class stands in columns 1 to 8,
-the profile from column~9, the group from column~53 and the access from
+The RAKF profiles are lines in a table; on TK5 and MVS/CE it is the member
+#cmd("PROFILES") of #cmd("SYS1.SECURE.CNTL"). The class stands in columns 1 to
+8, the profile from column~9, the group from column~53 and the access from
 column~61. For each profile the line without a group is the universal
-access, the access of every user, and it must be there: the load of the table
-stops with the abend U0400 if a profile has a line for a group but no line
-without a group, and RAKF then keeps the table it had. The order of the lines
-does not matter, because RAKF sorts the table itself when it loads it; the
-examples keep the lines of one profile together and the line without a group
-first only to be easy to read. A line that appears twice for the same profile
-and group stops the load with the abend U0300.
+access, the access of every user, and it must be there: with RAKF 2.0.0 the
+load of the table stops with the abend U0400 if a profile has a line for a
+group but no line without a group, and RAKF then keeps the table it had.
+RAKF 2.0.0 also sorts the table itself when it loads it, so the order of the
+lines does not matter; a line that appears twice for the same class, profile
+and group stops the load with the abend U0300, even if the access differs.
+With an earlier RAKF, keep the table in sort order, the line without a group
+first. The examples keep the lines of one profile together and the line
+without a group first, which is right for every RAKF release and easy to read.
 #idx("profile table")
 
 After you change the table, RAKF must load it before the profiles take
@@ -304,8 +311,11 @@ JESSPOOLHERC02.*                                    ADMIN   UPDATE
 JESSPOOLHERC02.*                                    TEAM    READ
 ```)
 
-The group TEAM now has read access to the jobs of #cmd("HERC02"). For the jobs
-of the other users nothing changes. The profile #cmd("HERC02.*") sorts after
+The group TEAM now has read access to the jobs whose owner is #cmd("HERC02").
+A job of HERC02 that has no owner, such as #cmd("HERC02A") submitted without
+#cmd("USER="), is asked about as #cmd(".HERC02A"); this profile does not cover
+it, and #cmd("*") decides for it. For the jobs of the other users nothing
+changes. The profile #cmd("HERC02.*") sorts after
 #cmd("*"), so it is the one that counts for the jobs of #cmd("HERC02")
 (@ug-access-cover). It replaces the lines of #cmd("*") for these jobs, which is
 why it repeats the line of ADMIN: without it, ADMIN would get the universal
