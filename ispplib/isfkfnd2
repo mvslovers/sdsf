@@ -11,7 +11,7 @@
 }  Examples:
 {    F IEF404I              }the next line with IEF404I
 {    F JOB PREV             }the line before with JOB
-{    F 'NOT CATLGD' ALL     }how many lines hold it, and the first
+{    F 'NOT CATLGD' ALL     }how often it occurs, and the first
 {    F X'5B' 1              }a dollar sign in column 1
 {    F ABEND 20 60          }ABEND within columns 20 to 60
 }

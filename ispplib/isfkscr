@@ -10,8 +10,8 @@
 }
 {  UP, DOWN [amount]  }Scroll up or down (the Up and Down keys, PF7, PF8).
 {  TOP, BOTTOM        }To the start or the end; BOT for short.
-{  LEFT, RIGHT        }On the log and on output, and on wide lists: the
-}                     Left and Right keys, PF10 and PF11.
+{  LEFT, RIGHT        }Sideways: the Left and Right keys, PF10 and PF11.
+}                     Typed only on the log and output; lists: the keys.
 }
 }  The SCROLL field, right of the command line, holds the amount:
 {  PAGE   }a screen          {  HALF   }half a screen
@@ -19,10 +19,10 @@
 {  CSR    }the line of the cursor to the top
 {  n      }n lines, up to 4 digits
 }
-}  The amount stays until you change it, also for the next session. An
-}  amount typed on the command line before a scroll key, or after UP or
-}  DOWN, applies to that one scroll: M or MAX to the end, P, H, D, C or
-}  a number. Anything else: INVALID SCROLL AMOUNT.
+}  The amount stays until you change it, also for the next session. A
+}  word typed before a scroll key is the amount for that one scroll: M or
+}  MAX to the end, P, H, D, C or a number. Typed UP, DOWN, LEFT, RIGHT
+}  take full words: DOWN MAX. Anything else: INVALID SCROLL AMOUNT.
 }
 }  The menu does not scroll.
 }
