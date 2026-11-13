@@ -151,9 +151,11 @@ SDSF gives JES2 the command and shows #cmd("COMMAND ISSUED")\; press Enter
 again, and the row shows #cmd("HOLD"). The job is now on the list of
 #cmd("I H"). #cmd("A") on the Status panel releases it, and #cmd("C") cancels
 it. #cmd("P") purges it: it cancels the job and deletes its output, and SDSF
-does not ask before it does. The list is read again at once and the job is no
-longer on it; the title line shows nothing if it worked. If it did not, it
-shows the reason, for example #cmd("CANNOT CANCEL THIS JOB").
+does not ask before it does. The list is read again at once; the title line
+shows nothing if SDSF made the request, and the job is normally no longer on
+the list. If the job is still there, press Enter to read the list again. If
+the request failed, the title line shows the reason, for example
+#cmd("CANNOT CANCEL THIS JOB").
 
 Three fields of a row can be changed here, by typing over them and pressing
 Enter:
@@ -256,8 +258,9 @@ There is no action character on this panel that deletes held output. To purge
 it, use #cmd("P") on the Status panel: find the job there, type #cmd("P") in its
 NP column and press Enter. SDSF deletes the held output and does not ask
 again, so make sure the row is the right one. The Status panel is read again
-at once and the job is no longer on it; the title line shows nothing if it
-worked. The next #cmd("H") does not list the job either.
+at once; the title line shows nothing if SDSF made the request, and the job
+is normally no longer on the list. If the job is still there, press Enter to
+read the list again. The next #cmd("H") then does not list the output.
 
 == Output Waiting to Print <ug-queues-output>
 
@@ -312,6 +315,7 @@ As on the Held Output panel, the field can be typed over only while it is on
 the screen, that is, on the first screen of columns.
 
 To delete output that waits to be printed, use #cmd("P") on the Status panel,
-as for held output; the Status panel is read again at once, and the next
-#cmd("O") does not list the job. To print it, a printer must be started; that
-is done on the Printer panel (@ug-devices).
+as for held output; the Status panel is read again at once, and if the job
+is still listed, press Enter to read it again. The next #cmd("O") then does
+not list the output. To print it, a printer must be started; that is done on
+the Printer panel (@ug-devices).
