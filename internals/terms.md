@@ -63,6 +63,11 @@ each:
 - The columns' names are the headings on the screen (`JOBNAME`, `JNUM`,
   `PRTY`, `QUEUE`, ...). Each panel's help lists and explains them; the
   Status panel's are in `ispplib/isfhstf` and `ispplib/isfhstf2`.
+- **wildcard**: in a name on ST or after `PREFIX`, `*` stands for any number
+  of characters and `%` for exactly one. Without one the whole name must
+  match.
+- **read again**: Enter with nothing typed reads the list or the log again.
+  Not "refresh" and not "update".
 
 ## Commands
 
