@@ -15,7 +15,7 @@ Spelling: names that appear on the screen keep the screen's spelling
 | Term | Means | Not |
 |---|---|---|
 | SDSF | this product, the SDSF clone for MVS 3.8j (repo `sdsf`) | IBM's SDSF, which is "IBM's SDSF V1R2" where it must be named |
-| Wally ISPF | the ISPF of MVS 3.8j systems, ISPF 2.2 by Wally Mclaughlin | "ISPF" alone where the difference to IBM's ISPF matters |
+| Wally ISPF | the ISPF of MVS 3.8j systems, by Wally Mclaughlin | "ISPF" alone where the difference to IBM's ISPF matters |
 
 ## Panels
 
