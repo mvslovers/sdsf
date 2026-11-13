@@ -24,8 +24,8 @@ Assignments”.
 #idx("RFIND command")
 #idx("searching", "for a string")
 #cmd("FIND") (or #cmd("F")) searches the data for a string. The line with the
-string goes to the top of the panel, the cursor goes to the string, and the
-title line says what was found. Upper and lower case are the same.
+string goes to the top of the panel, the cursor goes to the string (on the
+lists, to the start of the row), and the title line says what was found. Upper and lower case are the same.
 
 A first search, on the output of a job:
 
@@ -37,7 +37,8 @@ A first search, on the output of a job:
   line that holds it. Each press goes one hit further.
 + When the search runs to the end of the data without a hit, the message is
   #cmd("*BOTTOM OF DATA REACHED*"), and the next #cmd("FIND") starts again at
-  the beginning. (When a search goes on from a hit, SDSF may leave the screen
+  the beginning. A backward search ends with #cmd(" * TOP OF DATA REACHED *"),
+  and the next one starts again at the end. (When a search goes on from a hit, SDSF may leave the screen
   as it is instead; the Reference, in the section “FIND”, says when.)
 + If the string is nowhere, the message is #cmd("NO CHARS  'IEF404I' FOUND").
 
@@ -50,8 +51,8 @@ again.
 *Direction.* After the string you may say where to look. #cmd("NEXT") is the
 default for a new string. #cmd("PREV") goes backward from the line before the
 top line, #cmd("FIRST") forward from the beginning of the data and
-#cmd("LAST") backward from its end. #cmd("ALL") counts the lines that hold the
-string and goes to the first one.
+#cmd("LAST") backward from its end. #cmd("ALL") counts the hits and goes to the
+first one. A line that holds the string twice counts twice.
 
 *Kind.* #cmd("CHARS") finds the string anywhere and is the default.
 #cmd("WORD") finds it as a word of its own, #cmd("PREFIX") (#cmd("PRE")) at the
@@ -61,7 +62,8 @@ digits and the characters #cmd("$"), #cmd("#") and #cmd("@") make up a word.
 *Columns.* One or two numbers at the end limit the search to a part of the
 line: with one, the string must begin in that column; with two, it must lie
 between them. The columns are those of the title line and of the scale line
-that #cmd("COLS") shows (@ug-search-columns).
+that #cmd("COLS") shows (@ug-search-columns). On output, the first column that
+is searched is 2.
 
 *Hexadecimal.* #cmd("X'5B'") looks for the bytes you give, two digits for each.
 Here, and only here, case matters.
@@ -70,25 +72,27 @@ Here, and only here, case matters.
   #table(columns: (2.0in, 1fr),
     [Command], [Finds],
     [#cmd("F IEF404I")], [The next line with #cmd("IEF404I").],
-    [#cmd("F JOB PREV")], [The line before the top line that holds
+    [#cmd("F JOB PREV")], [The nearest line above the top line that holds
       #cmd("JOB").],
-    [#cmd("F 'NOT CATLGD' ALL")], [How many lines hold it, and the first.],
-    [#cmd("F X'5B' 1")], [A dollar sign in column 1.],
+    [#cmd("F 'NOT CATLGD' ALL")], [How many times it occurs, and the first.],
+    [#cmd("F X'5B' 2")], [A dollar sign in the first column shown on
+      output (column 2).],
     [#cmd("F ABEND 20 60")], [#cmd("ABEND") within columns 20 to 60.],
     [#cmd("F SYS WORD")], [#cmd("SYS") as a word of its own, not inside
       another.],
   )
 ]
 
-*How far SDSF looks.* On the log and on output, one #cmd("FIND") looks
-through 5000 lines at most. Then it stops with #cmd("*FINDLIM REACHED*"), and
+*How far SDSF looks.* On the log and on output, one #cmd("FIND") looks through
+at most 5000 lines by default. Then it stops with #cmd("*FINDLIM REACHED*"), and
 the next #cmd("FIND") goes on from there. #cmd("FINDLIM") changes the number
 (Reference, section “FINDLIM”).
 
-*On the lists.* On the Status panel and the other lists, #cmd("FIND") looks
-through the rows as you see them. The kind and the columns are accepted there
-but make no difference. With the cursor on a row, the search begins at the row
-after it.
+*On the lists.* On the Status panel, the other lists and the Job Data Set
+panel, #cmd("FIND") looks through the rows as you see them. The kind and the
+columns are accepted there but make no difference, and the cursor goes to the
+start of the row, not onto the string. With the cursor on a row, the search
+begins at the row after it. With #cmd("ALL"), a row counts once.
 
 *Mistakes.* #cmd("INCONSISTENT PARAMETERS") means two directions, two kinds, or
 a string that does not fit in the columns you gave. #cmd("INVALID HEX STRING")
@@ -137,12 +141,14 @@ A line of output or of the log can be wider than the screen. The title line of
 both panels shows #cmd("COLUMNS") and the first and last column on the screen.
 On the Output Data Set panel the first column is 2, since column 1 holds the
 carriage control and is never shown. The Left and Right keys (PF10 and PF11)
-move the text sideways, by the width of the screen, up to column 255. With a
+move the text sideways, up to column 255, by the amount in the SCROLL field
+(with the default, #cmd("PAGE"), the width of the screen). With a
 number typed before the key, or after the command (#cmd("RIGHT 10")), it
 moves by that many columns. #cmd("M") before the key goes as far as it can.
 
 *The scale.* #cmd("COLS") puts a line over the data that numbers the columns:
-a mark after every fifth column and a digit after every tenth. It moves with
+a #cmd("+") in every fifth column and the tens digit in every tenth, as in
+#cmd("----+----1----+----2"). It moves with
 the text when you move the columns. #cmd("RESET") takes it away. It stays only
 while the output or the log it was shown on stays open. Use it together with
 #cmd("FIND") and its columns: put the scale up, read the column of the field
@@ -193,7 +199,8 @@ judged under (@ug-access).
     and the columns on view.],
 )
 
-A message appears on the same line, on the right. The Reference, Chapter 2, “Panels”, has the
+A message appears on the same line, on the right. On the Output Data Set panel
+and the log it covers #cmd("COLUMNS") until the next Enter. The Reference, Chapter 2, “Panels”, has the
 title of each panel.
 
 *Which system.* The log is the log of your own system unless you have chosen
