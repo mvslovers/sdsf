@@ -286,17 +286,23 @@ holds only the changed copy. This job makes it and copies #cmd("ISP@PRIM") into
 it (#cmd("VOL=SER") is a volume that takes data sets, #cmd("PUB001") on a stock
 MVS/CE):
 
-#code("//ISPPRIM  JOB (SYS),'ISP@PRIM',CLASS=A,MSGCLASS=A
+#code("//ISPPRIM  JOB (SYS),'ISP@PRIM',CLASS=A,MSGCLASS=H
 //COPY     EXEC PGM=IEBCOPY
 //SYSPRINT DD  SYSOUT=*
 //IN       DD  DISP=SHR,DSN=SYSGEN.ISPF.PLIB
 //OUT      DD  DSN=SYS2.ISP.PLIB,DISP=(NEW,CATLG),UNIT=SYSDA,
 //             VOL=SER=PUB001,SPACE=(TRK,(5,5,5)),
-//             DCB=(RECFM=FB,LRECL=80,BLKSIZE=3120)
+//             DCB=(RECFM=FB,LRECL=80,BLKSIZE=19040)
 //SYSIN    DD  *
   COPY OUTDD=OUT,INDD=IN
   SELECT MEMBER=ISP@PRIM
 /*")
+
+#cmd("BLKSIZE=19040") is the block size of #cmd("SYSGEN.ISPF.PLIB"). In a
+concatenation the library with the largest block size must come first. A
+library with a smaller block size in front of it breaks the other ISPF
+options, which end with message #cmd("ISP012E"). The output of the job is in
+the spool under #cmd("MSGCLASS=H").
 
 Check that #cmd("SYS2.ISP.PLIB") has the member #cmd("ISP@PRIM"). Then put the
 library first in the #cmd("ALLOC") of ISPPLIB in #cmd("SYS1.CMDPROC(ISPF)")

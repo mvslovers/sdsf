@@ -6,7 +6,7 @@ Release 4** package, for the SMP that ships with MVS 3.8j (not SMP/E).
 
 This guide is for **1.2.0**, FMID **`TISF120`**. The SMP installation was
 tested on fresh TK5 and MVS/CE systems, and the system changes, the IPL and
-the start of SDSF on MVS/CE. Removing SDSF is described in `uninstall.md`.
+the start of SDSF on both. Removing SDSF is described in `uninstall.md`.
 
 ## Read this first
 
@@ -263,18 +263,24 @@ changed copy. This job makes it and copies `ISP@PRIM` into it (`VOL=SER` is
 a volume that takes data sets, `PUB001` on a stock MVS/CE):
 
 ```
-//ISPPRIM  JOB (SYS),'ISP@PRIM',CLASS=A,MSGCLASS=A
+//ISPPRIM  JOB (SYS),'ISP@PRIM',CLASS=A,MSGCLASS=H
 //COPY     EXEC PGM=IEBCOPY
 //SYSPRINT DD  SYSOUT=*
 //IN       DD  DISP=SHR,DSN=SYSGEN.ISPF.PLIB
 //OUT      DD  DSN=SYS2.ISP.PLIB,DISP=(NEW,CATLG),UNIT=SYSDA,
 //             VOL=SER=PUB001,SPACE=(TRK,(5,5,5)),
-//             DCB=(RECFM=FB,LRECL=80,BLKSIZE=3120)
+//             DCB=(RECFM=FB,LRECL=80,BLKSIZE=19040)
 //SYSIN    DD  *
   COPY OUTDD=OUT,INDD=IN
   SELECT MEMBER=ISP@PRIM
 /*
 ```
+
+`BLKSIZE=19040` is the block size of `SYSGEN.ISPF.PLIB`. In a
+concatenation the library with the largest block size must come first. A
+library with a smaller block size in front of it breaks the other ISPF
+options, which end with message `ISP012E`. The output of the job is in the
+spool under `MSGCLASS=H`.
 
 Check that `SYS2.ISP.PLIB` has the member `ISP@PRIM`. Then put the
 library first in the `ALLOC` of ISPPLIB in `SYS1.CMDPROC(ISPF)`
