@@ -22,8 +22,9 @@ command line, type:
 and press Enter. SDSF shows its primary option menu (@ug-start-menu). The
 command #cmd("SDSF") is a CLIST that the installation puts into the SYSPROC
 concatenation. Your site may also have added an entry for SDSF to the ISPF
-primary option menu; if so, you may use it. The installation in this book sets
-up #cmd("TSO SDSF") only.
+primary option menu, option #cmd("S") if the letter was free; if so, you may
+use it. The installation in this book sets up #cmd("TSO SDSF"), and it has an
+optional step for the menu (@ug-install-menu).
 
 If the answer is #cmd("COMMAND SDSF NOT FOUND"), the CLIST is not in SYSPROC.
 @ug-install lists this among the things that go wrong, and says how to put it
