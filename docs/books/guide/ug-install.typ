@@ -248,6 +248,99 @@ Do not add the library to the #cmd("ALLOC FILE(SYSPROC)") of
 
 The changes take effect at the next logon.
 
+=== Add SDSF to the ISPF Primary Option Menu <ug-install-menu>
+
+#idx("primary option menu")#idx("ISP@PRIM")
+This step is optional. Without it, SDSF starts with #cmd("TSO SDSF") from any
+ISPF command line. With it, option #cmd("S") of the ISPF primary option menu
+starts SDSF. The package does not make the change: the menu panel
+#cmd("ISP@PRIM") belongs to ISPF, not to SDSF.
+
+The change has two parts, both in #cmd("ISP@PRIM"): a line in the
+#cmd(")BODY") section that shows the option, and an entry in the
+#cmd(")PROC") translation of #cmd("&ZSEL") that starts SDSF. The entry is the
+#cmd("SELECT") that the CLIST #cmd("SDSF") runs.
+
+ISPF uses the first #cmd("ISP@PRIM") that it finds in the ISPPLIB
+concatenation. Do not change the copy in the library of ISPF: an update of ISPF
+may replace it. Put the changed copy in a library in front of it.
+
+*On TK5*, #cmd("SYS2.ISP.PLIB") comes before #cmd("ISP.V2R2M0.PLIB") and holds
+the #cmd("ISP@PRIM") of TK5 already, the one with the lines #cmd("M") and
+#cmd("T1"). Keep a copy of the member under another name, then change it in
+place. After the line #cmd("T1") in the #cmd(")BODY") section, add:
+
+#code("%   S @SDSF        + Spool and system display facility")
+
+and after the entry #cmd("T1,'PANEL(ISPTK5)'") in the #cmd(")PROC")
+translation, add:
+
+#code("                S,'PGM(ISFISP) NOCHECK NEWAPPL(ISF)'")
+
+A user who has an #cmd("ISP@PRIM") of their own in
+#cmd("<userid>.ISP.PLIB") does not see the change.
+
+*On MVS/CE*, #cmd("ISP@PRIM") is in #cmd("SYSGEN.ISPF.PLIB"), and there is no
+library of local panels in front of it. Make one, #cmd("SYS2.ISP.PLIB"), that
+holds only the changed copy. This job makes it and copies #cmd("ISP@PRIM") into
+it (#cmd("VOL=SER") is a volume that takes data sets, #cmd("PUB001") on a stock
+MVS/CE):
+
+#code("//ISPPRIM  JOB (SYS),'ISP@PRIM',CLASS=A,MSGCLASS=H
+//COPY     EXEC PGM=IEBCOPY
+//SYSPRINT DD  SYSOUT=*
+//IN       DD  DISP=SHR,DSN=SYSGEN.ISPF.PLIB
+//OUT      DD  DSN=SYS2.ISP.PLIB,DISP=(NEW,CATLG),UNIT=SYSDA,
+//             VOL=SER=PUB001,SPACE=(TRK,(5,5,5)),
+//             DCB=(RECFM=FB,LRECL=80,BLKSIZE=19040)
+//SYSIN    DD  *
+  COPY OUTDD=OUT,INDD=IN
+  SELECT MEMBER=ISP@PRIM
+/*")
+
+#cmd("BLKSIZE=19040") is the block size of #cmd("SYSGEN.ISPF.PLIB"). In a
+concatenation the library with the largest block size must come first. A
+library with a smaller block size in front of it breaks the other ISPF
+options, which end with message #cmd("ISP012E"). The output of the job is in
+the spool under #cmd("MSGCLASS=H").
+
+Check that #cmd("SYS2.ISP.PLIB") has the member #cmd("ISP@PRIM"). Then put the
+library first in the #cmd("ALLOC") of ISPPLIB in #cmd("SYS1.CMDPROC(ISPF)")
+(@ug-install-ispf), continuing the line as before:
+
+#code("ALLOC F(ISPPLIB) DA('SYS2.ISP.PLIB','SYSGEN.ISPF.PLIB', +
+               'SYSGEN.ISPF.RFEPLIB','ISF.ISFPLIB') SHR")
+
+In #cmd("SYS2.ISP.PLIB(ISP@PRIM)"), add after the line #cmd("SD") in the
+#cmd(")BODY") section:
+
+#code("% S {SDSF       + Spool and system display facility")
+
+and after the entry #cmd("SD,'CMD(REVOUT *)  NEWAPPL(ISR)'") in the
+#cmd(")PROC") translation:
+
+#code("                S,'PGM(ISFISP) NOCHECK NEWAPPL(ISF)'")
+
+The line in #cmd(")BODY") has the form of its neighbours: an option letter, the
+name, and the text. Use the attribute characters that the lines around it use
+(#cmd("%") and #cmd("{") here, #cmd("@") on TK5), as defined in the
+#cmd(")ATTR") section of the panel. Leave the other lines as they are.
+
+The change takes effect at the next start of ISPF. The menu then shows the
+line. Type #cmd("S"), and SDSF shows #cmd("SDSF PRIMARY OPTION MENU"). The End
+key (PF3) takes you back to the ISPF menu.
+
+If #cmd("S") is taken: the letters on the left of the commas in the
+#cmd(")PROC") translation are the options that the menu has. On a stock TK5
+they are #cmd("0") to #cmd("7"), #cmd("R"), #cmd("C"), #cmd("M"), #cmd("T"),
+#cmd("T1") and #cmd("X"). On a stock MVS/CE they are #cmd("0") to #cmd("7"),
+#cmd("A"), #cmd("C"), #cmd("T"), #cmd("SD"), #cmd("M") and #cmd("X"). #cmd("S")
+is free on both. ISPF compares the whole entry, so #cmd("SD") on MVS/CE does
+not clash with #cmd("S"). If a site has used #cmd("S") for something else, take
+a letter that is not in the list and write it in the menu line and in the
+translation, in place of #cmd("S"). SDSF does not care which letter starts it.
+Tell the users which one it is.
+
 === Set Up the Authorization <ug-install-auth>
 
 #idx("RAKF")#idx("authorization")
@@ -306,6 +399,9 @@ MVS/CE system the group ADMIN has READ on it (#cmd("FACILITYSVC244 ... ADMIN
 READ") in the RAKF profiles), so an ADMIN user passes the check without
 #cmd("IGX00011"). Give that user's group UPDATE on #cmd("SDSF.OPER"), with a
 line of its own, for the check.
+
+If you made the change of @ug-install-menu, option #cmd("S") on the ISPF
+primary option menu does the same as #cmd("TSO SDSF").
 
 If the check fails, see @ug-install-trouble-auth.
 
@@ -380,6 +476,10 @@ section), or every logon names data sets that no longer exist.
   authorized.
 - Take #cmd("ISF.ISFPLIB") and #cmd("ISF.ISFCLST") out of the ISPPLIB and
   SYSPROC concatenations, where you put them (@ug-install-ispf).
+- If you added SDSF to the ISPF primary option menu (@ug-install-menu), take
+  the line and the entry out of #cmd("ISP@PRIM"). On MVS/CE, take
+  #cmd("SYS2.ISP.PLIB") out of the #cmd("ALLOC") of ISPPLIB too, and delete the
+  library if nothing else is in it.
 - Take the RAKF rules for SDSF out, if you no longer need them.
 - IPL with CLPA. The copy of #cmd("IGX00011") in the running link pack area
   stays until then.
@@ -393,7 +493,8 @@ A return code says only that a job ran. Check that:
 - the six libraries are no longer in the catalog;
 - #cmd("SYS1.LPALIB") and #cmd("SYS1.AOST4") have no member
   #cmd("IGX00011");
-- no logon procedure or CLIST still names a library of SDSF.
+- no logon procedure or CLIST still names a library of SDSF, and no
+  #cmd("ISP@PRIM") still has an option that starts it.
 
 == Troubleshooting <ug-install-trouble>
 

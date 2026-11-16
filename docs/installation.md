@@ -6,7 +6,7 @@ Release 4** package, for the SMP that ships with MVS 3.8j (not SMP/E).
 
 This guide is for **1.2.0**, FMID **`TISF120`**. The SMP installation was
 tested on fresh TK5 and MVS/CE systems, and the system changes, the IPL and
-the start of SDSF on MVS/CE. Removing SDSF is described in `uninstall.md`.
+the start of SDSF on both. Removing SDSF is described in `uninstall.md`.
 
 ## Read this first
 
@@ -217,6 +217,120 @@ SYSPROC is allocated already, and that `ALLOC` fails without a message
 
 The changes take effect at the next logon.
 
+## 7a. ISPF primary option menu
+
+This step is optional. Without it, SDSF starts with `TSO SDSF` from any
+ISPF command line. With it, option `S` of the ISPF primary option menu
+starts SDSF. The package does not make the change: the menu panel
+`ISP@PRIM` belongs to ISPF, not to SDSF.
+
+The change has two parts, both in `ISP@PRIM`: a line in the `)BODY` section
+that shows the option, and an entry in the `)PROC` translation of `&ZSEL`
+that starts SDSF. The entry is the `SELECT` that the CLIST `SDSF` runs.
+
+ISPF uses the first `ISP@PRIM` that it finds in the ISPPLIB concatenation.
+Do not change the copy in ISPF's own library: an update of ISPF may
+replace it. Put the changed copy in a library in front of it.
+
+| System | `ISP@PRIM` of ISPF | The changed copy |
+|---|---|---|
+| TK5 | `ISP.V2R2M0.PLIB` | `SYS2.ISP.PLIB`, which holds TK5's own copy already and comes before it |
+| MVS/CE | `SYSGEN.ISPF.PLIB` | `SYS2.ISP.PLIB`, a library that you make for it |
+
+**TK5.** The ISPPLIB concatenation of a user is, in this order,
+`<userid>.ISP.PLIB`, `SYS2.ISP.PLIB`, `ISP.V2R2M0.PLIB`,
+`SYS2.REVIEW.PLIB` and `ISF.ISFPLIB` (section 7). `SYS2.ISP.PLIB` holds the
+`ISP@PRIM` of TK5, the one with the lines `M` and `T1`. Keep a copy of the
+member under another name, then change it in place. After the line `T1` in
+the `)BODY` section, add:
+
+```
+%   S @SDSF        + Spool and system display facility
+```
+
+and after the entry `T1,'PANEL(ISPTK5)'` in the `)PROC` translation, add:
+
+```
+                S,'PGM(ISFISP) NOCHECK NEWAPPL(ISF)'
+```
+
+A user who has an `ISP@PRIM` of their own in `<userid>.ISP.PLIB` does not
+see the change.
+
+**MVS/CE.** `ISP@PRIM` is in `SYSGEN.ISPF.PLIB`, and there is no library of
+local panels in front of it. Make one, `SYS2.ISP.PLIB`, that holds only the
+changed copy. This job makes it and copies `ISP@PRIM` into it (`VOL=SER` is
+a volume that takes data sets, `PUB001` on a stock MVS/CE):
+
+```
+//ISPPRIM  JOB (SYS),'ISP@PRIM',CLASS=A,MSGCLASS=H
+//COPY     EXEC PGM=IEBCOPY
+//SYSPRINT DD  SYSOUT=*
+//IN       DD  DISP=SHR,DSN=SYSGEN.ISPF.PLIB
+//OUT      DD  DSN=SYS2.ISP.PLIB,DISP=(NEW,CATLG),UNIT=SYSDA,
+//             VOL=SER=PUB001,SPACE=(TRK,(5,5,5)),
+//             DCB=(RECFM=FB,LRECL=80,BLKSIZE=19040)
+//SYSIN    DD  *
+  COPY OUTDD=OUT,INDD=IN
+  SELECT MEMBER=ISP@PRIM
+/*
+```
+
+`BLKSIZE=19040` is the block size of `SYSGEN.ISPF.PLIB`. In a
+concatenation the library with the largest block size must come first. A
+library with a smaller block size in front of it breaks the other ISPF
+options, which end with message `ISP012E`. The output of the job is in the
+spool under `MSGCLASS=H`.
+
+Check that `SYS2.ISP.PLIB` has the member `ISP@PRIM`. Then put the
+library first in the `ALLOC` of ISPPLIB in `SYS1.CMDPROC(ISPF)`
+(section 7), continuing the line as before:
+
+```
+ALLOC F(ISPPLIB) DA('SYS2.ISP.PLIB','SYSGEN.ISPF.PLIB', +
+               'SYSGEN.ISPF.RFEPLIB','ISF.ISFPLIB') SHR
+```
+
+In `SYS2.ISP.PLIB(ISP@PRIM)`, add after the line `SD` in the `)BODY`
+section:
+
+```
+% S {SDSF       + Spool and system display facility
+```
+
+and after the entry `SD,'CMD(REVOUT *)  NEWAPPL(ISR)'` in the `)PROC`
+translation:
+
+```
+                S,'PGM(ISFISP) NOCHECK NEWAPPL(ISF)'
+```
+
+**The line.** The line in `)BODY` has the form of its neighbours: an
+option letter, the name, and the text. Use the attribute characters that
+the lines around it use (`%` and `{` here, `@` on TK5), as defined in the
+`)ATTR` section of the panel. Leave the other lines as they are.
+
+**The change takes effect at the next start of ISPF.** Start ISPF. The menu
+shows the line, for example on TK5:
+
+```
+    T1 TK5           Summary of changes made in TK5
+    S  SDSF          Spool and system display facility
+    X  EXIT          Terminate ISPF using log and list defaults
+```
+
+Type `S`. SDSF shows `SDSF PRIMARY OPTION MENU`. The End key (PF3) takes
+you back to the ISPF menu.
+
+**If `S` is taken.** The letters on the left of the commas in the `)PROC`
+translation are the options that the menu has. On a stock TK5 they are
+`0` to `7`, `R`, `C`, `M`, `T`, `T1` and `X`. On a stock MVS/CE they are
+`0` to `7`, `A`, `C`, `T`, `SD`, `M` and `X`. `S` is free on both. ISPF
+compares the whole entry, so `SD` on MVS/CE does not clash with `S`. If a
+site has used `S` for something else, take a letter that is not in the list
+and write it in the menu line and in the translation, in place of `S`. SDSF
+does not care which letter starts it. Tell the users which one it is.
+
 ## 8. Authorization
 
 SDSF asks RAKF. There are two kinds of rule.
@@ -272,6 +386,9 @@ From any ISPF command line:
 ```
 TSO SDSF
 ```
+
+If you made the change of section 7a, `S` on the ISPF primary option menu
+does the same.
 
 Check the SVC routine as a user who has UPDATE on `SDSF.OPER` (a `/`
 command needs UPDATE) but no access to `FACILITY SVC244`. If `LOG` shows the

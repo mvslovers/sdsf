@@ -265,6 +265,10 @@ exist. The copy of
   that volume would be authorized.
 - Take the two `$CONCAT` lines for `ISF.ISFPLIB` and `ISF.ISFCLST` out of
   the logon CLIST (installation section 7).
+- If you added SDSF to the ISPF primary option menu (installation section
+  7a), take the menu line and the `)PROC` entry out of `ISP@PRIM`. On
+  MVS/CE, take `SYS2.ISP.PLIB` out of the `ALLOC` of ISPPLIB too, and delete
+  the library if nothing else is in it.
 - Take the RAKF rules for SDSF out, if you no longer need them
   (installation section 8).
 - IPL with CLPA.
